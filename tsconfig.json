@@ -7,11 +7,15 @@
     "jsx": "react-jsx",
     "allowJs": true,
     "moduleResolution": "node",
-    "baseUrl": ".",
+    "baseUrl": "src",
+    "paths": {
+      "#/*": ["*"]
+    },
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
+  "include": ["src"],
   "ts-node": {
     "compilerOptions": {
       "module": "CommonJS"

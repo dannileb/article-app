@@ -30,6 +30,7 @@
     "webpack-dev-server": "^5.2.2"
   },
   "dependencies": {
+    "@bem-react/classname": "^1.7.0",
     "@types/react-router": "^5.1.20",
     "classnames": "^2.5.1",
     "react": "^19.1.1",

@@ -1,0 +1,19 @@
+.navbar{
+    width: 100%;
+    height: var(--navbar-height);
+
+    display: flex;
+    align-items: center;
+    padding: 20px;
+
+    background-color: var(--bg-color-accent);
+}
+
+.links{
+    margin-left: auto;
+
+}
+
+.mainLink{
+    margin-right: 15px;
+}

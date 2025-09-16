@@ -22,7 +22,7 @@ export function buildLoaders(options: BuildOptions): webpack.RuleSetRule[] {
               return Boolean(resPath.includes(".module."));
             },
             localIdentName: options.isDev
-              ? "[path][name]__[local]"
+              ? "[hash:base64:8]__[local]"
               : "[hash:base64:8]",
           },
         },
