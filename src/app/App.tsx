@@ -1,10 +1,13 @@
 import { AppProvider } from "#/app/AppProvider";
 import AppRouter from "#/app/providers/router/ui/AppRouter";
+import { Suspense } from "react";
 
 export const App = () => {
   return (
-    <AppProvider>
-      <AppRouter />
-    </AppProvider>
+    <Suspense fallback="Загрузка...">
+      <AppProvider>
+        <AppRouter />
+      </AppProvider>
+    </Suspense>
   );
 };
