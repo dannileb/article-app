@@ -1,22 +1,22 @@
-.sidebar{
+.sidebar {
     height: calc(100vh - var(--navbar-height));
     width: var(--sidebar-width);
 
     background-color: var(--bg-color-accent);
     position: relative;
 
-    transition: width ease-in .25s;
+    transition: width ease-in 0.25s;
 }
 
-.collapsed{
+.collapsed {
     width: var(--sidebar-width-collapsed);
 }
 
-.switchers{
+.switchers {
     position: absolute;
     width: 100%;
     bottom: 20px;
-    
+
     display: flex;
     justify-content: center;
     gap: 16px;

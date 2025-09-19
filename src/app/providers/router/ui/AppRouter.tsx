@@ -4,9 +4,9 @@ import { RouterProvider } from "react-router";
 
 const AppRouter = () => {
   return (
-    <Suspense fallback={<div>Загрузка...</div>}>
-      <RouterProvider router={routerConfig} />
-    </Suspense>
+      <Suspense fallback={<div>Загрузка...</div>}>
+          <RouterProvider router={routerConfig} />
+      </Suspense>
   );
 };
 export default AppRouter;

@@ -4,10 +4,10 @@ import { Suspense } from "react";
 
 export const App = () => {
   return (
-    <Suspense fallback="Загрузка...">
-      <AppProvider>
-        <AppRouter />
-      </AppProvider>
-    </Suspense>
+      <Suspense fallback="Загрузка...">
+          <AppProvider>
+              <AppRouter />
+          </AppProvider>
+      </Suspense>
   );
 };

@@ -1,10 +1,8 @@
 import { useTranslation } from "react-i18next";
-import classes from "./LangSwitcher.module.scss";
 import { Button } from "#/shared/ui/Button/Button";
 
-interface LangSwitcherProps {}
 
-export const LangSwitcher = ({}: LangSwitcherProps) => {
+export const LangSwitcher = () => {
   const { t, i18n } = useTranslation();
 
   const toggleLang = () => {
@@ -12,8 +10,8 @@ export const LangSwitcher = ({}: LangSwitcherProps) => {
   };
 
   return (
-    <Button onClick={toggleLang} view="clear">
-      {t("langSwitcher")}
-    </Button>
+      <Button onClick={toggleLang} view="clear">
+          {t("langSwitcher")}
+      </Button>
   );
 };

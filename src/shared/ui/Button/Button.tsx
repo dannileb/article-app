@@ -14,11 +14,11 @@ export const Button = ({
   ...props
 }: ButtonProps) => {
   return (
-    <button
-      {...props}
-      className={classNames(classes.button, className, classes[view])}
-    >
-      {children}
-    </button>
+      <button
+          {...props}
+          className={classNames(classes.button, className, classes[view])}
+      >
+          {children}
+      </button>
   );
 };

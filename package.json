@@ -8,21 +8,32 @@
   "scripts": {
     "start": "npx webpack serve --env port=3000",
     "build:prod": "npx webpack --env mode=production",
-    "build:dev": "npx webpack --env mode=development"
+    "build:dev": "npx webpack --env mode=development",
+    "lint": "eslint . --report-unused-disable-directives --max-warnings 0",
+    "lint-fix": "eslint . --fix"
   },
   "devDependencies": {
     "@babel/core": "^7.28.4",
     "@babel/preset-env": "^7.28.3",
+    "@eslint/js": "^9.35.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.6.1",
+    "@svgr/webpack": "^8.1.0",
     "@types/node": "^24.3.1",
     "@types/react": "^19.1.13",
     "@types/react-dom": "^19.1.9",
+    "@types/react-router": "^5.1.20",
     "@types/webpack": "^5.28.5",
     "@types/webpack-dev-server": "^4.7.2",
     "babel-loader": "^10.0.0",
     "babel-plugin-i18next-extract": "^1.1.0",
     "css-loader": "^7.1.2",
+    "eslint": "^9.35.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "file-loader": "^6.2.0",
+    "globals": "^16.4.0",
     "html-webpack-plugin": "^5.6.4",
+    "jiti": "^2.5.1",
     "mini-css-extract-plugin": "^2.9.4",
     "react-refresh": "^0.17.0",
     "sass": "^1.92.1",
@@ -31,23 +42,21 @@
     "ts-loader": "^9.5.4",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.2",
+    "typescript-eslint": "^8.44.0",
+    "typescript-plugin-css-modules": "^5.2.0",
     "webpack": "^5.101.3",
     "webpack-cli": "^6.0.1",
     "webpack-dev-server": "^5.2.2"
   },
   "dependencies": {
     "@bem-react/classname": "^1.7.0",
-    "@svgr/webpack": "^8.1.0",
-    "@types/react-router": "^5.1.20",
     "classnames": "^2.5.1",
-    "file-loader": "^6.2.0",
     "i18next": "^25.5.2",
     "i18next-browser-languagedetector": "^8.2.0",
     "i18next-http-backend": "^3.0.2",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-i18next": "^15.7.3",
-    "react-router": "^7.9.1",
-    "typescript-plugin-css-modules": "^5.2.0"
+    "react-router": "^7.9.1"
   }
 }

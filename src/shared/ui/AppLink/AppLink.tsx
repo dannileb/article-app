@@ -14,11 +14,11 @@ export const AppLink = ({
   ...props
 }: PropsWithChildren<AppLinkProps>) => {
   return (
-    <Link
-      {...props}
-      className={classNames(classes.appLink, classes[view], className)}
-    >
-      {children}
-    </Link>
+      <Link
+          {...props}
+          className={classNames(classes.appLink, classes[view], className)}
+      >
+          {children}
+      </Link>
   );
 };
