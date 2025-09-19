@@ -1,4 +1,3 @@
-// eslint.config.js
 import js from '@eslint/js';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
@@ -7,6 +6,7 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import stylistic from '@stylistic/eslint-plugin';
 import prettierConfig from 'eslint-config-prettier';
 import { defineConfig } from 'eslint/config';
+import i18next from 'eslint-plugin-i18next';
 
 export default defineConfig(
     {
@@ -57,4 +57,5 @@ export default defineConfig(
         },
     },
     prettierConfig,
+    i18next.configs['flat/recommended'],
 );

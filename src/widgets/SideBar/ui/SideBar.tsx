@@ -17,7 +17,7 @@ export const SideBar = () => {
         [classes.collapsed]: collapsed,
       })}
       >
-          <button onClick={onToggle}>toggle</button>
+          <button onClick={onToggle}>+</button>
           <div className={classes.switchers}>
               <ThemeSwitcher />
               <LangSwitcher />
