@@ -54,6 +54,10 @@ export default defineConfig(
             '@stylistic/quotes': ['error', 'single'],
             '@stylistic/semi': ['error', 'always'],
             '@stylistic/comma-dangle': ['error', 'always-multiline'],
+            '@stylistic/max-len': [
+                'warn',
+                { code: 80, ignoreUrls: true, ignoreStrings: true },
+            ],
         },
     },
     prettierConfig,
