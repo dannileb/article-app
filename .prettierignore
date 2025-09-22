@@ -1,3 +1,4 @@
-**/*.ts
-**/*.tsx
-!*.config.ts
+build/
+dist/
+coverage/
+node_modules/

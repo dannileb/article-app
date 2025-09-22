@@ -1,6 +1,6 @@
-import { PropsWithChildren } from "react";
-import { ThemeProvider } from "./providers/ThemeProvider";
+import { PropsWithChildren } from 'react';
+import { ThemeProvider } from './providers/ThemeProvider';
 
 export const AppProvider = ({ children }: PropsWithChildren) => {
-  return <ThemeProvider>{children}</ThemeProvider>;
+    return <ThemeProvider>{children}</ThemeProvider>;
 };

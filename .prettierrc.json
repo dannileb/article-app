@@ -1,11 +1,12 @@
 {
   "printWidth": 80,
-  "endOfLine": "auto",
+  "tabWidth": 4,
   "singleQuote": true,
-  "quoteProps": "consistent",
   "trailingComma": "all",
   "arrowParens": "always",
-  "tabWidth": 4,
+  "semi": true,
+  "endOfLine": "auto",
+  "quoteProps": "consistent",
   "overrides": [
     {
       "files": ["*.yaml", "*.yml"],

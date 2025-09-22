@@ -2,5 +2,8 @@
   "Язык": "English",
   "langSwitcher": "English",
   "navBarLabel-main": "Главная",
-  "navBarLabel-about": "О сайте"
+  "navBarLabel-about": "О сайте",
+  "pageNotFound_text": "Страница не найдена",
+  "catchedError_text": "Произошла ошибка во время работы приложения",
+  "catchedError_btnText": "Перезагрузить страницу"
 }
