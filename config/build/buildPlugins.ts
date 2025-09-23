@@ -3,6 +3,7 @@ import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import ReactRefreshWebpackPlugin from "@pmmmwh/react-refresh-webpack-plugin";
 import webpack from "webpack";
 import { BuildOptions } from "./types/config";
+import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 
 export function buildPlugins({
   paths,
@@ -22,5 +23,6 @@ export function buildPlugins({
     }),
     new webpack.HotModuleReplacementPlugin(),
     ...(isDev ? [new ReactRefreshWebpackPlugin()] : []),
+    new BundleAnalyzerPlugin({openAnalyzer: false})
   ];
 }

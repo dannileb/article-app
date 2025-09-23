@@ -15,7 +15,7 @@
     "allowSyntheticDefaultImports": true,
     "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
-  "include": ["src"],
+  "include": ["src", "./config/jest/jest-setup.ts"],
   "ts-node": {
     "compilerOptions": {
       "module": "CommonJS"
