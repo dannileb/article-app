@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 export interface ButtonProps
     extends PropsWithChildren<ButtonHTMLAttributes<HTMLButtonElement>> {
-    view?: 'clear' | 'primary';
+    view?: 'clear' | 'primary' | 'secondary';
 }
 
 export const Button = ({

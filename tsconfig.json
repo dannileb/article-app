@@ -15,7 +15,11 @@
     "allowSyntheticDefaultImports": true,
     "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
-  "include": ["src", "./config/jest/jest-setup.ts"],
+  "include": [
+    "src",
+    "./config/jest/jest-setup.ts",
+    "config/storybook/StyleDecorator.tsx"
+  ],
   "ts-node": {
     "compilerOptions": {
       "module": "CommonJS"
