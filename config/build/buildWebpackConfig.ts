@@ -11,7 +11,7 @@ export function buildWebpackConfig(
   const { mode, paths, isDev } = options;
   return {
     mode: mode,
-    entry: paths.enrtry,
+    entry: paths.entry,
     output: {
       filename: "[name].[contenthash].js",
       path: paths.build,

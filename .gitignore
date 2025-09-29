@@ -3,3 +3,11 @@ node_modules
 
 *storybook.log
 storybook-static
+
+# Playwright
+/tests/__screenshots__
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
