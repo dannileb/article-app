@@ -13,8 +13,8 @@ jobs:
       - uses: ./.github/actions/setup
       - name: Lint
         run: npm run lint
-      - name: Lint css
-        run: npm run lint-css
+      - name: Lint scss
+        run: npm run lint-scss
 
   build:
     needs: lint
