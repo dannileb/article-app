@@ -8,7 +8,9 @@ export default defineConfig({
     workers: process.env.CI ? 1 : undefined,
     reporter: 'html',
     use: {
-        baseURL: 'http://localhost:6006',
+        baseURL: process.env.DOCKER
+            ? 'http://storybook:6006'
+            : 'http://localhost:6006',
     },
     snapshotPathTemplate: '{testDir}/__screenshots__/{testFilePath}/{arg}{ext}',
     expect: {
@@ -29,9 +31,4 @@ export default defineConfig({
             },
         },
     ],
-    webServer: {
-        command: 'npm run storybook',
-        url: 'http://localhost:6006',
-        reuseExistingServer: true,
-    },
 });

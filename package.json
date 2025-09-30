@@ -14,7 +14,7 @@
     "lint-scss": "stylelint \"**/*.scss\"",
     "lint-scss-fix": "stylelint \"**/*.scss\" --fix",
     "test-unit": "jest --config ./config/jest/jest.config.ts",
-    "test-ui": "npx playwright test",
+    "test-ui-update": "docker-compose -f docker-compose-test-ui.test.yml up --abort-on-container-exit",
     "storybook": "storybook dev -p 6006 -c ./config/storybook",
     "build-storybook": "storybook build -c ./config/storybook"
   },
