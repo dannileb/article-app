@@ -41,7 +41,9 @@ jobs:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
       - name: UI test
-        run: npm run test-ui
+        run: npm run build-storybook
+      - name: Run Playwright tests
+        run: npx playwright test ./tests/ui.spec.ts
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
