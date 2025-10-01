@@ -6,11 +6,9 @@ export default defineConfig({
     forbidOnly: !!process.env.CI,
     retries: process.env.CI ? 2 : 0,
     workers: process.env.CI ? 1 : undefined,
-    reporter: 'html',
+    reporter: [['html', { open: 'never' }]],
     use: {
-        baseURL: process.env.DOCKER
-            ? 'http://storybook:6006'
-            : 'http://localhost:6006',
+        baseURL: 'http://localhost:6006',
     },
     snapshotPathTemplate: '{testDir}/__screenshots__/{testFilePath}/{arg}{ext}',
     expect: {
@@ -31,12 +29,10 @@ export default defineConfig({
             },
         },
     ],
-    webServer: process.env.CI
-        ? {
-              command: 'npx http-server storybook-static -p 6006',
-              url: 'http://localhost:6006',
-              timeout: 60000,
-              reuseExistingServer: true,
-          }
-        : undefined,
+    webServer: {
+        command: 'npx http-server storybook-static -p 6006',
+        url: 'http://localhost:6006',
+        timeout: 60000,
+        reuseExistingServer: true,
+    },
 });

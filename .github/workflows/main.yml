@@ -37,16 +37,11 @@ jobs:
   ui-test:
     needs: lint
     runs-on: ubuntu-latest
-    container:
-      image: mcr.microsoft.com/playwright:v1.55.1-noble
-      options: --user 1001
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
-      - name: Build Storybook
-        run: npm run build-storybook
-      - name: Run Playwright tests
-        run: npx playwright test
+      - name: UI test
+        run: npm run test-ui
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
