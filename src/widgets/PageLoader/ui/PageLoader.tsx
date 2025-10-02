@@ -16,7 +16,7 @@ export const PageLoader = ({ fullscreen, show = true }: PageLoaderProps) => {
             })}
         >
             <div className={classes.loader}>
-                <Loader color="var(--bg-color)" />
+                <Loader color="var(---color-bg-primary)" />
             </div>
         </div>
     );

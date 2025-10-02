@@ -1,9 +1,10 @@
 {
-  "Язык": "English",
-  "langSwitcher": "English",
+  "langSwitcher_flag": "🇺🇸",
+  "langSwitcher_text": "English",
   "navBarLabel-main": "Главная",
   "navBarLabel-about": "О сайте",
   "pageNotFound_text": "Страница не найдена",
   "catchedError_text": "Произошла ошибка во время работы приложения",
-  "catchedError_btnText": "Перезагрузить страницу"
+  "catchedError_btnText": "Перезагрузить страницу",
+  "header_title": "Article App"
 }

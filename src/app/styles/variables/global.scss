@@ -13,4 +13,15 @@
     --navbar-height: 50px;
     --sidebar-width: 300px;
     --sidebar-width-collapsed: 80px;
+
+    // Цвета
+    --color-article-title: var(--color-text-primary);
+    --color-article-subtitle: var(--color-text-secondary);
+    --color-article-meta: var(--color-text-muted);
+    --color-article-content: var(--color-text-primary);
+    --color-article-link: var(--color-primary);
+    --color-article-link-hover: var(--color-primary-hover);
+    --color-article-blockquote: var(--color-secondary);
+    --color-article-code-bg: var(--color-bg-tertiary);
+    --color-article-code-border: var(--color-border);
 }

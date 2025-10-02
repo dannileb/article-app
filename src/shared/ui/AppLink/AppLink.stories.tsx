@@ -20,8 +20,20 @@ type Story = StoryObj<typeof meta>;
 export const Light: Story = {
     args: {},
 };
+export const LightActive: Story = {
+    args: {
+        view: 'active',
+    },
+};
 
 export const Dark: Story = {
     args: {},
+    decorators: [ThemeDecorator(Theme.DARK)],
+};
+
+export const DarkActive: Story = {
+    args: {
+        view: 'active',
+    },
     decorators: [ThemeDecorator(Theme.DARK)],
 };

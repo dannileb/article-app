@@ -1,11 +1,13 @@
 .appLink {
     text-decoration: none;
+    color: var(--color-text-secondary);
+
+    &:hover {
+        color: var(--color-text-active);
+    }
 }
 
-.primary {
-    color: var(--primary-color-accent);
-}
-
-.secondary {
-    color: var(--secondary-color-accent);
+.active {
+    pointer-events: none;
+    color: var(--color-text-primary);
 }

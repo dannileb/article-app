@@ -1,8 +1,57 @@
 :root {
-    --bg-color: #d2d2e9;
-    --bg-color-accent: #090949;
-    --primary-color: #041c65;
-    --secondary-color: #0449e0;
-    --primary-color-accent: #049604;
-    --secondary-color-accent: #04ff04;
+    /* Светлая тема */
+
+    // Цвета
+    --color-primary: #2563eb;
+    --color-primary-hover: #1d4ed8;
+    --color-primary-light: #dbeafe;
+    --color-secondary: #64748b;
+    --color-secondary-hover: #475569;
+    --color-secondary-light: #f1f5f9;
+    --color-accent: #0891b2;
+    --color-accent-hover: #0e7490;
+    --color-success: #059669;
+    --color-warning: #d97706;
+    --color-error: #dc2626;
+
+    // Тексты
+    --color-text-primary: #0f172a;
+    --color-text-secondary: #64748b;
+    --color-text-active: rgb(14 22 43);
+    --color-text-muted: #94a3b8;
+
+    // Фоны
+    --color-bg-primary: #fff;
+    --color-bg-secondary: #f8fafc;
+    --color-bg-tertiary: #bdf;
+    --color-bg-accent-blue: #eff6ff;
+    --color-bg-accent-green: #f0fdf4;
+    --color-bg-accent-yellow: #fefce8;
+    --color-bg-accent-red: #fef2f2;
+    --color-bg-accent-purple: #faf5ff;
+    --color-bg-accent-orange: #fff7ed;
+    --color-bg-accent-cyan: #ecfeff;
+    --color-bg-accent-pink: #fdf2f8;
+    --color-bg-accent-gray: #f9fafb;
+    --color-bg-accent-indigo: #eef2ff;
+    --color-bg-accent-blue-hover: #dbeafe;
+    --color-bg-accent-green-hover: #dcfce7;
+    --color-bg-accent-yellow-hover: #fef3c7;
+    --color-bg-accent-red-hover: #fee2e2;
+    --color-bg-accent-purple-hover: #f3e8ff;
+    --color-bg-accent-orange-hover: #fed7aa;
+    --color-bg-accent-cyan-hover: #cffafe;
+    --color-bg-accent-pink-hover: #fce7f3;
+    --color-bg-accent-gray-hover: #f3f4f6;
+    --color-bg-accent-indigo-hover: #e0e7ff;
+
+    // Контейнеры
+    --color-border: #e2e8f0;
+    --color-border-light: #f1f5f9;
+    --color-card-bg: #fff;
+    --color-card-border: #e2e8f0;
+    --color-card-shadow: rgb(0, 0, 0 / 10%);
+    --color-input-bg: #fff;
+    --color-input-border: #d1d5db;
+    --color-input-focus: #2563eb;
 }

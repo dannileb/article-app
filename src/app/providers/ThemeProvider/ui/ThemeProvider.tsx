@@ -1,21 +1,34 @@
-import { PropsWithChildren, useMemo, useState } from "react";
-import {
-  LOCAL_STORAGE_THEME_KEY,
-  Theme,
-  ThemeContext,
-} from "../lib/ThemeContext";
+import { forwardRef, useMemo, useState } from 'react';
+import { Theme, ThemeContext } from '../lib/ThemeContext';
 
-const defaulValue =
-  (localStorage.getItem(LOCAL_STORAGE_THEME_KEY) as Theme) || Theme.LIGHT;
-
-const ThemeProvider = ({ children }: PropsWithChildren) => {
-  const [theme, setTheme] = useState<Theme>(defaulValue);
-
-  const value = useMemo(() => ({ theme, setTheme }), [theme]);
-
-  return (
-      <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
-  );
+type ThemeProps = React.HTMLAttributes<HTMLDivElement> & {
+    theme?: Theme;
 };
+
+const ThemeProvider = forwardRef<HTMLDivElement, ThemeProps>(
+    ({ theme: themeProps, ...props }, ref) => {
+        const [theme, setTheme] = useState<Theme>(() => {
+            if (themeProps) {
+                return themeProps;
+            }
+            const saved = localStorage.getItem('theme') as Theme;
+            if (saved) return saved;
+
+            return window.matchMedia('(prefers-color-scheme: dark)').matches
+                ? Theme.DARK
+                : Theme.LIGHT;
+        });
+
+        const value = useMemo(() => ({ theme, setTheme }), [theme]);
+
+        return (
+            <ThemeContext.Provider value={value}>
+                <div {...props} ref={ref} data-theme={theme}>
+                    {props.children}
+                </div>
+            </ThemeContext.Provider>
+        );
+    },
+);
 
 export default ThemeProvider;

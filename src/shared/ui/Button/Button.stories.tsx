@@ -1,38 +1,40 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 
-import { fn } from 'storybook/test';
-
 import { Button } from './Button';
+import { ThemeDecorator } from '#/shared/config/storybook';
+import { Theme } from '#/app/providers/ThemeProvider';
 
 const meta = {
     title: 'shared/Button',
     component: Button,
     tags: ['autodocs'],
     argTypes: {
-        view: { options: ['clear', 'primary', 'secondary'] },
+        view: {
+            options: ['clear', 'primary', 'secondary'],
+        },
+        form: {
+            options: ['default', 'brick', 'rounded'],
+        },
+        disabled: { control: { type: 'boolean' } },
     },
-    args: { onClick: fn() },
+    args: {
+        view: 'primary',
+        form: 'default',
+        disabled: false,
+    },
 } satisfies Meta<typeof Button>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
+export const Light: Story = {
     args: {
         children: 'Кнопка',
     },
 };
-
-export const Clear: Story = {
+export const Dark: Story = {
     args: {
-        view: 'clear',
         children: 'Кнопка',
     },
-};
-
-export const Secondary: Story = {
-    args: {
-        view: 'secondary',
-        children: 'Кнопка',
-    },
+    decorators: [ThemeDecorator(Theme.DARK)],
 };

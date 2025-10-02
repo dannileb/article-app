@@ -1,8 +1,57 @@
-.app.dark {
-    --bg-color: #090949;
-    --bg-color-accent: #d2d2e9;
-    --primary-color: #049604;
-    --secondary-color: #04ff04;
-    --primary-color-accent: #041c65;
-    --secondary-color-accent: #0449e0;
+[data-theme='dark'] {
+    /* Темная тема */
+
+    // Цвета
+    --color-primary: #3b82f6;
+    --color-primary-hover: #2563eb;
+    --color-primary-light: #1e3a8a;
+    --color-secondary: #94a3b8;
+    --color-secondary-hover: #cbd5e1;
+    --color-secondary-light: #334155;
+    --color-accent: #06b6d4;
+    --color-accent-hover: #0891b2;
+    --color-success: #10b981;
+    --color-warning: #f59e0b;
+    --color-error: #ef4444;
+
+    // Тексты
+    --color-text-primary: #f8fafc;
+    --color-text-secondary: #a2a7ad;
+    --color-text-active: #e0e6ee;
+    --color-text-muted: #94a3b8;
+
+    // Фоны
+    --color-bg-primary: #0f172a;
+    --color-bg-secondary: #1e293b;
+    --color-bg-tertiary: #334155;
+    --color-bg-accent-blue: #1e3a8a;
+    --color-bg-accent-green: #14532d;
+    --color-bg-accent-yellow: #713f12;
+    --color-bg-accent-red: #7f1d1d;
+    --color-bg-accent-purple: #581c87;
+    --color-bg-accent-orange: #9a3412;
+    --color-bg-accent-cyan: #164e63;
+    --color-bg-accent-pink: #831843;
+    --color-bg-accent-gray: #374151;
+    --color-bg-accent-indigo: #312e81;
+    --color-bg-accent-blue-hover: #1d4ed8;
+    --color-bg-accent-green-hover: #166534;
+    --color-bg-accent-yellow-hover: #92400e;
+    --color-bg-accent-red-hover: #991b1b;
+    --color-bg-accent-purple-hover: #6b21a8;
+    --color-bg-accent-orange-hover: #c2410c;
+    --color-bg-accent-cyan-hover: #0e7490;
+    --color-bg-accent-pink-hover: #be185d;
+    --color-bg-accent-gray-hover: #4b5563;
+    --color-bg-accent-indigo-hover: #3730a3;
+
+    // Контейнеры
+    --color-border: #475569;
+    --color-border-light: #334155;
+    --color-card-bg: #1e293b;
+    --color-card-border: #475569;
+    --color-card-shadow: rgb(0 0 0 / 30%);
+    --color-input-bg: #334155;
+    --color-input-border: #475569;
+    --color-input-focus: #3b82f6;
 }
