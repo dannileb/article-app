@@ -6,5 +6,6 @@
   "pageNotFound_text": "The page is not found",
   "catchedError_text": "An error occurred during the application work",
   "catchedError_btnText": "Reload the page",
-  "header_title": "Article App"
+  "header_title": "Article App",
+  "loginModal_heading": "Log in"
 }

@@ -4,9 +4,7 @@
 @use './themes/light.scss' as *;
 
 .app {
-    font: var(--font-m);
     background: var(--color-bg-primary);
-    color: var(--color-text-primary);
     min-height: 100vh;
 }
 

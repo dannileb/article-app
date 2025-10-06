@@ -1,0 +1,41 @@
+.modal {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: opacity 200ms ease;
+}
+
+.overlay {
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-bg-overlay);
+}
+
+.content {
+    position: absolute;
+    max-width: 90%;
+    max-height: 90%;
+    padding: 8px;
+    border-radius: 4px;
+    background-color: var(--color-bg-primary);
+}
+
+.entering {
+    opacity: 1;
+}
+
+.entered {
+    opacity: 1;
+}
+
+.exiting {
+    opacity: 0;
+}
+
+.exited {
+    opacity: 0;
+}

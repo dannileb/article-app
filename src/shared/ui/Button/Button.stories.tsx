@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-webpack5';
 
 import { Button } from './Button';
 import { ThemeDecorator } from '#/shared/config/storybook';
-import { Theme } from '#/app/providers/ThemeProvider';
+import { Theme } from '#/shared/config/theme/ThemeContext';
 
 const meta = {
     title: 'shared/Button',

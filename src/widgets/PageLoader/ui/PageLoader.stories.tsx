@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { PageLoader } from './PageLoader';
-import { Theme } from '#/app/providers/ThemeProvider';
 import { ThemeDecorator } from '#/shared/config/storybook';
+import { Theme } from '#/shared/config/theme/ThemeContext';
 
 const Component = PageLoader;
 

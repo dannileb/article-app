@@ -2,7 +2,7 @@ import {
     LOCAL_STORAGE_THEME_KEY,
     Theme,
     useThemeContext,
-} from './ThemeContext';
+} from '../../config/theme/ThemeContext';
 
 interface UseThemeResult {
     theme: Theme;
@@ -15,7 +15,6 @@ export function useTheme(): UseThemeResult {
     const toggleTheme = () => {
         const newTheme = theme === Theme.DARK ? Theme.LIGHT : Theme.DARK;
 
-        document.documentElement.setAttribute('data-theme', theme);
         setTheme(newTheme);
         localStorage.setItem(LOCAL_STORAGE_THEME_KEY, newTheme);
     };

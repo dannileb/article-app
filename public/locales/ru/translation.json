@@ -6,5 +6,6 @@
   "pageNotFound_text": "Страница не найдена",
   "catchedError_text": "Произошла ошибка во время работы приложения",
   "catchedError_btnText": "Перезагрузить страницу",
-  "header_title": "Article App"
+  "header_title": "Article App",
+  "loginModal_heading": "Авторизация"
 }

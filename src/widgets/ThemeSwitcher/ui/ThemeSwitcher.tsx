@@ -1,4 +1,5 @@
-import { Theme, useTheme } from '#/app/providers/ThemeProvider';
+import { Theme } from '#/shared/config/theme/ThemeContext';
+import { useTheme } from '#/shared/lib/hooks/useTheme';
 import { Button } from '#/shared/ui/Button/Button';
 import { MoonOutlined, SunOutlined } from '@ant-design/icons';
 

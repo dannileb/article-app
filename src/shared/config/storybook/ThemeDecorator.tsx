@@ -1,9 +1,10 @@
 import { FC } from 'react';
-import { Theme, ThemeProvider } from '../../../app/providers/ThemeProvider';
+import { ThemeWrapper } from '#/shared/ui/ThemeWrapper';
+import { Theme } from '#/shared/config/theme/ThemeContext';
 
 export const ThemeDecorator = (theme: Theme) => (Story: FC) =>
     (
-        <ThemeProvider theme={theme} className="app">
+        <ThemeWrapper theme={theme} className="app">
             <Story />
-        </ThemeProvider>
+        </ThemeWrapper>
     );

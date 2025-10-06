@@ -4,7 +4,7 @@ import {
     ThemeDecorator,
     RouterDecorator,
 } from '../../src/shared/config/storybook';
-import { Theme } from '../../src/app/providers/ThemeProvider';
+import { Theme } from '../../src/shared/config/theme/ThemeContext';
 
 const preview: Preview = {
     decorators: [RouterDecorator, ThemeDecorator(Theme.LIGHT)],
