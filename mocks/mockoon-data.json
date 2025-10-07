@@ -1,0 +1,650 @@
+{
+  "uuid": "0c076dc7-42dd-49ce-8496-eaa22a14357b",
+  "lastMigration": 33,
+  "name": "Mockoon data",
+  "endpointPrefix": "api",
+  "latency": 0,
+  "port": 8000,
+  "hostname": "",
+  "folders": [],
+  "routes": [
+    {
+      "uuid": "fe857ad4-0c3f-473f-8e0e-649ce15bc8d8",
+      "type": "http",
+      "documentation": "User registration",
+      "method": "post",
+      "endpoint": "register",
+      "responses": [
+        {
+          "uuid": "e2be58f3-f90e-4632-bf31-4660e8e2af9b",
+          "body": "{\n  \"user\": {\n    \"id\": {{faker 'number.int' min=1 max=1000}},\n    \"email\": \"{{body 'email'}}\",\n    \"name\": \"{{body 'name'}}\",\n    \"role\": \"user\"\n  },\n  \"accessToken\": \"{{jwt (bodyRaw 'id') (body 'email') 'secret-key' expiresIn='24h'}}\"\n}",
+          "latency": 0,
+          "statusCode": 201,
+          "label": "Success",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "b18b0b11-fe09-465c-a9d2-5b56a16f5844",
+      "type": "http",
+      "documentation": "User login",
+      "method": "post",
+      "endpoint": "login",
+      "responses": [
+        {
+          "uuid": "fcbb15b8-5290-415a-8489-9cd2e85d8058",
+          "body": "{\n  \"user\": {\n    \"id\": 1,\n    \"email\": \"admin@test.com\",\n    \"name\": \"Admin User\",\n    \"role\": \"admin\"\n  },\n  \"accessToken\": \"{{faker 'internet.jwt' '{header: { alg: \"HS256\"}, payload: { email: \"admin@test.com\", role: \"admin\"}}'}}\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Admin Response",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "email",
+              "value": "admin@test.com",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "password",
+              "value": "admin123",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "cee94e16-31cb-44d8-a9cc-260fe230f7c3",
+          "body": "{\r\n  \"user\": {\r\n    \"id\": 2,\r\n    \"email\": \"user@test.com\",\r\n    \"name\": \"Regular User\",\r\n    \"role\": \"user\"\r\n  },\r\n  \"accessToken\": \"{{jwt '2' 'user@test.com' 'secret-key' (object role='user' expiresIn='1h')}}\"\r\n}\r\n",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "User Response",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "email",
+              "value": "user@test.com",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "password",
+              "value": "user123",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "e0791000-ec14-462c-9e60-b23970220821",
+          "body": "{\n  \"message\": \"Invalid email or password\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Invalid credentials",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "53ee571b-c43a-4232-80af-4c525dcae38c",
+      "type": "http",
+      "documentation": "Get user profile",
+      "method": "get",
+      "endpoint": "profile",
+      "responses": [
+        {
+          "uuid": "be5d0756-03de-4533-97d2-8722234083c3",
+          "body": "{\n  \"id\": {{jwtPayload (header 'Authorization') 'sub'}},\n  \"email\": \"{{jwtPayload (header 'Authorization') 'email'}}\",\n  \"name\": \"User Name\",\n  \"role\": \"{{jwtPayload (header 'Authorization') 'role'}}\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Success",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "^Bearer .+",
+              "invert": false,
+              "operator": "regex"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "099563a4-eea9-4cad-b4c5-194e4058ed35",
+          "body": "{\n  \"message\": \"No token provided\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "4a5036bc-ed07-4b53-9a4b-60a946614d8f",
+      "type": "http",
+      "documentation": "Get all posts",
+      "method": "get",
+      "endpoint": "posts",
+      "responses": [
+        {
+          "uuid": "c947447a-9aa1-41dd-922e-f4f1dee6c2bd",
+          "body": "{{data 'posts'}}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Success",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "DATABUCKET",
+          "filePath": "",
+          "databucketID": "posts",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "^Bearer .+",
+              "invert": false,
+              "operator": "regex"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "f1ecab98-1fbf-4ab4-bb31-ba928459ba02",
+          "body": "{\n  \"message\": \"Authentication required\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "772be1cd-e9e3-43b4-9322-1a1dedaa4176",
+      "type": "http",
+      "documentation": "Get post by ID",
+      "method": "get",
+      "endpoint": "posts/:id",
+      "responses": [
+        {
+          "uuid": "920691c2-e9d8-4773-b46c-29869198b809",
+          "body": "{{#each (data 'posts') as |post|}}\n{{#if (eq (urlParam 'id') (toString post.id))}}\n{\n  \"id\": {{post.id}},\n  \"title\": \"{{post.title}}\",\n  \"content\": \"{{post.content}}\",\n  \"userId\": {{post.userId}},\n  \"author\": \"{{post.author}}\",\n  \"createdAt\": \"{{post.createdAt}}\",\n  \"tags\": {{stringify post.tags}},\n  \"comments\": {{stringify post.comments}}\n}\n{{/if}}\n{{/each}}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Success",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "^Bearer .+",
+              "invert": false,
+              "operator": "regex"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "bee36a2f-a863-43f7-85e1-a652e003a34e",
+          "body": "{\n  \"message\": \"Authentication required\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "ef3986ed-18a8-43e8-a27a-5210f10a293b",
+      "type": "http",
+      "documentation": "Create new post",
+      "method": "post",
+      "endpoint": "posts",
+      "responses": [
+        {
+          "uuid": "652839db-cda3-489f-9520-16130f1a4ae6",
+          "body": "{\n  \"id\": {{faker 'number.int' min=100 max=999}},\n  \"title\": \"{{body 'title'}}\",\n  \"content\": \"{{body 'content'}}\",\n  \"userId\": {{jwtPayload (header 'Authorization') 'sub'}},\n  \"author\": \"{{jwtPayload (header 'Authorization') 'email'}}\",\n  \"createdAt\": \"{{now}}\",\n  \"tags\": {{body 'tags'}}\n}",
+          "latency": 0,
+          "statusCode": 201,
+          "label": "Created",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "^Bearer .+",
+              "invert": false,
+              "operator": "regex"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "ff340447-fde9-43eb-ab47-f82539a56182",
+          "body": "{\n  \"message\": \"Authentication required\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "cb27aacd-90e2-4bef-b9be-b8cd2ad78d08",
+      "type": "http",
+      "documentation": "Delete post (admin or author only)",
+      "method": "delete",
+      "endpoint": "posts/:id",
+      "responses": [
+        {
+          "uuid": "5aba6c54-4953-488e-b42b-9b8ba662ffb8",
+          "body": "{\n  \"message\": \"Post deleted successfully\",\n  \"id\": {{urlParam 'id'}}\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Success",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "^Bearer .+",
+              "invert": false,
+              "operator": "regex"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "1102c2d9-3b35-4254-a3e1-dcc693da5d6a",
+          "body": "{\n  \"message\": \"Authentication required\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "83b5e976-0e9a-4ab1-8042-fd98f39c0d92",
+      "type": "http",
+      "documentation": "Get all users (admin only)",
+      "method": "get",
+      "endpoint": "admin/users",
+      "responses": [
+        {
+          "uuid": "41e367c5-813c-4501-a99b-201d6f8a4cc1",
+          "body": "{{data 'users'}}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Success",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "DATABUCKET",
+          "filePath": "",
+          "databucketID": "users",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "^Bearer .+",
+              "invert": false,
+              "operator": "regex"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "456c81f6-bebe-40ca-a52b-2771f56abbf3",
+          "body": "{\n  \"message\": \"Admin access required\"\n}",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    }
+  ],
+  "rootChildren": [
+    {
+      "type": "route",
+      "uuid": "fe857ad4-0c3f-473f-8e0e-649ce15bc8d8"
+    },
+    {
+      "type": "route",
+      "uuid": "b18b0b11-fe09-465c-a9d2-5b56a16f5844"
+    },
+    {
+      "type": "route",
+      "uuid": "53ee571b-c43a-4232-80af-4c525dcae38c"
+    },
+    {
+      "type": "route",
+      "uuid": "4a5036bc-ed07-4b53-9a4b-60a946614d8f"
+    },
+    {
+      "type": "route",
+      "uuid": "772be1cd-e9e3-43b4-9322-1a1dedaa4176"
+    },
+    {
+      "type": "route",
+      "uuid": "ef3986ed-18a8-43e8-a27a-5210f10a293b"
+    },
+    {
+      "type": "route",
+      "uuid": "cb27aacd-90e2-4bef-b9be-b8cd2ad78d08"
+    },
+    {
+      "type": "route",
+      "uuid": "83b5e976-0e9a-4ab1-8042-fd98f39c0d92"
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Access-Control-Allow-Origin",
+      "value": "*"
+    },
+    {
+      "key": "Access-Control-Allow-Methods",
+      "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+    },
+    {
+      "key": "Access-Control-Allow-Headers",
+      "value": "Content-Type,Authorization"
+    }
+  ],
+  "proxyReqHeaders": [],
+  "proxyResHeaders": [],
+  "data": [
+    {
+      "uuid": "b6fe4b21-1a6a-41d7-8d7a-9e5d4f451e7a",
+      "id": "users",
+      "name": "Users",
+      "documentation": "List of all users",
+      "value": "[\n  {\n    \"id\": 1,\n    \"email\": \"admin@test.com\",\n    \"password\": \"admin123\",\n    \"name\": \"Admin User\",\n    \"role\": \"admin\",\n    \"createdAt\": \"2025-09-01T10:00:00Z\"\n  },\n  {\n    \"id\": 2,\n    \"email\": \"user@test.com\",\n    \"password\": \"user123\",\n    \"name\": \"Regular User\",\n    \"role\": \"user\",\n    \"createdAt\": \"2025-09-15T14:30:00Z\"\n  },\n  {\n    \"id\": 3,\n    \"email\": \"moderator@test.com\",\n    \"password\": \"mod123\",\n    \"name\": \"Moderator User\",\n    \"role\": \"moderator\",\n    \"createdAt\": \"2025-09-20T09:45:00Z\"\n  }\n]"
+    },
+    {
+      "uuid": "3150a840-253c-4e28-a264-e2f0ce3dbc47",
+      "id": "posts",
+      "name": "Posts",
+      "documentation": "List of blog posts",
+      "value": "[\r\n  {{#repeat 50}}\r\n  {\r\n    \"id\": {{@index}},\r\n    \"title\": \"{{faker 'lorem.sentence'}}\",\r\n    \"content\": \"{{faker 'lorem.paragraph'}}\\n\\n{{faker 'lorem.paragraph'}}\\n\\n{{faker 'lorem.paragraph'}}\",\r\n    \"userId\": \"{{faker 'number.int' min=1 max=3}}\",\r\n    \"author\": \"{{faker 'person.fullName'}}\",\r\n    \"createdAt\": \"{{faker 'date.recent' 30}}\",\r\n    \"tags\": [\"{{faker 'word.noun'}}\", \"{{faker 'word.verb'}}\"],\r\n    \"comments\": []\r\n  }{{#unless @last}},{{/unless}}\r\n  {{/repeat}}\r\n]\r\n"
+    }
+  ],
+  "callbacks": []
+}
