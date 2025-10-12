@@ -18,7 +18,8 @@
     "test-ui-update": "npm run build-storybook && docker-compose -f docker-compose-test-ui-update.test.yml up --abort-on-container-exit",
     "storybook": "storybook dev -p 6006 -c ./config/storybook",
     "build-storybook": "storybook build -c ./config/storybook",
-    "mock-api-local": "npx mockoon-cli start --data ./mocks/mockoon-data.json"
+    "mock-api-local": "npx mockoon-cli start --data ./mocks/mockoon-data.json",
+    "prepare": "husky || true"
   },
   "devDependencies": {
     "@babel/core": "^7.28.4",
