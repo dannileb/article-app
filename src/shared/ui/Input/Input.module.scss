@@ -1,0 +1,45 @@
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.inputBody {
+    padding-left: var(--input-horizontal-padding);
+    padding-right: var(--input-horizontal-padding);
+    padding-bottom: var(--input-vertical-padding);
+    padding-top: var(--input-vertical-padding);
+
+    display: flex;
+
+    border-radius: var(--border-radius-default);
+    border: 1px solid var(--color-input-border);
+
+    &:has(.input:focus) {
+        border: 1px solid var(--color-input-focus);
+    }
+}
+
+.inputLabel {
+    margin-left: var(--label-offset);
+    font-size: var(--font-size-s);
+}
+
+.input {
+    width: 100%;
+    outline: none;
+    border: none;
+
+    color: var(--color-text-primary);
+    background-color: transparent;
+
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus,
+    &:-webkit-autofill:active {
+        box-shadow: 0 0 0 30px var(--color-input-bg) inset !important;
+    }
+}
+
+.inputPasswordButton {
+    margin-left: 4px;
+}

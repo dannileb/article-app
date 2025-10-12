@@ -2,6 +2,7 @@
     // Шрифт
     --font-family-main: -apple-system, blinkmacsystemfont, 'Segoe UI', system-ui,
         roboto, oxygen-sans, ubuntu, cantarell, 'Helvetica Neue', sans-serif;
+    --font-size-s: 12px;
     --font-size-m: 16px;
     --font-line-m: 24px;
     --font-m: var(--font-size-m) / var(--font-line-m) var(--font-family-main);
@@ -13,6 +14,11 @@
     --navbar-height: 50px;
     --sidebar-width: 300px;
     --sidebar-width-collapsed: 80px;
+    --border-radius-default: 4px;
+    --border-radius-rounded: 40px;
+    --input-vertical-padding: 4px;
+    --input-horizontal-padding: 8px;
+    --label-offset: 4px;
 
     // Цвета
     --color-article-title: var(--color-text-primary);

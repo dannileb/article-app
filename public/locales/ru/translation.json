@@ -7,5 +7,10 @@
   "catchedError_text": "Произошла ошибка во время работы приложения",
   "catchedError_btnText": "Перезагрузить страницу",
   "header_title": "Article App",
-  "loginModal_heading": "Авторизация"
+  "loginModal_heading": "Авторизация",
+  "loginForm_username": "Введите имя пользователя",
+  "loginForm_password": "Введите пароль",
+  "loginForm_login": "Войти",
+  "loginForm_username-label": "Имя пользователя",
+  "loginForm_password-label": "Пароль"
 }

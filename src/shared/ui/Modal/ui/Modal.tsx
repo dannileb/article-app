@@ -5,16 +5,12 @@ import classNames from 'classnames';
 import { PortalWithTheme } from '#/shared/ui/PortalWithTheme/ui/PortalWithTheme';
 import { useTheme } from '#/shared/lib/hooks/useTheme';
 
-interface ModalProps {
+export type ModalProps = React.PropsWithChildren<{
     isOpen: boolean;
     onClickOutside?: (e: React.MouseEvent) => void;
-}
+}>;
 
-export const Modal = ({
-    isOpen,
-    onClickOutside,
-    children,
-}: React.PropsWithChildren<ModalProps>) => {
+export const Modal = ({ isOpen, onClickOutside, children }: ModalProps) => {
     const { theme } = useTheme();
     const portalRef = useRef<HTMLDivElement | null>(null);
 

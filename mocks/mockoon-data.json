@@ -53,7 +53,7 @@
       "responses": [
         {
           "uuid": "fcbb15b8-5290-415a-8489-9cd2e85d8058",
-          "body": "{\n  \"user\": {\n    \"id\": 1,\n    \"email\": \"admin@test.com\",\n    \"name\": \"Admin User\",\n    \"role\": \"admin\"\n  },\n  \"accessToken\": \"{{faker 'internet.jwt' '{header: { alg: \"HS256\"}, payload: { email: \"admin@test.com\", role: \"admin\"}}'}}\"\n}",
+          "body": "{\n  \"user\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"name\": \"Admin User\",\n    \"role\": \"admin\"\n  },\n  \"accessToken\": \"{{faker 'internet.jwt' '{header: { alg: \"HS256\"}, payload: { username: \"admin\", role: \"admin\"}}'}}\"\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Admin Response",
@@ -70,8 +70,8 @@
           "rules": [
             {
               "target": "body",
-              "modifier": "email",
-              "value": "admin@test.com",
+              "modifier": "username",
+              "value": "admin",
               "invert": false,
               "operator": "equals"
             },
@@ -92,7 +92,7 @@
         },
         {
           "uuid": "cee94e16-31cb-44d8-a9cc-260fe230f7c3",
-          "body": "{\r\n  \"user\": {\r\n    \"id\": 2,\r\n    \"email\": \"user@test.com\",\r\n    \"name\": \"Regular User\",\r\n    \"role\": \"user\"\r\n  },\r\n  \"accessToken\": \"{{jwt '2' 'user@test.com' 'secret-key' (object role='user' expiresIn='1h')}}\"\r\n}\r\n",
+          "body": "{\r\n  \"user\": {\r\n    \"id\": 2,\r\n    \"username\": \"user\",\r\n    \"name\": \"Regular User\",\r\n    \"role\": \"user\"\r\n  },\r\n  \"accessToken\": \"{{faker 'internet.jwt' '{header: { alg: \"HS256\"}, payload: { username: \"user\", role: \"user\"}}'}}\"\r\n}\r\n",
           "latency": 0,
           "statusCode": 200,
           "label": "User Response",
@@ -109,8 +109,8 @@
           "rules": [
             {
               "target": "body",
-              "modifier": "email",
-              "value": "user@test.com",
+              "modifier": "username",
+              "value": "user",
               "invert": false,
               "operator": "equals"
             },
@@ -167,7 +167,7 @@
       "responses": [
         {
           "uuid": "be5d0756-03de-4533-97d2-8722234083c3",
-          "body": "{\n  \"id\": {{jwtPayload (header 'Authorization') 'sub'}},\n  \"email\": \"{{jwtPayload (header 'Authorization') 'email'}}\",\n  \"name\": \"User Name\",\n  \"role\": \"{{jwtPayload (header 'Authorization') 'role'}}\"\n}",
+          "body": "{\n  \"id\": {{jwtPayload (header 'Authorization') 'sub'}},\n  \"user\": \"{{jwtPayload (header 'Authorization') 'user'}}\",\n  \"name\": \"User Name\",\n  \"role\": \"{{jwtPayload (header 'Authorization') 'role'}}\"\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Success",
@@ -636,7 +636,7 @@
       "id": "users",
       "name": "Users",
       "documentation": "List of all users",
-      "value": "[\n  {\n    \"id\": 1,\n    \"email\": \"admin@test.com\",\n    \"password\": \"admin123\",\n    \"name\": \"Admin User\",\n    \"role\": \"admin\",\n    \"createdAt\": \"2025-09-01T10:00:00Z\"\n  },\n  {\n    \"id\": 2,\n    \"email\": \"user@test.com\",\n    \"password\": \"user123\",\n    \"name\": \"Regular User\",\n    \"role\": \"user\",\n    \"createdAt\": \"2025-09-15T14:30:00Z\"\n  },\n  {\n    \"id\": 3,\n    \"email\": \"moderator@test.com\",\n    \"password\": \"mod123\",\n    \"name\": \"Moderator User\",\n    \"role\": \"moderator\",\n    \"createdAt\": \"2025-09-20T09:45:00Z\"\n  }\n]"
+      "value": "[\n  {\n    \"id\": 1,\n    \"username\": \"admin@test.com\",\n    \"password\": \"admin123\",\n    \"name\": \"Admin User\",\n    \"role\": \"admin\",\n    \"createdAt\": \"2025-09-01T10:00:00Z\"\n  },\n  {\n    \"id\": 2,\n    \"username\": \"user@test.com\",\n    \"password\": \"user123\",\n    \"name\": \"Regular User\",\n    \"role\": \"user\",\n    \"createdAt\": \"2025-09-15T14:30:00Z\"\n  },\n  {\n    \"id\": 3,\n    \"username\": \"moderator@test.com\",\n    \"password\": \"mod123\",\n    \"name\": \"Moderator User\",\n    \"role\": \"moderator\",\n    \"createdAt\": \"2025-09-20T09:45:00Z\"\n  }\n]"
     },
     {
       "uuid": "3150a840-253c-4e28-a264-e2f0ce3dbc47",

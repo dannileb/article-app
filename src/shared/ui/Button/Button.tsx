@@ -6,7 +6,6 @@ export interface ButtonProps
     extends PropsWithChildren<ButtonHTMLAttributes<HTMLButtonElement>> {
     view?: 'clear' | 'primary' | 'secondary' | 'compact';
     form?: 'default' | 'brick' | 'rounded';
-    disabled?: boolean;
     icon?: React.ReactNode;
 }
 
