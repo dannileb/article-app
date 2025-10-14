@@ -2,6 +2,10 @@
   "": "",
   "catchedError_btnText": "",
   "catchedError_text": "",
+  "errors": {
+    "unknown": ""
+  },
+  "header_login_text": "",
   "header_title": "",
   "langSwitcher": "",
   "langSwitcher_flag": "",
@@ -9,6 +13,7 @@
   "loginForm_login": "",
   "loginForm_password": "",
   "loginForm_password-label": "",
+  "loginForm_title": "",
   "loginForm_username": "",
   "loginForm_username-label": "",
   "loginModa_heading": "",

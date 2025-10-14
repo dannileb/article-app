@@ -13,6 +13,7 @@ export function buildCssLoader(isDev: boolean){
             auto: (resPath: string) => {
               return Boolean(resPath.includes(".module."));
             },
+            exportLocalsConvention: 'asIs',
             localIdentName: isDev
               ? "[hash:base64:8]__[local]"
               : "[hash:base64:8]",

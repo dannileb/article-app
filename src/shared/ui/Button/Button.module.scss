@@ -2,13 +2,24 @@
     cursor: pointer;
     padding: 4px 8px;
 
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+
     outline: none;
+
+    &:disabled {
+        user-select: none;
+        pointer-events: none;
+        opacity: 0.3;
+    }
 }
 
-.disabled {
-    user-select: none;
-    pointer-events: none;
-    opacity: 0.3;
+.buttonIconContainer {
+    &:empty {
+        display: none;
+    }
 }
 
 .default {

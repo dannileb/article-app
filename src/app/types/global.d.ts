@@ -14,5 +14,6 @@ declare const __IS_DEV__: boolean;
  * Its hack way to export redux inferring types from #/app
  * and use it in #/shared/model/hooks.ts
  */
-declare type RootState = import('../store/store').RootState;
+declare type StateSchema =
+    import('../providers/ReduxProvider/config/StateSchema').StateSchema;
 declare type AppDispatch = import('../store/store').AppDispatch;

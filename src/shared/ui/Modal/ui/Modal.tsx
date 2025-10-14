@@ -25,7 +25,7 @@ export const Modal = ({ isOpen, onClickOutside, children }: ModalProps) => {
                     <div
                         className={classes.overlay}
                         onClick={(e) => {
-                            onClickOutside(e);
+                            onClickOutside?.(e);
                         }}
                     />
                     <div className={classes.content}>{children}</div>

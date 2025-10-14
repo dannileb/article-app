@@ -8,6 +8,11 @@ const meta = {
     title: 'features/LoginForm',
     component: LoginForm,
     tags: ['autodocs'],
+    args: {
+        onLogin: () => {
+            return;
+        },
+    },
 } satisfies Meta<typeof LoginForm>;
 
 export default meta;

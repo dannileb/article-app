@@ -5,3 +5,11 @@
     flex-direction: column;
     gap: 10px;
 }
+
+.title {
+    text-align: center;
+}
+
+.errorMessage {
+    color: var(--color-error);
+}

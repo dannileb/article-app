@@ -12,5 +12,10 @@
   "loginForm_password": "Введите пароль",
   "loginForm_login": "Войти",
   "loginForm_username-label": "Имя пользователя",
-  "loginForm_password-label": "Пароль"
+  "loginForm_password-label": "Пароль",
+  "loginForm_title": "Вход",
+  "errors.unknown": "Неизвестная ошибка",
+  "Invalid username or password": "Неверное имя пользователя или пароль",
+  "No token provided": "Токен авторизации не предоставлен",
+  "header_login_text": "Войти"
 }

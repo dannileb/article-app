@@ -6,11 +6,14 @@ export enum Theme {
 }
 
 export interface ThemeContextType {
-    theme?: Theme;
-    setTheme?: React.Dispatch<React.SetStateAction<Theme>>;
+    theme: Theme;
+    setTheme: React.Dispatch<React.SetStateAction<Theme>>;
 }
 
-export const ThemeContext = createContext<ThemeContextType>({});
+export const ThemeContext = createContext<ThemeContextType>({
+    theme: Theme.LIGHT,
+    setTheme: () => {},
+});
 
 export const useThemeContext = () => useContext(ThemeContext);
 

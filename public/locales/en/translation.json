@@ -7,5 +7,15 @@
   "catchedError_text": "An error occurred during the application work",
   "catchedError_btnText": "Reload the page",
   "header_title": "Article App",
-  "loginModal_heading": "Log in"
+  "loginModal_heading": "Log in",
+  "loginForm_title": "Log in",
+  "loginForm_username-label": "Username",
+  "loginForm_username": "Enter username",
+  "loginForm_password-label": "Password",
+  "loginForm_password": "Enter password",
+  "loginForm_login": "Log in",
+  "errors.unknown": "Unknown error",
+  "Invalid username or password": "Invalid username or password",
+  "No token provided": "No auth token provided",
+  "header_login_text": "Log in"
 }

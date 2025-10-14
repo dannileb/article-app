@@ -1,19 +1,21 @@
 .navbar {
     width: 100%;
     height: var(--navbar-height);
+    padding: 20px;
 
     display: flex;
     align-items: center;
-    padding: 20px;
+    justify-content: space-between;
+    gap: 16px;
 
     background-color: var(--color-bg-tertiary);
 }
 
-.title {
-    margin-left: auto;
-    margin-right: 8px;
+.userContainer {
+    display: flex;
+    align-items: center;
 }
 
-.mainLink {
-    margin-right: 15px;
+.user {
+    margin-right: 8px;
 }

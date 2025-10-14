@@ -17,7 +17,7 @@
       "responses": [
         {
           "uuid": "e2be58f3-f90e-4632-bf31-4660e8e2af9b",
-          "body": "{\n  \"user\": {\n    \"id\": {{faker 'number.int' min=1 max=1000}},\n    \"email\": \"{{body 'email'}}\",\n    \"name\": \"{{body 'name'}}\",\n    \"role\": \"user\"\n  },\n  \"accessToken\": \"{{jwt (bodyRaw 'id') (body 'email') 'secret-key' expiresIn='24h'}}\"\n}",
+          "body": "{\n  \"user\": {\n    \"id\": {{faker 'number.int' min=1 max=1000}},\n    \"username\": \"{{body 'username'}}\",\n    \"name\": \"{{body 'name'}}\",\n    \"role\": \"user\"\n  },\n  \"accessToken\": \"{{jwt (bodyRaw 'id') (body 'email') 'secret-key' expiresIn='24h'}}\"\n}",
           "latency": 0,
           "statusCode": 201,
           "label": "Success",
@@ -53,7 +53,7 @@
       "responses": [
         {
           "uuid": "fcbb15b8-5290-415a-8489-9cd2e85d8058",
-          "body": "{\n  \"user\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"name\": \"Admin User\",\n    \"role\": \"admin\"\n  },\n  \"accessToken\": \"{{faker 'internet.jwt' '{header: { alg: \"HS256\"}, payload: { username: \"admin\", role: \"admin\"}}'}}\"\n}",
+          "body": "{\n  \"user\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"name\": \"Admin User\",\n    \"role\": \"admin\"\n  },\n  \"accessToken\": \"{{faker 'internet.jwt' '{header: { alg: \"HS256\"}, payload: { username: \"admin\", role: \"admin\", id: 1, name: \"Admin User\"}}'}}\"\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Admin Response",
@@ -92,7 +92,7 @@
         },
         {
           "uuid": "cee94e16-31cb-44d8-a9cc-260fe230f7c3",
-          "body": "{\r\n  \"user\": {\r\n    \"id\": 2,\r\n    \"username\": \"user\",\r\n    \"name\": \"Regular User\",\r\n    \"role\": \"user\"\r\n  },\r\n  \"accessToken\": \"{{faker 'internet.jwt' '{header: { alg: \"HS256\"}, payload: { username: \"user\", role: \"user\"}}'}}\"\r\n}\r\n",
+          "body": "{\r\n  \"user\": {\r\n    \"id\": 2,\r\n    \"username\": \"user\",\r\n    \"name\": \"Regular User\",\r\n    \"role\": \"user\"\r\n  },\r\n  \"accessToken\": \"{{faker 'internet.jwt' '{header: { alg: \"HS256\"}, payload: { username: \"user\", role: \"user\", id: 2, name: \"Regular User\"}}'}}\"\r\n}\r\n",
           "latency": 0,
           "statusCode": 200,
           "label": "User Response",
@@ -131,7 +131,7 @@
         },
         {
           "uuid": "e0791000-ec14-462c-9e60-b23970220821",
-          "body": "{\n  \"message\": \"Invalid email or password\"\n}",
+          "body": "{\n  \"message\": \"Invalid username or password\"\n}",
           "latency": 0,
           "statusCode": 401,
           "label": "Invalid credentials",
@@ -167,7 +167,7 @@
       "responses": [
         {
           "uuid": "be5d0756-03de-4533-97d2-8722234083c3",
-          "body": "{\n  \"id\": {{jwtPayload (header 'Authorization') 'sub'}},\n  \"user\": \"{{jwtPayload (header 'Authorization') 'user'}}\",\n  \"name\": \"User Name\",\n  \"role\": \"{{jwtPayload (header 'Authorization') 'role'}}\"\n}",
+          "body": "{\n  \"id\": {{parseInt (jwtPayload (header 'Authorization') 'id')}},\n  \"user\": \"{{jwtPayload (header 'Authorization') 'username'}}\",\n  \"name\": \"{{jwtPayload (header 'Authorization') 'name'}}\",\n  \"role\": \"{{jwtPayload (header 'Authorization') 'role'}}\"\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Success",

@@ -5,6 +5,12 @@ export interface User {
     role: string;
 }
 
+export interface UserWithToken {
+    user: User;
+    accessToken: string;
+}
+
 export interface UserSchema {
     authData?: User;
+    isLoading?: boolean;
 }
