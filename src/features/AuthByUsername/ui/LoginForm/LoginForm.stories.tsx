@@ -4,6 +4,7 @@ import LoginForm from './LoginForm';
 import { ThemeDecorator } from '#/shared/config/storybook';
 import { Theme } from '#/shared/config/theme/ThemeContext';
 import { ReduxDecorator } from '#/shared/config/storybook/ReduxDecorator';
+import { loginReducer } from '../../model/slice/loginSlice';
 
 const meta = {
     title: 'features/LoginForm',
@@ -15,14 +16,19 @@ const meta = {
         },
     },
     decorators: [
-        ReduxDecorator({
-            login: {
-                isLoading: false,
-                error: '',
-                username: '',
-                password: '',
+        ReduxDecorator(
+            {
+                login: {
+                    isLoading: false,
+                    error: '',
+                    username: '',
+                    password: '',
+                },
             },
-        }),
+            {
+                login: loginReducer,
+            },
+        ),
     ],
 } satisfies Meta<typeof LoginForm>;
 
