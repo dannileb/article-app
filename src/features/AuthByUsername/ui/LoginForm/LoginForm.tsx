@@ -3,21 +3,25 @@ import { Button } from '#/shared/ui/Button/Button';
 import classes from './LoginForm.module.scss';
 import { Input } from '#/shared/ui/Input/Input';
 import { memo, useCallback } from 'react';
-import { loginActions } from '../../model/slice/loginSlice';
+import { loginActions, loginReducer } from '../../model/slice/loginSlice';
 import { useAppDispatch, useAppSelector } from '#/shared/lib/hooks/reduxHooks';
 import { getLoginForm } from '../../model/selectors/getLoginState/getLoginState';
 import { loginByUsername } from '../../model/services/loginByUsername/loginByUsername';
 import { LoginOutlined } from '@ant-design/icons';
 import { Text } from '#/shared/ui/Text/Text';
 import { Heading } from '#/shared/ui/Heading/Heading';
+import { useReducerManager } from '#/shared/lib/hooks/useReducerManager';
 
-interface LoginFormProps {
+export interface LoginFormProps {
     onLogin: () => void;
 }
+
+const initialRedusers = { login: loginReducer };
 
 const LoginFormInner = ({ onLogin }: LoginFormProps) => {
     const { t } = useTranslation();
 
+    useReducerManager(initialRedusers);
     const dispatch = useAppDispatch();
     const { username, password, error, isLoading } =
         useAppSelector(getLoginForm) ?? {};
@@ -85,4 +89,4 @@ const LoginFormInner = ({ onLogin }: LoginFormProps) => {
     );
 };
 
-export const LoginForm = memo(LoginFormInner);
+export default memo(LoginFormInner);

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 
-import { LoginForm } from './LoginForm';
+import LoginForm from './LoginForm';
 import { ThemeDecorator } from '#/shared/config/storybook';
 import { Theme } from '#/shared/config/theme/ThemeContext';
 import { ReduxDecorator } from '#/shared/config/storybook/ReduxDecorator';

@@ -9,12 +9,15 @@ interface LoginError {
 }
 
 export const getProfile = createAsyncThunk<
-    User,
+    User | undefined,
     void,
     { rejectValue: LoginError }
 >('user/getProfile', async (_, thunkApi) => {
     try {
         const accessToken = localStorage.getItem(ACESS_TOKEN_KEY);
+        if (accessToken === null) {
+            return undefined;
+        }
         const response = await axios.get<User>(
             'http://localhost:8000/api/profile',
             {
@@ -23,7 +26,6 @@ export const getProfile = createAsyncThunk<
                 },
             },
         );
-
         return response.data;
     } catch (error: unknown) {
         if (axios.isAxiosError<LoginError>(error)) {
