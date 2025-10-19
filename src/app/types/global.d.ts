@@ -16,4 +16,5 @@ declare const __IS_DEV__: boolean;
  */
 declare type StateSchema =
     import('../providers/ReduxProvider/config/StateSchema').StateSchema;
-declare type AppDispatch = import('../store/store').AppDispatch;
+declare type AppDispatch =
+    import('../providers/ReduxProvider/config/store').AppDispatch;

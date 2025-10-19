@@ -26,6 +26,9 @@ const config: Config = {
         '#/(.*)': '<rootDir>/src/$1',
         '\\.(s?css|less)$': 'identity-obj-proxy',
     },
+    globals: {
+        __IS_DEV__: true,
+    },
 };
 
 export default config;

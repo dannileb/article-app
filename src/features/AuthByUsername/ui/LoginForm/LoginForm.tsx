@@ -45,8 +45,12 @@ const LoginFormInner = ({ onLogin }: LoginFormProps) => {
             return;
         }
         try {
-            await dispatch(loginByUsername({ username, password })).unwrap();
-            onLogin();
+            const result = await dispatch(
+                loginByUsername({ username, password }),
+            );
+            if (result.meta.requestStatus === 'fulfilled') {
+                onLogin();
+            }
         } catch (error) {
             console.error('Login failed:', error);
         }
@@ -77,10 +81,11 @@ const LoginFormInner = ({ onLogin }: LoginFormProps) => {
                 onChange={handleChangePassword}
                 value={password}
             />
-            {error && <Text view="error">{error}</Text>}
+            {error && <Text view="error">{t(error)}</Text>}
             <Button
                 onClick={handleLogin}
                 isLoading={isLoading}
+                disabled={!username || !password}
                 icon={<LoginOutlined />}
             >
                 {t('loginForm_login')}
