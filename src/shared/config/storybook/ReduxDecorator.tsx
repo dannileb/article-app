@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { ReduxProvider } from '#/app/providers/ReduxProvider/ui/ReduxProvider';
 import { DeepPartial } from '#/shared/types/DeepPartial.types';
-import { ReducersList } from '#/shared/types/ReducersList.types';
+import { ReducersList } from '#/shared/types/Redux/ReducersList.types';
 
 export const ReduxDecorator =
     (initState: DeepPartial<StateSchema>, redusersList?: ReducersList) =>

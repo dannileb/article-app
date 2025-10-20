@@ -1,6 +1,6 @@
 import { ReduxStoreWithManager } from '#/app/providers/ReduxProvider/config/StateSchema';
 import { useAppDispatch } from '#/shared/lib/hooks/reduxHooks';
-import { ReducersList } from '#/shared/types/ReducersList.types';
+import { ReducersList } from '#/shared/types/Redux';
 import { Reducer } from '@reduxjs/toolkit';
 import { useEffect } from 'react';
 import { useStore } from 'react-redux';

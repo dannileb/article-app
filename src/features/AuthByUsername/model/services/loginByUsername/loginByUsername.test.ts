@@ -1,12 +1,12 @@
-import axios from 'axios';
 import { loginByUsername } from './loginByUsername';
 import { userActions } from '#/entities/User';
 import { ACCESS_TOKEN_KEY } from '#/shared/consts/localStorage';
 import { TestAsyncThunk } from '#/shared/lib/tests/TestAsyncThunk';
 import { TestAsyncThunkWithLocalStorage } from '#/shared/lib/tests/TestAsyncThunkWithLocalStorage';
+import { $api } from '#/shared/api/api';
 
-jest.mock('axios');
-const mockedAxios = jest.mocked(axios);
+jest.mock('#/shared/api/api');
+const mockedAxios = jest.mocked($api);
 
 describe('loginByUsername.test', () => {
     test('login should be successed: token saved and dispathc setAuthData have been called', async () => {
@@ -22,13 +22,10 @@ describe('loginByUsername.test', () => {
             password: '123',
         });
 
-        expect(mockedAxios.post).toHaveBeenCalledWith(
-            'http://localhost:8000/api/login',
-            {
-                username: 'test',
-                password: '123',
-            },
-        );
+        expect(mockedAxios.post).toHaveBeenCalledWith('/login', {
+            username: 'test',
+            password: '123',
+        });
 
         expect(window.localStorage.setItem).toHaveBeenCalledWith(
             ACCESS_TOKEN_KEY,

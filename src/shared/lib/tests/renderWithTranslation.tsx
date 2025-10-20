@@ -21,15 +21,15 @@ export function renderWithProviders(
     const ComponentWithTranslation = withTranslation()(component);
     const { reduxProps } = options ?? {};
     return render(
-        <ReduxProvider
-            initialState={reduxProps?.initialState}
-            asyncReducers={reduxProps?.asyncReducers}
-        >
-            <MemoryRouter initialEntries={['/']}>
+        <MemoryRouter initialEntries={['/']}>
+            <ReduxProvider
+                initialState={reduxProps?.initialState}
+                asyncReducers={reduxProps?.asyncReducers}
+            >
                 <I18nextProvider i18n={i18n}>
                     <ComponentWithTranslation />
                 </I18nextProvider>
-            </MemoryRouter>
-        </ReduxProvider>,
+            </ReduxProvider>
+        </MemoryRouter>,
     );
 }

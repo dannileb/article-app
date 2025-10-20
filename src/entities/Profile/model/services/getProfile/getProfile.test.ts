@@ -1,28 +1,20 @@
-import axios from 'axios';
 import { getProfile } from './getProfile';
-import { ACCESS_TOKEN_KEY } from '#/shared/consts/localStorage';
 import { Profile } from '../../types/profile.types';
-import { TestAsyncThunkWithLocalStorage } from '#/shared/lib/tests/TestAsyncThunkWithLocalStorage';
+import { TestAsyncThunk } from '#/shared/lib/tests/TestAsyncThunk';
+import { $api } from '#/shared/api/api';
 
-jest.mock('axios');
-const mockedAxios = jest.mocked(axios);
+jest.mock('#/shared/api/api');
+const mockedAxios = jest.mocked($api);
 
 describe('getProfile.test', () => {
-    test('should return undefined: localStorage does not have token', async () => {
-        const thunk = new TestAsyncThunkWithLocalStorage(getProfile);
+    test('should return authError: localStorage does not have token', async () => {
+        const thunk = new TestAsyncThunk(getProfile);
         const result = await thunk.callThunk();
-        thunk.localStorageMock.getItem.mockReturnValueOnce(null);
-
-        expect(thunk.localStorageMock.getItem).toHaveBeenCalledWith(
-            ACCESS_TOKEN_KEY,
-        );
-        expect(mockedAxios.get).not.toHaveBeenCalled();
-        expect(result.meta.requestStatus).toBe('fulfilled');
-        expect(result.payload).toBeUndefined();
+        expect(result.meta.requestStatus).toBe('rejected');
+        expect(result.payload).toEqual({ message: 'errors.unknown' });
     });
 
     test('should return profile', async () => {
-        const mockToken = 'token';
         const mockUser: Profile = {
             id: 1,
             username: 'test',
@@ -36,39 +28,11 @@ describe('getProfile.test', () => {
         };
         mockedAxios.get.mockResolvedValue({ data: mockUser });
 
-        const thunk = new TestAsyncThunkWithLocalStorage(getProfile);
-        thunk.localStorageMock.getItem.mockReturnValueOnce(mockToken);
+        const thunk = new TestAsyncThunk(getProfile);
         const result = await thunk.callThunk();
 
-        expect(thunk.localStorageMock.getItem).toHaveBeenCalledWith(
-            ACCESS_TOKEN_KEY,
-        );
-        expect(mockedAxios.get).toHaveBeenCalledWith(
-            'http://localhost:8000/api/profile',
-            {
-                headers: {
-                    Authorization: `Bearer ${mockToken}`,
-                },
-            },
-        );
+        expect(mockedAxios.get).toHaveBeenCalledWith('/profile');
         expect(result.meta.requestStatus).toBe('fulfilled');
         expect(result.payload).toEqual(mockUser);
-    });
-
-    test('should return error', async () => {
-        const mockToken = 'token';
-        const mockError = { message: 'errors.unknown' };
-        mockedAxios.get.mockRejectedValue(mockError);
-
-        const thunk = new TestAsyncThunkWithLocalStorage(getProfile);
-        thunk.localStorageMock.getItem.mockReturnValueOnce(mockToken);
-        const result = await thunk.callThunk();
-
-        expect(thunk.localStorageMock.getItem).toHaveBeenCalledWith(
-            ACCESS_TOKEN_KEY,
-        );
-        expect(mockedAxios.get).toHaveBeenCalled();
-        expect(result.meta.requestStatus).toBe('rejected');
-        expect(result.payload).toEqual(mockError);
     });
 });
