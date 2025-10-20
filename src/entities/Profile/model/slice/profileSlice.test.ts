@@ -12,7 +12,7 @@ describe('profileSlice.test', () => {
         jest.clearAllMocks();
     });
 
-    test('should should set authData', () => {
+    test('should should set profile', () => {
         const mockUser: Profile = {
             id: 1,
             username: 'test',
@@ -30,6 +30,6 @@ describe('profileSlice.test', () => {
                 state as ProfileSchema,
                 profileActions.setProfile(mockUser),
             ),
-        ).toEqual({ mockUser });
+        ).toEqual({ data: mockUser });
     });
 });

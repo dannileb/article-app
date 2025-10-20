@@ -3,6 +3,8 @@ import type { Meta, StoryObj } from '@storybook/react';
 import ProfilePage from './ProfilePage';
 import { ThemeDecorator } from '#/shared/config/storybook';
 import { Theme } from '#/shared/config/theme/ThemeContext';
+import { ReduxDecorator } from '#/shared/config/storybook/ReduxDecorator';
+import { profileReducer } from '#/entities/Profile';
 
 const Component = ProfilePage;
 
@@ -12,6 +14,14 @@ const meta = {
     tags: ['autodocs'],
     argTypes: {},
     args: {},
+    decorators: [
+        ReduxDecorator(
+            {
+                profile: undefined,
+            },
+            { profile: profileReducer },
+        ),
+    ],
 } satisfies Meta<typeof Component>;
 
 export default meta;

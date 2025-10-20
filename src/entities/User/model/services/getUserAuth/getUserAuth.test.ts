@@ -47,6 +47,7 @@ describe('getUserAuth.test', () => {
             },
         );
         expect(result.meta.requestStatus).toBe('fulfilled');
+        console.debug(result.payload);
         expect(result.payload).toEqual(mockUser);
     });
 
