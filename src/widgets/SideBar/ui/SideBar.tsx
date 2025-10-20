@@ -9,21 +9,22 @@ import {
     InfoCircleOutlined,
     LeftOutlined,
     RightOutlined,
+    UserOutlined,
 } from '@ant-design/icons';
-import { AppLink } from '#/shared/ui/AppLink/AppLink';
 import { RoutePath } from '#/shared/config/routeConfig/routeConfig';
 import { useTranslation } from 'react-i18next';
-import { useLocation } from 'react-router';
-import { matchPath } from 'react-router';
+import { SideBarLink } from '#/widgets/SideBar/ui/SideBarLink/SideBarLink';
+import { useAppSelector } from '#/shared/lib/hooks/reduxHooks';
+import { getUser } from '#/entities/User';
 
 export const SideBar = () => {
     const { t } = useTranslation();
-    const { pathname } = useLocation();
+    const { authData } = useAppSelector(getUser);
 
     const [collapsed, setCollapsed] = useState<boolean>(false);
 
-    const sidebarLinks = useMemo(
-        () => [
+    const sidebarLinks = useMemo(() => {
+        const baseLinks = [
             {
                 text: t('navBarLabel-main'),
                 to: RoutePath.main,
@@ -34,9 +35,16 @@ export const SideBar = () => {
                 to: RoutePath.about,
                 icon: <InfoCircleOutlined />,
             },
-        ],
-        [t],
-    );
+        ];
+        if (authData) {
+            baseLinks.push({
+                text: t('navBarLabel-profile'),
+                to: RoutePath.profile,
+                icon: <UserOutlined />,
+            });
+        }
+        return baseLinks;
+    }, [authData, t]);
 
     const onToggle = () => {
         setCollapsed((prev) => !prev);
@@ -52,19 +60,11 @@ export const SideBar = () => {
                 <div className={classes.content}>
                     {sidebarLinks.map((link, index) => {
                         return (
-                            <AppLink
+                            <SideBarLink
                                 key={index}
-                                to={link.to}
-                                className={classes.link}
-                                view={
-                                    matchPath(link.to, pathname)
-                                        ? 'active'
-                                        : 'secondary'
-                                }
-                                title={link.text}
-                            >
-                                {collapsed ? link.icon : link.text}
-                            </AppLink>
+                                link={link}
+                                collapsed={collapsed}
+                            />
                         );
                     })}
                 </div>

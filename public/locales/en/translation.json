@@ -18,5 +18,7 @@
   "errors.unauthorized": "Authorization error",
   "Invalid username or password": "Invalid username or password",
   "No token provided": "No auth token provided",
-  "header_login_text": "Log in"
+  "header_login_text": "Log in",
+  "profile_text": "Profile",
+  "navBarLabel-profile": "Profile"
 }

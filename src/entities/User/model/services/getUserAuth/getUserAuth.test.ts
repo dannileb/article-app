@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getProfile } from './getProfile';
+import { getUserAuth } from './getUserAuth';
 import { ACCESS_TOKEN_KEY } from '#/shared/consts/localStorage';
 import { User } from '../../types/user.types';
 import { TestAsyncThunkWithLocalStorage } from '#/shared/lib/tests/TestAsyncThunkWithLocalStorage';
@@ -7,9 +7,9 @@ import { TestAsyncThunkWithLocalStorage } from '#/shared/lib/tests/TestAsyncThun
 jest.mock('axios');
 const mockedAxios = jest.mocked(axios);
 
-describe('getProfile.test', () => {
+describe('getUserAuth.test', () => {
     test('should return undefined: localStorage does not have token', async () => {
-        const thunk = new TestAsyncThunkWithLocalStorage(getProfile);
+        const thunk = new TestAsyncThunkWithLocalStorage(getUserAuth);
         const result = await thunk.callThunk();
         thunk.localStorageMock.getItem.mockReturnValueOnce(null);
 
@@ -21,7 +21,7 @@ describe('getProfile.test', () => {
         expect(result.payload).toBeUndefined();
     });
 
-    test('should return profile', async () => {
+    test('should return auth data', async () => {
         const mockToken = 'token';
         const mockUser: User = {
             id: 1,
@@ -31,7 +31,7 @@ describe('getProfile.test', () => {
         };
         mockedAxios.get.mockResolvedValue({ data: mockUser });
 
-        const thunk = new TestAsyncThunkWithLocalStorage(getProfile);
+        const thunk = new TestAsyncThunkWithLocalStorage(getUserAuth);
         thunk.localStorageMock.getItem.mockReturnValueOnce(mockToken);
         const result = await thunk.callThunk();
 
@@ -39,7 +39,7 @@ describe('getProfile.test', () => {
             ACCESS_TOKEN_KEY,
         );
         expect(mockedAxios.get).toHaveBeenCalledWith(
-            'http://localhost:8000/api/profile',
+            'http://localhost:8000/api/me',
             {
                 headers: {
                     Authorization: `Bearer ${mockToken}`,
@@ -55,7 +55,7 @@ describe('getProfile.test', () => {
         const mockError = { message: 'errors.unknown' };
         mockedAxios.get.mockRejectedValue(mockError);
 
-        const thunk = new TestAsyncThunkWithLocalStorage(getProfile);
+        const thunk = new TestAsyncThunkWithLocalStorage(getUserAuth);
         thunk.localStorageMock.getItem.mockReturnValueOnce(mockToken);
         const result = await thunk.callThunk();
 

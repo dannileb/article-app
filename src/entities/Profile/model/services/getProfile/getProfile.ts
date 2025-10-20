@@ -1,4 +1,4 @@
-import { User } from '../../types/user.types';
+import { Profile } from '../../types/profile.types';
 import { ACCESS_TOKEN_KEY } from '#/shared/consts/localStorage';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
@@ -6,16 +6,16 @@ import { ResponseError } from '#/shared/types/Axios';
 import { processAsyncThunkError } from '#/shared/lib/redux/processAsyncThunkError';
 
 export const getProfile = createAsyncThunk<
-    User | undefined,
+    Profile | undefined,
     void,
     { rejectValue: ResponseError }
->('user/getProfile', async (_, thunkApi) => {
+>('profile/getProfile', async (_, thunkApi) => {
     try {
         const accessToken = localStorage.getItem(ACCESS_TOKEN_KEY);
         if (accessToken === null) {
             return undefined;
         }
-        const response = await axios.get<User>(
+        const response = await axios.get<Profile>(
             'http://localhost:8000/api/profile',
             {
                 headers: {

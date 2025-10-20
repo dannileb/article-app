@@ -18,5 +18,7 @@
   "errors.unauthorized": "Необходима авторизация",
   "Invalid username or password": "Неверное имя пользователя или пароль",
   "No token provided": "Токен авторизации не предоставлен",
-  "header_login_text": "Войти"
+  "header_login_text": "Войти",
+  "profile_text": "Профиль",
+  "navBarLabel-profile": "Профиль"
 }

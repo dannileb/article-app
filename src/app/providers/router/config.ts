@@ -17,6 +17,10 @@ export const routerConfig = createBrowserRouter([
                 lazy: () => import('#/pages/AboutPage'),
             },
             {
+                path: RoutePath.profile,
+                lazy: () => import('#/pages/ProfilePage'),
+            },
+            {
                 path: RoutePath.not_found,
                 Component: NotFoundPage,
             },

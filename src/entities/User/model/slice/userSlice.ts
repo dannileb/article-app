@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { User, UserSchema } from '../types/user.types';
-import { getProfile } from '../services/getProfile/getProfile';
+import { getUserAuth } from '../services/getUserAuth/getUserAuth';
 import { ACCESS_TOKEN_KEY } from '#/shared/consts/localStorage';
 
 const initialState: UserSchema = {};
@@ -19,14 +19,14 @@ export const userSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(getProfile.pending, (state) => {
+            .addCase(getUserAuth.pending, (state) => {
                 state.isLoading = true;
             })
-            .addCase(getProfile.fulfilled, (state, action) => {
+            .addCase(getUserAuth.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.authData = action.payload;
             })
-            .addCase(getProfile.rejected, (state) => {
+            .addCase(getUserAuth.rejected, (state) => {
                 state.isLoading = false;
             });
     },

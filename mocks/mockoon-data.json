@@ -53,7 +53,7 @@
       "responses": [
         {
           "uuid": "fcbb15b8-5290-415a-8489-9cd2e85d8058",
-          "body": "{\n  \"user\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"name\": \"Admin User\",\n    \"role\": \"admin\"\n  },\n  \"accessToken\": \"{{faker 'internet.jwt' '{header: { alg: \"HS256\"}, payload: { username: \"admin\", role: \"admin\", id: 1, name: \"Admin User\"}}'}}\"\n}",
+          "body": "{\n  \"user\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"name\": \"Admin User\",\n    \"role\": \"admin\"\n  },\n  \"accessToken\": \"{{faker 'internet.jwt' '{header: { alg: \"HS256\"}, payload: { username: \"admin\", role: \"admin\", id: 1}}'}}\"\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Admin Response",
@@ -92,7 +92,7 @@
         },
         {
           "uuid": "cee94e16-31cb-44d8-a9cc-260fe230f7c3",
-          "body": "{\r\n  \"user\": {\r\n    \"id\": 2,\r\n    \"username\": \"user\",\r\n    \"name\": \"Regular User\",\r\n    \"role\": \"user\"\r\n  },\r\n  \"accessToken\": \"{{faker 'internet.jwt' '{header: { alg: \"HS256\"}, payload: { username: \"user\", role: \"user\", id: 2, name: \"Regular User\"}}'}}\"\r\n}\r\n",
+          "body": "{\r\n  \"user\": {\r\n    \"id\": 2,\r\n    \"username\": \"user\",\r\n    \"name\": \"Regular User\",\r\n    \"role\": \"user\"\r\n  },\r\n  \"accessToken\": \"{{faker 'internet.jwt' '{header: { alg: \"HS256\"}, payload: { username: \"user\", role: \"user\", id: 2}}'}}\"\r\n}\r\n",
           "latency": 0,
           "statusCode": 200,
           "label": "User Response",
@@ -161,13 +161,13 @@
     {
       "uuid": "53ee571b-c43a-4232-80af-4c525dcae38c",
       "type": "http",
-      "documentation": "Get user profile",
+      "documentation": "Get user auth",
       "method": "get",
-      "endpoint": "profile",
+      "endpoint": "me",
       "responses": [
         {
           "uuid": "be5d0756-03de-4533-97d2-8722234083c3",
-          "body": "{\n  \"id\": {{parseInt (jwtPayload (header 'Authorization') 'id')}},\n  \"user\": \"{{jwtPayload (header 'Authorization') 'username'}}\",\n  \"name\": \"{{jwtPayload (header 'Authorization') 'name'}}\",\n  \"role\": \"{{jwtPayload (header 'Authorization') 'role'}}\"\n}",
+          "body": "{\n  \"id\": {{parseInt (jwtPayload (header 'Authorization') 'id')}},\n  \"user\": \"{{jwtPayload (header 'Authorization') 'username'}}\",\n  \"role\": \"{{jwtPayload (header 'Authorization') 'role'}}\"\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Success",
@@ -565,6 +565,73 @@
       "responseMode": null,
       "streamingMode": null,
       "streamingInterval": 0
+    },
+    {
+      "uuid": "79623194-9776-4b6f-856b-fcc38eecdce5",
+      "type": "http",
+      "documentation": "Get user profile",
+      "method": "get",
+      "endpoint": "profile/:id",
+      "responses": [
+        {
+          "uuid": "99f5061b-8b81-40b2-9f61-41eb8f533537",
+          "body": "{{{stringify (\r\n  find (dataRaw 'profiles') \r\n  (object id=(parseInt (urlParam 'id')))\r\n)}}}\r\n",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Success",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "users",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "2b881b8c-03fd-46de-8ad9-2ef0d2ab1273",
+      "type": "crud",
+      "documentation": "Get user profile",
+      "method": "",
+      "endpoint": "profile",
+      "responses": [
+        {
+          "uuid": "36eea2fc-1cdf-4a66-ad9c-a15ce6dfc1c3",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "DATABUCKET",
+          "filePath": "",
+          "databucketID": "users",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
     }
   ],
   "rootChildren": [
@@ -599,6 +666,14 @@
     {
       "type": "route",
       "uuid": "83b5e976-0e9a-4ab1-8042-fd98f39c0d92"
+    },
+    {
+      "type": "route",
+      "uuid": "79623194-9776-4b6f-856b-fcc38eecdce5"
+    },
+    {
+      "type": "route",
+      "uuid": "2b881b8c-03fd-46de-8ad9-2ef0d2ab1273"
     }
   ],
   "proxyMode": false,
@@ -634,9 +709,9 @@
     {
       "uuid": "b6fe4b21-1a6a-41d7-8d7a-9e5d4f451e7a",
       "id": "users",
-      "name": "Users",
+      "name": "Profiles",
       "documentation": "List of all users",
-      "value": "[\n  {\n    \"id\": 1,\n    \"username\": \"admin@test.com\",\n    \"password\": \"admin123\",\n    \"name\": \"Admin User\",\n    \"role\": \"admin\",\n    \"createdAt\": \"2025-09-01T10:00:00Z\"\n  },\n  {\n    \"id\": 2,\n    \"username\": \"user@test.com\",\n    \"password\": \"user123\",\n    \"name\": \"Regular User\",\n    \"role\": \"user\",\n    \"createdAt\": \"2025-09-15T14:30:00Z\"\n  },\n  {\n    \"id\": 3,\n    \"username\": \"moderator@test.com\",\n    \"password\": \"mod123\",\n    \"name\": \"Moderator User\",\n    \"role\": \"moderator\",\n    \"createdAt\": \"2025-09-20T09:45:00Z\"\n  }\n]"
+      "value": "[\r\n  {{#repeat 10}}\r\n  {\r\n  \"id\": {{@index}},\r\n  \"username\": \"{{faker 'internet.displayName'}}\",\r\n  \"name\": \"{{faker 'person.firstName'}}\",\r\n  \"surname\": \"{{faker 'person.lastName'}}\",\r\n  \"photo\": \"{{faker 'image.personPortrait'}}\",\r\n  \"age\": {{faker 'number.int' min=10 max=90}},\r\n  \"country\": \"{{faker 'location.country'}}\",\r\n  \"city\": \"{{faker 'location.city'}}\",\r\n  \"currency\": \"{{faker 'finance.currencyCode'}}\"\r\n  }\r\n  {{#unless @last}},{{/unless}}\r\n  {{/repeat}}\r\n]\r\n"
     },
     {
       "uuid": "3150a840-253c-4e28-a264-e2f0ce3dbc47",

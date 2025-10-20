@@ -1,3 +1,4 @@
+import { ProfileSchema } from '#/entities/Profile';
 import { UserSchema } from '#/entities/User';
 import { LoginSchema } from '#/features/AuthByUsername';
 import {
@@ -9,7 +10,9 @@ import {
 
 export interface StateSchema {
     user: UserSchema;
+    // async
     login?: LoginSchema;
+    profile?: ProfileSchema;
 }
 
 export type StateSchemaKey = keyof StateSchema;
