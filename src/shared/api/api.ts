@@ -4,8 +4,7 @@ import axios from 'axios';
 export const $api = axios.create({
     baseURL: __API__,
     headers: {
-        'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem(ACCESS_TOKEN_KEY)
+        Authorization: localStorage.getItem(ACCESS_TOKEN_KEY)
             ? 'Bearer ' + localStorage.getItem(ACCESS_TOKEN_KEY)
             : undefined,
     },

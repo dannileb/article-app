@@ -9,7 +9,7 @@ const mockedAxios = jest.mocked($api);
 describe('getUserAuth.test', () => {
     test('should return error: localStorage does not have token', async () => {
         const thunk = new TestAsyncThunk(getUserAuth);
-        const result = await thunk.callThunk();
+        const result = await thunk.callThunk(undefined);
 
         expect(result.meta.requestStatus).toBe('rejected');
         expect(result.payload).toEqual({ message: 'errors.unknown' });
@@ -19,13 +19,12 @@ describe('getUserAuth.test', () => {
         const mockUser: User = {
             id: 1,
             username: 'test',
-            name: 'test',
             role: 'test',
         };
         mockedAxios.get.mockResolvedValue({ data: mockUser });
 
         const thunk = new TestAsyncThunk(getUserAuth);
-        const result = await thunk.callThunk();
+        const result = await thunk.callThunk(undefined);
 
         expect(mockedAxios.get).toHaveBeenCalledWith('/me');
 

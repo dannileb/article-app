@@ -14,7 +14,7 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "plugins": [{ "name": "typescript-plugin-css-modules" }],
-    "strictNullChecks": true
+    "strict": true
   },
   "include": [
     "src",

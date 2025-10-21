@@ -22,6 +22,10 @@
   "navBarLabel-main": "",
   "navBarLabel-profile": "",
   "pageNotFound_text": "",
+  "profile": {
+    "error": "",
+    "notFound": ""
+  },
   "profile_text": "",
   "Главная": "",
   "О сайте": ""

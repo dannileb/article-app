@@ -1,6 +1,7 @@
 import { Profile } from '../../types/profile.types';
 import { DeepPartial } from '#/shared/types/DeepPartial.types';
-import { getProfileState } from './getProfileState';
+import { getProfileData } from './getProfileData';
+import { getProfileIsLoading } from './getProfileIsLoading';
 
 describe('getProfileState.test', () => {
     it('should return state', () => {
@@ -21,17 +22,14 @@ describe('getProfileState.test', () => {
                 isLoading: true,
             },
         };
-        const { data, isLoading } = getProfileState(state as StateSchema) ?? {};
+        const data = getProfileData(state as StateSchema) ?? {};
+        const isLoading = getProfileIsLoading(state as StateSchema);
         expect(isLoading).toBe(true);
-        Object.keys(mockUser).forEach((key) => {
-            expect(data?.[key as keyof Profile]).toBe(
-                mockUser[key as keyof Profile],
-            );
-        });
+        expect(data).toEqual(mockUser);
     });
 
     it('should return undefined if state is undefined', () => {
         const state = {};
-        expect(getProfileState(state as StateSchema)).toBe(undefined);
+        expect(getProfileData(state as StateSchema)).toBe(undefined);
     });
 });

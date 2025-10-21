@@ -27,7 +27,9 @@ export const NavBar = () => {
             </Heading>
             <div className={classes.userContainer}>
                 <Text className={classes.user}>
-                    {authData?.name || t('header_login_text')}
+                    {authData?.username
+                        ? `@${authData.username}`
+                        : t('header_login_text')}
                 </Text>
                 <Button
                     icon={authData ? <LogoutOutlined /> : <LoginOutlined />}

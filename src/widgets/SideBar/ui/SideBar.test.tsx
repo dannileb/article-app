@@ -10,7 +10,6 @@ const initialState: DeepPartial<StateSchema> = {
         authData: {
             id: 1,
             username: 'test',
-            name: 'test',
         },
     },
 };

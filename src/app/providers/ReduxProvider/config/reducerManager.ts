@@ -16,7 +16,7 @@ export function createReducerManager(
     return {
         getReducerMap: () => reducers,
         reduce: (state, action) => {
-            if (keysToRemove.length > 0) {
+            if (keysToRemove.length > 0 && state) {
                 state = { ...state };
                 for (const key of keysToRemove) {
                     delete state[key];
@@ -27,9 +27,9 @@ export function createReducerManager(
             const filteredState =
                 state &&
                 Object.fromEntries(
-                    Object.keys(reducers).map((key: StateSchemaKey) => [
-                        key,
-                        state[key],
+                    Object.keys(reducers).map((key) => [
+                        key as StateSchemaKey,
+                        state[key as StateSchemaKey],
                     ]),
                 );
 

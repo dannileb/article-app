@@ -4,7 +4,7 @@ import { SideBar } from '#/widgets/SideBar';
 import PageLoader from '#/widgets/PageLoader';
 import { Suspense, useEffect } from 'react';
 import { useAppDispatch } from '#/shared/lib/hooks/reduxHooks';
-import { getProfile } from '#/entities/User';
+import { getUserAuth } from '#/entities/User';
 
 export const AppLayout = () => {
     const navigation = useNavigation();
@@ -13,7 +13,7 @@ export const AppLayout = () => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        dispatch(getProfile());
+        dispatch(getUserAuth());
     }, [dispatch]);
 
     return (

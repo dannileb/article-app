@@ -8,7 +8,6 @@ describe('getUser.test', () => {
                 authData: {
                     id: 1,
                     username: 'test',
-                    name: 'test',
                     role: 'test',
                 },
                 isLoading: true,
@@ -18,7 +17,6 @@ describe('getUser.test', () => {
         expect(isLoading).toBe(true);
         expect(authData?.id).toBe(1);
         expect(authData?.username).toBe('test');
-        expect(authData?.name).toBe('test');
         expect(authData?.role).toBe('test');
     });
 

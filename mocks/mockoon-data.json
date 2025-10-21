@@ -167,7 +167,7 @@
       "responses": [
         {
           "uuid": "be5d0756-03de-4533-97d2-8722234083c3",
-          "body": "{\n  \"id\": {{parseInt (jwtPayload (header 'Authorization') 'id')}},\n  \"user\": \"{{jwtPayload (header 'Authorization') 'username'}}\",\n  \"role\": \"{{jwtPayload (header 'Authorization') 'role'}}\"\n}",
+          "body": "{\n  \"id\": {{parseInt (jwtPayload (header 'Authorization') 'id')}},\n  \"username\": \"{{jwtPayload (header 'Authorization') 'username'}}\",\n  \"role\": \"{{jwtPayload (header 'Authorization') 'role'}}\"\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Success",

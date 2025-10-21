@@ -16,6 +16,7 @@ import { useTranslation } from 'react-i18next';
 import { SideBarLink } from '#/widgets/SideBar/ui/SideBarLink/SideBarLink';
 import { useAppSelector } from '#/shared/lib/hooks/reduxHooks';
 import { getUser } from '#/entities/User';
+import { generatePath } from 'react-router';
 
 export const SideBar = () => {
     const { t } = useTranslation();
@@ -39,7 +40,7 @@ export const SideBar = () => {
         if (authData) {
             baseLinks.push({
                 text: t('navBarLabel-profile'),
-                to: RoutePath.profile,
+                to: generatePath(RoutePath.profile, { profileId: authData.id }),
                 icon: <UserOutlined />,
             });
         }

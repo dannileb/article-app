@@ -4,11 +4,10 @@ import { NavigateFunction } from 'react-router';
 
 interface ThunkExtraArg {
     api: AxiosInstance;
-    navigate: NavigateFunction;
+    navigate?: NavigateFunction;
 }
 
 export interface ThunkConfig<Error = ResponseError> {
-    state: StateSchema;
     rejectValue: Error;
     extra: ThunkExtraArg;
 }

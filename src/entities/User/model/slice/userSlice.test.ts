@@ -16,7 +16,6 @@ describe('userSlice.test', () => {
     test('should should set authData', () => {
         const authData: User = {
             id: 1,
-            name: 'test',
             username: 'test',
             role: 'test',
         };
