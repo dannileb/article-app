@@ -31,7 +31,7 @@ describe('getProfile.test', () => {
         const thunk = new TestAsyncThunk(getProfile);
         const result = await thunk.callThunk({ profileId: '1' });
 
-        expect(mockedAxios.get).toHaveBeenCalledWith('/profile');
+        expect(mockedAxios.get).toHaveBeenCalledWith('/profile/1');
         expect(result.meta.requestStatus).toBe('fulfilled');
         expect(result.payload).toEqual(mockUser);
     });
