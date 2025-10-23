@@ -23,4 +23,5 @@ export interface ProfileSchema {
     readonly?: boolean;
     isUpdateLoading?: boolean;
     updateError?: string;
+    isEditing?: boolean;
 }

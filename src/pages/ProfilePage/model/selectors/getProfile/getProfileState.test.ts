@@ -2,11 +2,11 @@ import { Profile } from '../../types/profile.types';
 import { DeepPartial } from '#/shared/types/DeepPartial.types';
 import { getProfileData } from './getProfileData';
 import { getProfileIsLoading } from './getProfileIsLoading';
-import { getProfileError } from '#/pages/ProfilePage/model/selectors/getUser/getProfileError';
-import { getProfileIsReadonly } from '#/pages/ProfilePage/model/selectors/getUser/getProfileIsReadonly';
-import { getProfileIsUpdateLoading } from '#/pages/ProfilePage/model/selectors/getUser/getProfileIsUpdateLoading';
-import { getProfileForm } from '#/pages/ProfilePage/model/selectors/getUser/getProfileForm';
-import { getProfileUpdateError } from '#/pages/ProfilePage/model/selectors/getUser/getProfileUpdateError';
+import { getProfileError } from '#/pages/ProfilePage/model/selectors/getProfile/getProfileError';
+import { getProfileIsReadonly } from '#/pages/ProfilePage/model/selectors/getProfile/getProfileIsReadonly';
+import { getProfileIsUpdateLoading } from '#/pages/ProfilePage/model/selectors/getProfile/getProfileIsUpdateLoading';
+import { getProfileForm } from '#/pages/ProfilePage/model/selectors/getProfile/getProfileForm';
+import { getProfileUpdateError } from '#/pages/ProfilePage/model/selectors/getProfile/getProfileUpdateError';
 
 describe('getProfileState.test', () => {
     it('should return state', () => {
