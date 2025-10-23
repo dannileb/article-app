@@ -4,7 +4,7 @@ import ProfilePage from './ProfilePage';
 import { ThemeDecorator } from '#/shared/config/storybook';
 import { Theme } from '#/shared/config/theme/ThemeContext';
 import { ReduxDecorator } from '#/shared/config/storybook/ReduxDecorator';
-import { profileReducer } from '#/entities/Profile';
+import { profileReducer } from '../model/slice/profileSlice';
 
 const Component = ProfilePage;
 

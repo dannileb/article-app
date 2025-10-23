@@ -8,6 +8,7 @@ interface ThunkExtraArg {
 }
 
 export interface ThunkConfig<Error = ResponseError> {
+    state: StateSchema;
     rejectValue: Error;
     extra: ThunkExtraArg;
 }

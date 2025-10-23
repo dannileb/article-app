@@ -1,8 +1,26 @@
 {
+  "": "",
+  "age": "",
+  "cancelEdit": "",
+  "city": "",
+  "country": "",
+  "currency": "",
+  "dropPhotoUpdate": "",
+  "editButton": "",
   "error": "",
+  "image": "",
+  "image_alert": "",
+  "name": "",
   "notFound": "",
   "profile": {
     "error": "",
     "notFound": ""
-  }
+  },
+  "saveButton": "",
+  "saveEdit": "",
+  "selectPhotoUpdate": "",
+  "surname": "",
+  "update_photo": "",
+  "username": "",
+  "username_alert": ""
 }

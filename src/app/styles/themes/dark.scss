@@ -20,12 +20,13 @@
     --color-text-active: #e0e6ee;
     --color-text-muted: #94a3b8;
     --color-text-error: #c53838;
+    --color-text-button: #f8fafc;
 
     // Фоны
     --color-bg-primary: #0f172a;
     --color-bg-secondary: #1e293b;
-    --color-bg-tertiary: #334155;
-    --color-bg-accent-blue: #1e3a8a;
+    --color-bg-tertiary: #1e3a8a;
+    --color-bg-accent-blue: #334155;
     --color-bg-accent-green: #14532d;
     --color-bg-accent-yellow: #713f12;
     --color-bg-accent-red: #7f1d1d;
@@ -53,6 +54,8 @@
     --color-card-border: #475569;
     --color-card-shadow: rgb(0 0 0 / 30%);
     --color-input-bg: #0f172a;
-    --color-input-border: #475569;
+    --color-input-bg-dnd: #0f172a30;
+    --color-input-border: #d1d5dd;
     --color-input-focus: #3b82f6;
+    --color-input-focus-dnd: #3b82f630;
 }

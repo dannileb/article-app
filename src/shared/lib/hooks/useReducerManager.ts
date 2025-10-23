@@ -1,6 +1,5 @@
-import { ReduxStoreWithManager } from '#/app/providers/ReduxProvider/config/StateSchema';
 import { useAppDispatch } from '#/shared/lib/hooks/reduxHooks';
-import { ReducersList } from '#/shared/types/Redux';
+import { ReducersList, ReduxStoreWithManager } from '#/shared/types/Redux';
 import { useEffect } from 'react';
 import { useStore } from 'react-redux';
 
@@ -19,25 +18,19 @@ export const useReducerManager = (
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        dispatch({
-            type: `@INIT ADD_REDUCERS: ${Object.keys(redusersList).join(', ')}`,
-        });
-        Object.entries(redusersList).forEach(([key, reducer]) => {
-            if (isKeyofRedusersList(key, redusersList)) {
-                store.reducerManager?.add(key, reducer);
+        Object.entries(redusersList).forEach(([name, reducer]) => {
+            if (isKeyofRedusersList(name, redusersList)) {
+                store.reducerManager.add(name, reducer);
+                dispatch({ type: `@INIT ${name} reducer` });
             }
         });
 
         return () => {
             if (removeOnUnmount) {
-                dispatch({
-                    type: `@INIT RESET_REDUCERS: ${Object.keys(
-                        redusersList,
-                    ).join(', ')}`,
-                });
-                Object.keys(redusersList).forEach((key) => {
-                    if (isKeyofRedusersList(key, redusersList)) {
-                        store.reducerManager?.remove(key);
+                Object.entries(redusersList).forEach(([name]) => {
+                    if (isKeyofRedusersList(name, redusersList)) {
+                        store.reducerManager.remove(name);
+                        dispatch({ type: `@DESTROY ${name} reducer` });
                     }
                 });
             }

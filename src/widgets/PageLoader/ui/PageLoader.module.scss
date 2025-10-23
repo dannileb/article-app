@@ -6,33 +6,65 @@
     justify-content: center;
     align-items: center;
 
-    background-color: var(--color-primary);
-
-    z-index: -1;
-    opacity: 0;
-    visibility: hidden;
+    z-index: 999;
 
     transition: opacity 200ms ease-in;
-
-    .loader {
-        visibility: hidden;
-        transition: visibility 50ms ease-in;
-    }
 }
 
-.show {
-    opacity: 1;
-    z-index: 999;
-    visibility: visible;
-
-    .loader {
-        visibility: visible;
-        transition: visibility 50ms ease-in;
-        transition-delay: 1s;
-    }
+.loader {
+    transition: visibility 50ms ease-in;
+    transition-delay: 1s;
 }
 
 .fullscreen {
     height: 100vh;
     width: 100vw;
+}
+
+.primary {
+    background-color: var(--color-primary);
+
+    .loader {
+        color: var(--color-bg-primary);
+    }
+}
+
+.secondary {
+    background-color: var(--color-bg-primary);
+
+    .loader {
+        color: var(--color-primary);
+    }
+}
+
+.entering {
+    opacity: 1;
+
+    .loader {
+        visibility: visible;
+    }
+}
+
+.entered {
+    opacity: 1;
+
+    .loader {
+        visibility: visible;
+    }
+}
+
+.exiting {
+    opacity: 0;
+
+    .loader {
+        visibility: hidden;
+    }
+}
+
+.exited {
+    opacity: 0;
+
+    .loader {
+        visibility: hidden;
+    }
 }

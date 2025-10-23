@@ -1,7 +1,12 @@
 {
   "": "",
+  "age": "",
   "catchedError_btnText": "",
   "catchedError_text": "",
+  "city": "",
+  "country": "",
+  "currency": "",
+  "editButton": "",
   "errors": {
     "unknown": ""
   },
@@ -18,15 +23,21 @@
   "loginForm_username-label": "",
   "loginModa_heading": "",
   "loginModal_heading": "",
+  "name": "",
   "navBarLabel-about": "",
   "navBarLabel-main": "",
   "navBarLabel-profile": "",
+  "notFound": "",
   "pageNotFound_text": "",
   "profile": {
     "error": "",
     "notFound": ""
   },
   "profile_text": "",
+  "saveButton": "",
+  "surname": "",
+  "username": "",
+  "username_alert": "",
   "Главная": "",
   "О сайте": ""
 }

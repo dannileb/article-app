@@ -28,8 +28,8 @@ describe('profileSlice.test', () => {
         expect(
             profileReducer(
                 state as ProfileSchema,
-                profileActions.setProfile(mockUser),
+                profileActions.setProfileForm(mockUser),
             ),
-        ).toEqual({ data: mockUser });
+        ).toEqual({ form: mockUser });
     });
 });

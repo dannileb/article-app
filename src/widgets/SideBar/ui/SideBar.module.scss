@@ -2,9 +2,11 @@
     height: calc(100vh - var(--navbar-height));
     width: var(--sidebar-width);
 
-    background-color: var(--color-bg-tertiary);
+    flex-shrink: 0;
     display: flex;
     align-items: center;
+
+    background-color: var(--color-bg-tertiary);
 
     transition: width ease-in 0.25s;
 }

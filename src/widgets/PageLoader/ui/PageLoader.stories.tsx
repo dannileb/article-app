@@ -11,7 +11,9 @@ const meta = {
     component: Component,
     tags: ['autodocs'],
     argTypes: {},
-    args: {},
+    args: {
+        timeout: 0,
+    },
 } satisfies Meta<typeof Component>;
 
 export default meta;

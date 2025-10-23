@@ -575,7 +575,7 @@
       "responses": [
         {
           "uuid": "99f5061b-8b81-40b2-9f61-41eb8f533537",
-          "body": "{{{stringify (\r\n  find (dataRaw 'profiles') \r\n  (object id=(parseInt (urlParam 'id')))\r\n)}}}\r\n",
+          "body": "{{setVar 'jwtUserId' (jwtPayload (header 'Authorization') 'id')~}}\r\n{{setVar 'profileId' (parseInt (urlParam 'id'))~}}\r\n{{~setVar 'profile' (find (dataRaw 'profiles') (object id=@profileId))~}}\r\n{{~#if (eq @jwtUserId @profileId)~}}\r\n{{{stringify (objectMerge \r\n    (object profileData=@profile)\r\n    (object readonly=false)\r\n)}}}\r\n{{~else~}}\r\n{{{stringify (objectMerge \r\n    (object profileData=@profile)\r\n    (object readonly=true)\r\n)}}}\r\n{{~/if}}\r\n",
           "latency": 0,
           "statusCode": 200,
           "label": "Success",
@@ -632,6 +632,146 @@
       "responseMode": null,
       "streamingMode": null,
       "streamingInterval": 0
+    },
+    {
+      "uuid": "d1728441-7d4f-4750-91c8-05dda27b8682",
+      "type": "http",
+      "documentation": "",
+      "method": "put",
+      "endpoint": "profile/:id",
+      "responses": [
+        {
+          "uuid": "3f413ea4-97d5-4e45-95e7-deee6e97bce6",
+          "body": "{\n  \"message\": \"errors.authRequired\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "",
+              "invert": false,
+              "operator": "null"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "ddb1dbca-94f6-49bc-b440-cd5fb6d55c3b",
+          "body": "{\n  \"message\": \"errors.noPermission\"\n}",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "params",
+              "modifier": "id",
+              "value": "{{jwtPayload (header 'Authorization') 'id'}}",
+              "invert": true,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "9c218a9f-9fc7-4bc4-9f12-ee969dce372e",
+          "body": "{\n  \"message\": \"errors.notFound\"\n}",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "data_bucket",
+              "modifier": "Profiles.{{urlParam 'id'}}",
+              "value": "",
+              "invert": false,
+              "operator": "null"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "efc58b80-e4e5-46ad-a82b-701bdbbaefa5",
+          "body": "{{~#if (bodyRaw 'username')~}}\r\n{{setData 'set' 'profiles' (concat (urlParam 'id') '.username') (bodyRaw 'username')}}\r\n{{~/if~}}\r\n{{~#if (bodyRaw 'name')~}}\r\n{{setData 'set' 'profiles' (concat (urlParam 'id') '.name') (bodyRaw 'name')}}\r\n{{~/if~}}\r\n{{~#if (bodyRaw 'surname')~}}\r\n{{setData 'set' 'profiles' (concat (urlParam 'id') '.surname') (bodyRaw 'surname')}}\r\n{{~/if~}}\r\n{{~#if (bodyRaw 'photo')~}}\r\n{{setData 'set' 'profiles' (concat (urlParam 'id') '.photo') (bodyRaw 'photo')}}\r\n{{~/if~}}\r\n{{~#if (bodyRaw 'age')~}}\r\n{{setData 'set' 'profiles' (concat (urlParam 'id') '.age') (bodyRaw 'age')}}\r\n{{~/if~}}\r\n{{~#if (bodyRaw 'country')~}}\r\n{{setData 'set' 'profiles' (concat (urlParam 'id') '.country') (bodyRaw 'country')}}\r\n{{~/if~}}\r\n{{~#if (bodyRaw 'city')~}}\r\n{{setData 'set' 'profiles' (concat (urlParam 'id') '.city') (bodyRaw 'city')}}\r\n{{~/if~}}\r\n{{~#if (bodyRaw 'currency')~}}\r\n{{setData 'set' 'profiles' (concat (urlParam 'id') '.currency') (bodyRaw 'currency')}}\r\n{{~/if~}}\r\n{{{stringify (dataRaw 'profiles' (urlParam 'id'))}}}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "^Bearer .+",
+              "invert": false,
+              "operator": "regex"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
     }
   ],
   "rootChildren": [
@@ -674,6 +814,10 @@
     {
       "type": "route",
       "uuid": "2b881b8c-03fd-46de-8ad9-2ef0d2ab1273"
+    },
+    {
+      "type": "route",
+      "uuid": "d1728441-7d4f-4750-91c8-05dda27b8682"
     }
   ],
   "proxyMode": false,
@@ -711,7 +855,7 @@
       "id": "users",
       "name": "Profiles",
       "documentation": "List of all users",
-      "value": "[\r\n  {{#repeat 10}}\r\n  {\r\n  \"id\": {{@index}},\r\n  \"username\": \"{{faker 'internet.displayName'}}\",\r\n  \"name\": \"{{faker 'person.firstName'}}\",\r\n  \"surname\": \"{{faker 'person.lastName'}}\",\r\n  \"photo\": \"{{faker 'image.personPortrait'}}\",\r\n  \"age\": {{faker 'number.int' min=10 max=90}},\r\n  \"country\": \"{{faker 'location.country'}}\",\r\n  \"city\": \"{{faker 'location.city'}}\",\r\n  \"currency\": \"{{faker 'finance.currencyCode'}}\"\r\n  }\r\n  {{#unless @last}},{{/unless}}\r\n  {{/repeat}}\r\n]\r\n"
+      "value": "[\r\n  {{#repeat 10}}\r\n  {\r\n  \"id\": {{@index}},\r\n  \"username\": \"{{faker 'internet.username'}}\",\r\n  \"name\": \"{{faker 'person.firstName'}}\",\r\n  \"surname\": \"{{faker 'person.lastName'}}\",\r\n  \"photo\": \"{{faker 'image.personPortrait'}}\",\r\n  \"age\": {{faker 'number.int' min=10 max=90}},\r\n  \"country\": \"{{faker 'location.country'}}\",\r\n  \"city\": \"{{faker 'location.city'}}\",\r\n  \"currency\": \"{{faker 'finance.currencyCode'}}\"\r\n  }\r\n  {{#unless @last}},{{/unless}}\r\n  {{/repeat}}\r\n]\r\n"
     },
     {
       "uuid": "3150a840-253c-4e28-a264-e2f0ce3dbc47",

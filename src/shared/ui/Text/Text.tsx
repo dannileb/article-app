@@ -5,12 +5,14 @@ import classNames from 'classnames';
 interface TextProps extends HTMLAttributes<HTMLParagraphElement> {
     view?: 'primary' | 'secondary' | 'error';
     size?: 's' | 'm' | 'l';
+    align?: 'left' | 'center' | 'right';
 }
 
 export const Text = ({
     children,
     view = 'primary',
     size = 'm',
+    align = 'left',
     ...props
 }: TextProps) => {
     return (
@@ -20,6 +22,7 @@ export const Text = ({
                 classes.text,
                 classes[view],
                 classes[`size_${size}`],
+                classes[`align_${align}`],
                 props.className,
             )}
         >

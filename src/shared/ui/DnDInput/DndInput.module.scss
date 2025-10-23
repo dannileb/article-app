@@ -1,0 +1,27 @@
+.dropZone {
+    padding: 16px;
+
+    border: 2px dashed var(--color-input-border);
+    border-radius: var(--border-radius-default);
+    background-color: var(--color-input-bg-dnd);
+
+    transition: all 0.3s ease;
+
+    &.dragging,
+    &:has(.label:hover) {
+        border-color: var(--color-input-focus);
+        background-color: var(--color-input-focus-dnd);
+    }
+}
+
+.label {
+    cursor: pointer;
+}
+
+.fileInput {
+    display: none;
+}
+
+.dropLabel {
+    display: block;
+}

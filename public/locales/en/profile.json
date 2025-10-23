@@ -1,4 +1,20 @@
 {
   "notFound": "User nopt found",
-  "error": "Profile fetching error"
+  "error": "Profile fetching error",
+  "age": "Age",
+  "currency": "Currency",
+  "surname": "Surname",
+  "username": "Username",
+  "username_alert": "Username can be changed once a month",
+  "country": "Country",
+  "city": "City",
+  "saveButton": "Save",
+  "editButton": "Edit profile",
+  "cancelEdit": "Cancel",
+  "saveEdit": "Save",
+  "selectPhotoUpdate": "Select file",
+  "dropPhotoUpdate": "or drag it here",
+  "update_photo": "Or upload a photo",
+  "image": "Enter link",
+  "image_alert": "In demo mode, photo uploading is not available"
 }
