@@ -14,11 +14,11 @@ export function processAsyncThunkError(
         const axiosError = error;
 
         return rejectWithValue({
-            message: axiosError.response?.data?.message ?? 'errors.unknown',
+            message: axiosError.response?.data?.message ?? 'unknown',
         });
     }
 
     return rejectWithValue({
-        message: 'errors.unknown',
+        message: 'unknown',
     });
 }

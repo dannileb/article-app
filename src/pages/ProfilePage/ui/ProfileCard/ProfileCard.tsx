@@ -5,7 +5,7 @@ import classes from '../ProfilePage.module.scss';
 import { Heading } from '#/shared/ui/Heading/Heading';
 import { TextCopiable } from '#/shared/ui/TextCopiable/TextCopiable';
 import { EnvironmentOutlined } from '@ant-design/icons';
-
+import avatarPlaceholder from '#/shared/assets/images/profilePlaceholder.webp';
 interface ProfileCardProps {
     profile: Profile;
 }
@@ -35,11 +35,14 @@ export const ProfileCard = ({ profile }: ProfileCardProps) => {
                 </Text>
             </div>
             <div className={classes.photoWrapper}>
-                <source />
                 <img
                     className={classes.photo}
                     src={profile.photo}
                     alt="profile_photo"
+                    onError={(e) => {
+                        e.currentTarget.src = avatarPlaceholder;
+                        e.currentTarget.onerror = null;
+                    }}
                 />
             </div>
         </div>

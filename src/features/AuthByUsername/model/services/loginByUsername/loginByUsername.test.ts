@@ -40,7 +40,7 @@ describe('loginByUsername.test', () => {
     });
 
     test('login should be failed: dispatch rejected with error message', async () => {
-        const errorResponse = { message: 'errors.unknown' };
+        const errorResponse = { message: 'unknown' };
         mockedAxios.post.mockRejectedValue({
             response: { data: errorResponse },
         });
@@ -71,6 +71,6 @@ describe('loginByUsername.test', () => {
         });
 
         expect(result.meta.requestStatus).toBe('rejected');
-        expect(result.payload).toEqual({ message: 'errors.unknown' });
+        expect(result.payload).toEqual({ message: 'unknown' });
     });
 });

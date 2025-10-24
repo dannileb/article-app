@@ -19,6 +19,7 @@ export interface LoginFormProps {
 const initialRedusers = { login: loginReducer };
 
 const LoginFormInner = ({ onLogin }: LoginFormProps) => {
+    const { t: tError } = useTranslation('errors');
     const { t } = useTranslation();
 
     useReducerManager(initialRedusers);
@@ -81,10 +82,11 @@ const LoginFormInner = ({ onLogin }: LoginFormProps) => {
                 onChange={handleChangePassword}
                 value={password}
             />
-            {error && <Text view="error">{t(error)}</Text>}
+            {error && <Text view="error">{tError(error)}</Text>}
             <Button
                 onClick={handleLogin}
                 isLoading={isLoading}
+                className={classes.button}
                 disabled={!username || !password}
                 icon={<LoginOutlined />}
             >

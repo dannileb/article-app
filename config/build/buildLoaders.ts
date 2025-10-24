@@ -12,13 +12,14 @@ export function buildLoaders(options: BuildOptions): webpack.RuleSetRule[] {
   
   const cssLoader = buildCssLoader(options.isDev)
 
-  const fileLoader = {
-    test: /\.(png|jpe?g|gif)$/i,
-    use: [
-      {
-        loader: "file-loader",
+  const imageLoader = {
+    test: /\.(png|jpe?g|gif|webp|svg)$/i,
+    type: 'asset', 
+    parser: {
+      dataUrlCondition: {
+        maxSize: 8 * 1024,
       },
-    ],
+    },
   };
 
   const babelLoader = {
@@ -33,5 +34,5 @@ export function buildLoaders(options: BuildOptions): webpack.RuleSetRule[] {
     },
   };
 
-  return [babelLoader, typeScriptLoader, cssLoader, svgLoader, fileLoader];
+  return [babelLoader, typeScriptLoader, cssLoader, svgLoader, imageLoader];
 }

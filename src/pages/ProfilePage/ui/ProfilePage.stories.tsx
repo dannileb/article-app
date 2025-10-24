@@ -1,12 +1,22 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import ProfilePage from './ProfilePage';
-import { ThemeDecorator } from '#/shared/config/storybook';
-import { Theme } from '#/shared/config/theme/ThemeContext';
 import { ReduxDecorator } from '#/shared/config/storybook/ReduxDecorator';
 import { profileReducer } from '../model/slice/profileSlice';
 
 const Component = ProfilePage;
+
+const mockUser = {
+    id: 1,
+    username: 'TestUsername',
+    name: 'Тест',
+    surname: 'Тестовый',
+    photo: '#',
+    age: 64,
+    country: 'Страна',
+    city: 'Город',
+    currency: 'COP',
+};
 
 const meta = {
     title: 'pages/ProfilePage',
@@ -14,24 +24,128 @@ const meta = {
     tags: ['autodocs'],
     argTypes: {},
     args: {},
-    decorators: [
-        ReduxDecorator(
-            {
-                profile: undefined,
-            },
-            { profile: profileReducer },
-        ),
-    ],
 } satisfies Meta<typeof Component>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Light: Story = {
+export const Default: Story = {
     args: {},
+    decorators: [
+        ReduxDecorator(
+            {
+                profile: {
+                    data: mockUser,
+                    form: mockUser,
+                    isLoading: false,
+                    error: undefined,
+                    readonly: true,
+                    isUpdateLoading: false,
+                    updateError: undefined,
+                    isEditing: false,
+                },
+            },
+            { profile: profileReducer },
+        ),
+    ],
 };
 
-export const Dark: Story = {
+export const Loading: Story = {
     args: {},
-    decorators: [ThemeDecorator(Theme.DARK)],
+    decorators: [
+        ReduxDecorator(
+            {
+                profile: {
+                    data: undefined,
+                    form: undefined,
+                    isLoading: true,
+                    readonly: true,
+                },
+            },
+            { profile: profileReducer },
+        ),
+    ],
+};
+
+export const Editable: Story = {
+    args: {},
+    decorators: [
+        ReduxDecorator(
+            {
+                profile: {
+                    data: mockUser,
+                    form: mockUser,
+                    isLoading: false,
+                    error: undefined,
+                    readonly: false,
+                    isUpdateLoading: false,
+                    updateError: undefined,
+                    isEditing: false,
+                },
+            },
+            { profile: profileReducer },
+        ),
+    ],
+};
+
+export const Editing: Story = {
+    args: {},
+    decorators: [
+        ReduxDecorator(
+            {
+                profile: {
+                    data: mockUser,
+                    form: mockUser,
+                    isLoading: false,
+                    error: undefined,
+                    readonly: false,
+                    isUpdateLoading: false,
+                    updateError: undefined,
+                    isEditing: true,
+                },
+            },
+            { profile: profileReducer },
+        ),
+    ],
+};
+
+export const Error: Story = {
+    args: {},
+    decorators: [
+        ReduxDecorator(
+            {
+                profile: {
+                    data: undefined,
+                    form: undefined,
+                    isLoading: false,
+                    error: 'Сообщение об ошибке',
+                    isUpdateLoading: false,
+                    updateError: undefined,
+                    isEditing: false,
+                    readonly: true,
+                },
+            },
+            { profile: profileReducer },
+        ),
+    ],
+};
+
+export const ErrorUpdate: Story = {
+    args: {},
+    decorators: [
+        ReduxDecorator(
+            {
+                profile: {
+                    data: mockUser,
+                    form: mockUser,
+                    isLoading: false,
+                    error: undefined,
+                    isUpdateLoading: false,
+                    updateError: 'Сообщение об ошибке',
+                    isEditing: true,
+                },
+            },
+            { profile: profileReducer },
+        ),
+    ],
 };

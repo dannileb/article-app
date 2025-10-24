@@ -57,7 +57,6 @@ export const profileSlice = createSlice({
             .addCase(updateProfile.rejected, (state, action) => {
                 state.isUpdateLoading = false;
                 state.updateError = action.payload?.message;
-                state.isEditing = false;
             })
             // handleLogout
             .addCase(userActions.logout, (state) => {

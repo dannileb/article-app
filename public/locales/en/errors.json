@@ -1,0 +1,9 @@
+{
+  "unknown": "Unknown error",
+  "unauthorized": "Authorization required",
+  "notFound": "Object is not found",
+  "forbidden": "Access forbidden",
+  "pageNotFound": "The page is not found",
+  "badCredentials": "Invalid username or password",
+  "catchedError": "An error occurred during the application work"
+}

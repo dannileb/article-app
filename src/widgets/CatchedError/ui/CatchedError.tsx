@@ -8,13 +8,14 @@ interface CatchedErrorProps {
 
 export const CatchedError = ({ error }: CatchedErrorProps) => {
     const { t } = useTranslation();
+    const { t: tError } = useTranslation('errors');
 
     const reloadPage = () => {
         location.reload();
     };
     return (
         <div className={classes.catchedError}>
-            <p>{t('catchedError_text')}</p>
+            <p>{tError('catchedError')}</p>
             <p>{error.message}</p>
             <Button onClick={reloadPage}>{t('catchedError_btnText')}</Button>
         </div>

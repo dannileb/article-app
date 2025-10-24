@@ -3,7 +3,6 @@
   "langSwitcher_text": "English",
   "navBarLabel-main": "Главная",
   "navBarLabel-about": "О сайте",
-  "pageNotFound_text": "Страница не найдена",
   "catchedError_text": "Произошла ошибка во время работы приложения",
   "catchedError_btnText": "Перезагрузить страницу",
   "header_title": "Article App",
@@ -14,10 +13,6 @@
   "loginForm_username-label": "Имя пользователя",
   "loginForm_password-label": "Пароль",
   "loginForm_title": "Вход",
-  "errors.unknown": "Неизвестная ошибка",
-  "errors.unauthorized": "Необходима авторизация",
-  "Invalid username or password": "Неверное имя пользователя или пароль",
-  "No token provided": "Токен авторизации не предоставлен",
   "header_login_text": "Войти",
   "profile_text": "Профиль",
   "navBarLabel-profile": "Профиль"

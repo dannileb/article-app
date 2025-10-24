@@ -12,7 +12,7 @@ describe('getUserAuth.test', () => {
         const result = await thunk.callThunk(undefined);
 
         expect(result.meta.requestStatus).toBe('rejected');
-        expect(result.payload).toEqual({ message: 'errors.unknown' });
+        expect(result.payload).toEqual({ message: 'unknown' });
     });
 
     test('should return auth data', async () => {

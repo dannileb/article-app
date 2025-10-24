@@ -12,7 +12,7 @@ export const ProfilePagePlaceholder = ({
     i18nErrorKey,
 }: ProfilePagePlaceholderProps) => {
     const { t } = useTranslation('profile');
-    const { t: tError } = useTranslation();
+    const { t: tError } = useTranslation('errors');
     return (
         <div className={classes.placeholder}>
             {i18nErrorKey ? (

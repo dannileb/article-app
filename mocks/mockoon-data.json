@@ -131,7 +131,7 @@
         },
         {
           "uuid": "e0791000-ec14-462c-9e60-b23970220821",
-          "body": "{\n  \"message\": \"Invalid username or password\"\n}",
+          "body": "{\n  \"message\": \"badCredentials\"\n}",
           "latency": 0,
           "statusCode": 401,
           "label": "Invalid credentials",
@@ -199,7 +199,7 @@
         },
         {
           "uuid": "099563a4-eea9-4cad-b4c5-194e4058ed35",
-          "body": "{\n  \"message\": \"No token provided\"\n}",
+          "body": "{\n  \"message\": \"unauthorized\"\n}",
           "latency": 0,
           "statusCode": 401,
           "label": "Unauthorized",
@@ -642,7 +642,7 @@
       "responses": [
         {
           "uuid": "3f413ea4-97d5-4e45-95e7-deee6e97bce6",
-          "body": "{\n  \"message\": \"errors.authRequired\"\n}",
+          "body": "{\n  \"message\": \"errors.unauthorized\"\n}",
           "latency": 0,
           "statusCode": 401,
           "label": "",
@@ -674,7 +674,7 @@
         },
         {
           "uuid": "ddb1dbca-94f6-49bc-b440-cd5fb6d55c3b",
-          "body": "{\n  \"message\": \"errors.noPermission\"\n}",
+          "body": "{\n  \"message\": \"errors.forbidden\"\n}",
           "latency": 0,
           "statusCode": 403,
           "label": "",

@@ -11,7 +11,7 @@ describe('getProfile.test', () => {
         const thunk = new TestAsyncThunk(getProfile);
         const result = await thunk.callThunk({ profileId: '1' });
         expect(result.meta.requestStatus).toBe('rejected');
-        expect(result.payload).toEqual({ message: 'errors.unknown' });
+        expect(result.payload).toEqual({ message: 'unknown' });
     });
 
     test('should return profile', async () => {

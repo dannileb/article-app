@@ -9,8 +9,8 @@ import { DndInput } from '#/shared/ui/DnDInput/DndInput';
 import { UserOutlined } from '@ant-design/icons';
 
 export const ProfileEditor = () => {
+    const { t: tError } = useTranslation('errors');
     const { t } = useTranslation('profile');
-    const { t: tError } = useTranslation();
     const form = useAppSelector(getProfileForm);
     const error = useAppSelector(getProfileUpdateError);
 
