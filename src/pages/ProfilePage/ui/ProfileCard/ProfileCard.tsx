@@ -5,7 +5,8 @@ import classes from '../ProfilePage.module.scss';
 import { Heading } from '#/shared/ui/Heading/Heading';
 import { TextCopiable } from '#/shared/ui/TextCopiable/TextCopiable';
 import { EnvironmentOutlined } from '@ant-design/icons';
-import avatarPlaceholder from '#/shared/assets/images/profilePlaceholder.webp';
+import { Avatar } from '#/shared/ui/Avatar/Avatar';
+
 interface ProfileCardProps {
     profile: Profile;
 }
@@ -34,17 +35,11 @@ export const ProfileCard = ({ profile }: ProfileCardProps) => {
                     {t('currency')}: {profile.currency}
                 </Text>
             </div>
-            <div className={classes.photoWrapper}>
-                <img
-                    className={classes.photo}
-                    src={profile.photo}
-                    alt="profile_photo"
-                    onError={(e) => {
-                        e.currentTarget.src = avatarPlaceholder;
-                        e.currentTarget.onerror = null;
-                    }}
-                />
-            </div>
+            <Avatar
+                size={196}
+                src={profile.photo}
+                alt={`${profile.name} ${profile.surname}`}
+            />
         </div>
     );
 };
