@@ -49,7 +49,7 @@ function ProfilePage() {
     }, [authData?.id]);
 
     useEffect(() => {
-        if (profileId) {
+        if (profileId && __PROJECT__ !== 'storybook') {
             dispatch(getProfile({ profileId }));
         }
     }, [dispatch, profileId, isAuthenticated]);

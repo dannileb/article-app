@@ -7,6 +7,7 @@ import { getProfileIsReadonly } from '#/pages/ProfilePage/model/selectors/getPro
 import { getProfileIsUpdateLoading } from '#/pages/ProfilePage/model/selectors/getProfile/getProfileIsUpdateLoading';
 import { getProfileForm } from '#/pages/ProfilePage/model/selectors/getProfile/getProfileForm';
 import { getProfileUpdateError } from '#/pages/ProfilePage/model/selectors/getProfile/getProfileUpdateError';
+import { getProfileIsEditing } from '#/pages/ProfilePage/model/selectors/getProfile/getProfileIsEditing';
 
 describe('getProfileState.test', () => {
     it('should return state', () => {
@@ -30,20 +31,29 @@ describe('getProfileState.test', () => {
                 readonly: true,
                 isUpdateLoading: true,
                 updateError: 'test',
+                isEditing: true,
             },
         };
 
-        expect(getProfileIsLoading(state as StateSchema)).toBe(true);
+        expect(getProfileData(state as StateSchema)).toEqual(mockUser);
         expect(getProfileError(state as StateSchema)).toBe('test');
+        expect(getProfileForm(state as StateSchema)).toEqual(mockUser);
+        expect(getProfileIsEditing(state as StateSchema)).toBe(true);
+        expect(getProfileIsLoading(state as StateSchema)).toBe(true);
         expect(getProfileIsReadonly(state as StateSchema)).toBe(true);
         expect(getProfileIsUpdateLoading(state as StateSchema)).toBe(true);
-        expect(getProfileForm(state as StateSchema)).toEqual(mockUser);
         expect(getProfileUpdateError(state as StateSchema)).toBe('test');
-        expect(getProfileData(state as StateSchema) ?? {}).toEqual(mockUser);
     });
 
     it('should return undefined if state is undefined', () => {
         const state = {};
         expect(getProfileData(state as StateSchema)).toBe(undefined);
+        expect(getProfileError(state as StateSchema)).toBe(undefined);
+        expect(getProfileForm(state as StateSchema)).toBe(undefined);
+        expect(getProfileIsEditing(state as StateSchema)).toBe(undefined);
+        expect(getProfileIsLoading(state as StateSchema)).toBe(undefined);
+        expect(getProfileIsReadonly(state as StateSchema)).toBe(undefined);
+        expect(getProfileIsUpdateLoading(state as StateSchema)).toBe(undefined);
+        expect(getProfileUpdateError(state as StateSchema)).toBe(undefined);
     });
 });
