@@ -855,7 +855,7 @@
       "id": "users",
       "name": "Profiles",
       "documentation": "List of all users",
-      "value": "[\r\n  {{#repeat 10}}\r\n  {\r\n  \"id\": {{@index}},\r\n  \"username\": \"{{faker 'internet.username'}}\",\r\n  \"name\": \"{{faker 'person.firstName'}}\",\r\n  \"surname\": \"{{faker 'person.lastName'}}\",\r\n  \"photo\": \"{{faker 'image.personPortrait'}}\",\r\n  \"age\": {{faker 'number.int' min=10 max=90}},\r\n  \"country\": \"{{faker 'location.country'}}\",\r\n  \"city\": \"{{faker 'location.city'}}\",\r\n  \"currency\": \"{{faker 'finance.currencyCode'}}\"\r\n  }\r\n  {{#unless @last}},{{/unless}}\r\n  {{/repeat}}\r\n]\r\n"
+      "value": "[\r\n  {{#repeat 10}}\r\n  {\r\n  \"id\": {{add @index 1}},\r\n  \"username\": \"{{faker 'internet.username'}}\",\r\n  \"name\": \"{{faker 'person.firstName'}}\",\r\n  \"surname\": \"{{faker 'person.lastName'}}\",\r\n  \"photo\": \"{{faker 'image.personPortrait'}}\",\r\n  \"age\": {{faker 'number.int' min=10 max=90}},\r\n  \"country\": \"{{faker 'location.country'}}\",\r\n  \"city\": \"{{faker 'location.city'}}\",\r\n  \"currency\": \"{{faker 'finance.currencyCode'}}\"\r\n  }\r\n  {{#unless @last}},{{/unless}}\r\n  {{/repeat}}\r\n]\r\n"
     },
     {
       "uuid": "3150a840-253c-4e28-a264-e2f0ce3dbc47",

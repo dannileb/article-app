@@ -11,5 +11,6 @@ export interface UserWithToken {
 
 export interface UserSchema {
     authData?: User;
+    isAuthenticated: boolean;
     isLoading?: boolean;
 }
