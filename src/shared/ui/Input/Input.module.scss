@@ -26,6 +26,10 @@
     font-size: var(--font-size-s);
 }
 
+.inputRequired {
+    color: var(--color-text-error);
+}
+
 .input {
     width: 100%;
     outline: none;
@@ -44,4 +48,20 @@
 
 .inputPasswordButton {
     margin-left: 4px;
+}
+
+.clear {
+    /* stylelint-disable-next-line no-descending-specificity */
+    .inputBody {
+        padding-left: 0;
+        padding-right: 0;
+        padding-bottom: 0;
+        padding-top: 0;
+
+        border: 1px solid transparent;
+
+        &:has(.input:focus) {
+            border: 1px solid transparent;
+        }
+    }
 }

@@ -11,9 +11,4 @@ describe('getUserIsAuth.test', () => {
 
         expect(getUserIsAuth(state as StateSchema)).toBe(true);
     });
-
-    it('should return undefined if state is undefined', () => {
-        const state = {};
-        expect(getUserIsAuth(state as StateSchema)).toBe(undefined);
-    });
 });

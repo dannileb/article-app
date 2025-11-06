@@ -1,7 +1,8 @@
 import { profileActions, profileReducer } from '../../model/slice/profileSlice';
-import { Profile, ProfileSchema } from '../../model/types/profile.types';
+import { ProfileSchema } from '../../model/types/profile.types';
 import { setupLocalStorageMock } from '#/shared/lib/tests/mockLocalStorage';
 import { DeepPartial } from '#/shared/types/DeepPartial.types';
+import { Profile } from '#/entities/Profile';
 
 const mockUser: Profile = {
     id: 1,

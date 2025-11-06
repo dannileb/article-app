@@ -1,0 +1,28 @@
+.editorWrapper {
+    height: 100%;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.editorContent {
+    padding: 0 8px;
+    overflow: auto;
+}
+
+.contentWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.image {
+    max-width: 100%;
+    align-self: center;
+}
+
+.previewButton {
+    align-self: flex-start;
+}

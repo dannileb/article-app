@@ -22,7 +22,10 @@ export const routerConfig = createBrowserRouter([
                 path: RoutePath.profile,
                 lazy: () => import('#/pages/ProfilePage'),
             },
-
+            {
+                path: RoutePath.article,
+                lazy: () => import('#/pages/ArticlePage'),
+            },
             {
                 Component: PrivateRoutes,
             },

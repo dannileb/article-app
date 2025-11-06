@@ -4,11 +4,17 @@
 @use './themes/light.scss' as *;
 
 .app {
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
     background: var(--color-bg-primary);
-    min-height: 100vh;
 }
 
 .content-page {
+    overflow: hidden;
+    flex-grow: 1;
     display: flex;
 }
 

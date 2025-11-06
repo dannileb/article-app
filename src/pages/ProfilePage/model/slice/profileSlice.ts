@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Profile, ProfileSchema } from '../types/profile.types';
+import { ProfileSchema } from '../types/profile.types';
 import { getProfile } from '../services/getProfile/getProfile';
 import { updateProfile } from '../services/updateProfile/updateProfile';
 import { userActions } from '#/entities/User';
+import { Profile } from '#/entities/Profile';
 
 const initialState: ProfileSchema = {
     isLoading: false,

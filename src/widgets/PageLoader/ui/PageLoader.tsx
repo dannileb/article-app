@@ -2,13 +2,16 @@ import { Loader } from '#/shared/ui/Loader/Loader';
 import classNames from 'classnames';
 import classes from './PageLoader.module.scss';
 import { Transition } from 'react-transition-group';
-import { useRef } from 'react';
+import { useCallback, useRef } from 'react';
+import { Button } from '#/shared/ui/Button/Button';
+import { useTranslation } from 'react-i18next';
 
 interface PageLoaderProps {
     show?: boolean;
     fullscreen?: boolean;
     timeout?: number;
     view?: 'primary' | 'secondary';
+    withReloadButton?: boolean;
 }
 
 export const PageLoader = ({
@@ -16,8 +19,14 @@ export const PageLoader = ({
     show = true,
     timeout = 200,
     view = 'primary',
+    withReloadButton = false,
 }: PageLoaderProps) => {
+    const { t } = useTranslation();
     const loaderRef = useRef<HTMLDivElement>(null);
+
+    const handeReload = useCallback(() => {
+        window.location.reload();
+    }, []);
 
     return (
         <Transition
@@ -41,6 +50,14 @@ export const PageLoader = ({
                     <div className={classes.loader}>
                         <Loader />
                     </div>
+                    {withReloadButton && (
+                        <Button
+                            className={classes.reloadButton}
+                            onClick={handeReload}
+                        >
+                            {t('reloadBtnText')}
+                        </Button>
+                    )}
                 </div>
             )}
         </Transition>

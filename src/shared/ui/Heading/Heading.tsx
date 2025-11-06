@@ -18,7 +18,7 @@ export const Heading = ({
         `h${level}`,
         {
             ...props,
-            className: classNames(classes[view], className),
+            className: classNames(classes.heading, classes[view], className),
         },
         children,
     );

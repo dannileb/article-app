@@ -1,0 +1,20 @@
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 16px;
+
+    background-color: var(--color-bg-primary);
+}
+
+.processButtons {
+    display: flex;
+    gap: 8px;
+}
+
+.addBlockContainer {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    gap: 16px;
+}

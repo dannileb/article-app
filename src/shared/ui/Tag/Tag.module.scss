@@ -1,0 +1,34 @@
+.tag {
+    width: fit-content;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+
+    padding: 4px;
+
+    color: var(--color-text-secondary);
+
+    border-radius: var(--border-radius-card);
+    background-color: var(--color-secondary-light);
+}
+
+.deleteButton {
+    border: none;
+    background-color: transparent;
+
+    color: currentcolor;
+
+    cursor: pointer;
+}
+
+.size_s {
+    font: var(--font-s);
+}
+
+.size_m {
+    font: var(--font-m);
+}
+
+.size_l {
+    font: var(--font-l);
+}

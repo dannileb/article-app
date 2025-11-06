@@ -1,0 +1,45 @@
+.header {
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    border-bottom: 1px solid var(--color-border);
+}
+
+.headerEditor {
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    border-bottom: 1px solid var(--color-border);
+}
+
+.articleInfo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+
+.articleTags {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.tag {
+    padding: 4px;
+
+    border-radius: var(--border-radius-card);
+    background-color: var(--color-secondary-light);
+}
+
+.editButton {
+    align-self: flex-end;
+}

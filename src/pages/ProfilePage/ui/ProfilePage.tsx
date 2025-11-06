@@ -1,8 +1,7 @@
 import { profileActions, profileReducer } from '../model/slice/profileSlice';
 import { useAppDispatch, useAppSelector } from '#/shared/lib/hooks/reduxHooks';
-import { useCallback, useEffect, useMemo } from 'react';
+import { useCallback, useEffect } from 'react';
 import { getProfile } from '../model/services/getProfile/getProfile';
-import { ProfileCard } from './ProfileCard/ProfileCard';
 import PageLoader from '#/widgets/PageLoader';
 import { useParams } from 'react-router';
 import { DynamicModuleLoader } from '#/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
@@ -15,16 +14,18 @@ import {
     getProfileIsLoading,
     getProfileIsReadonly,
 } from '../model/selectors';
-import { ProfilePagePlaceholder } from './ProfilePagePlaceholder/ProfilePagePlaceholder';
 import { ProfileEditor } from './ProfileEditor/ProfileEditor';
 import { updateProfile } from '../model/services/updateProfile/updateProfile';
-import { getUser } from '#/entities/User';
+import { getUserIsAuth } from '#/entities/User';
+import { ProfileCard } from '#/entities/Profile';
+import { PagePlaceholder } from '#/widgets/PagePlaceholder/ui/PagePlaceholder';
 
 const initialRedusers = { profile: profileReducer };
 
 function ProfilePage() {
     const { profileId } = useParams();
-    const { authData } = useAppSelector(getUser);
+
+    const isAuthenticated = useAppSelector(getUserIsAuth);
     const profileData = useAppSelector(getProfileData);
     const isLoading = useAppSelector(getProfileIsLoading);
     const isEditing = useAppSelector(getProfileIsEditing);
@@ -44,10 +45,6 @@ function ProfilePage() {
         dispatch(updateProfile());
     }, [dispatch]);
 
-    const isAuthenticated = useMemo(() => {
-        return !!authData?.id;
-    }, [authData?.id]);
-
     useEffect(() => {
         if (profileId && __PROJECT__ !== 'storybook') {
             dispatch(getProfile({ profileId }));
@@ -65,7 +62,7 @@ function ProfilePage() {
                         <ProfileCard profile={profileData} />
                     )
                 ) : (
-                    <ProfilePagePlaceholder i18nErrorKey={error} />
+                    <PagePlaceholder i18nErrorKey={error} />
                 )}
                 {!readonly && (
                     <ProfilePageToolbar

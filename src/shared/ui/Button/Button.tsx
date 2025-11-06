@@ -5,7 +5,7 @@ import { LoadingOutlined } from '@ant-design/icons';
 
 export interface ButtonProps
     extends PropsWithChildren<ButtonHTMLAttributes<HTMLButtonElement>> {
-    view?: 'clear' | 'primary' | 'secondary' | 'compact';
+    view?: 'clear' | 'primary' | 'secondary' | 'compact' | 'link';
     form?: 'default' | 'brick' | 'rounded';
     icon?: React.ReactNode;
     iconPosition?: 'left' | 'right';

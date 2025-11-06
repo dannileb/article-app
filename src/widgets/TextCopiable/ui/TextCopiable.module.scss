@@ -1,0 +1,34 @@
+.copiableWrapper {
+    padding: 2px 4px;
+    border-radius: var(--border-radius-default);
+
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    transition: background-color 50ms ease-in-out;
+
+    &.primary {
+        background-color: #e0e6ee75;
+    }
+
+    &.secondary {
+        background-color: #e0e6ee25;
+    }
+
+    &.error {
+        background-color: var(--color-bg-error);
+    }
+
+    &.copied {
+        background-color: var(--color-bg-success);
+    }
+}
+
+.copyButton {
+    opacity: 0.5;
+}
+
+.monospace {
+    font-family: monospace;
+}

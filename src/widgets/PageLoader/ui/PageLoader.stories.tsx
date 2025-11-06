@@ -27,3 +27,9 @@ export const Dark: Story = {
     args: {},
     decorators: [ThemeDecorator(Theme.DARK)],
 };
+
+export const WithReloadButton: Story = {
+    args: {
+        withReloadButton: true,
+    },
+};

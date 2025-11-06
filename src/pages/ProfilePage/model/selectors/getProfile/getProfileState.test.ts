@@ -1,4 +1,3 @@
-import { Profile } from '../../types/profile.types';
 import { DeepPartial } from '#/shared/types/DeepPartial.types';
 import { getProfileData } from './getProfileData';
 import { getProfileIsLoading } from './getProfileIsLoading';
@@ -8,6 +7,7 @@ import { getProfileIsUpdateLoading } from '#/pages/ProfilePage/model/selectors/g
 import { getProfileForm } from '#/pages/ProfilePage/model/selectors/getProfile/getProfileForm';
 import { getProfileUpdateError } from '#/pages/ProfilePage/model/selectors/getProfile/getProfileUpdateError';
 import { getProfileIsEditing } from '#/pages/ProfilePage/model/selectors/getProfile/getProfileIsEditing';
+import { Profile } from '#/entities/Profile';
 
 describe('getProfileState.test', () => {
     it('should return state', () => {

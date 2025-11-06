@@ -53,7 +53,7 @@
       "responses": [
         {
           "uuid": "fcbb15b8-5290-415a-8489-9cd2e85d8058",
-          "body": "{\n  \"user\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"name\": \"Admin User\",\n    \"role\": \"admin\"\n  },\n  \"accessToken\": \"{{faker 'internet.jwt' '{header: { alg: \"HS256\"}, payload: { username: \"admin\", role: \"admin\", id: 1}}'}}\"\n}",
+          "body": "{\n  \"user\": {\n    \"id\": 0,\n    \"username\": \"admin\",\n    \"name\": \"admin\",\n    \"role\": \"admin\"\n  },\n  \"accessToken\": \"{{faker 'internet.jwt' '{header: { alg: \"HS256\"}, payload: { username: \"admin\", role: \"admin\", id: 0}}'}}\"\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Admin Response",
@@ -92,7 +92,7 @@
         },
         {
           "uuid": "cee94e16-31cb-44d8-a9cc-260fe230f7c3",
-          "body": "{\r\n  \"user\": {\r\n    \"id\": 2,\r\n    \"username\": \"user\",\r\n    \"name\": \"Regular User\",\r\n    \"role\": \"user\"\r\n  },\r\n  \"accessToken\": \"{{faker 'internet.jwt' '{header: { alg: \"HS256\"}, payload: { username: \"user\", role: \"user\", id: 2}}'}}\"\r\n}\r\n",
+          "body": "{{~setVar 'profile' (find (dataRaw 'profiles') (object username=(bodyRaw 'username')))~}}\r\n{{~setVar 'jwtParams' (concat '{header: { alg: \"HS256\"}, payload: { username: \"' @profile.username '\", role: \"user\", id: ' @profile.id '}}')~}}\r\n{\r\n  \"user\": {\r\n    \"id\": {{@profile.id}},\r\n    \"username\": \"{{@profile.username}}\",\r\n    \"name\": \"{{@profile.name}}\",\r\n    \"role\": \"user\"\r\n  },\r\n  \"accessToken\": \"{{faker 'internet.jwt' @jwtParams}}\"\r\n}\r\n",
           "latency": 0,
           "statusCode": 200,
           "label": "User Response",
@@ -108,18 +108,11 @@
           "sendFileAsBody": false,
           "rules": [
             {
-              "target": "body",
-              "modifier": "username",
-              "value": "user",
-              "invert": false,
-              "operator": "equals"
-            },
-            {
-              "target": "body",
-              "modifier": "password",
-              "value": "user123",
-              "invert": false,
-              "operator": "equals"
+              "target": "templating",
+              "modifier": "{{find (dataRaw 'Profiles') (object username=(body 'username'))}}",
+              "value": "",
+              "invert": true,
+              "operator": "null"
             }
           ],
           "rulesOperator": "AND",
@@ -231,7 +224,7 @@
       "type": "http",
       "documentation": "Get all posts",
       "method": "get",
-      "endpoint": "posts",
+      "endpoint": "articles",
       "responses": [
         {
           "uuid": "c947447a-9aa1-41dd-922e-f4f1dee6c2bd",
@@ -299,14 +292,14 @@
       "type": "http",
       "documentation": "Get post by ID",
       "method": "get",
-      "endpoint": "posts/:id",
+      "endpoint": "articles/:id",
       "responses": [
         {
-          "uuid": "920691c2-e9d8-4773-b46c-29869198b809",
-          "body": "{{#each (data 'posts') as |post|}}\n{{#if (eq (urlParam 'id') (toString post.id))}}\n{\n  \"id\": {{post.id}},\n  \"title\": \"{{post.title}}\",\n  \"content\": \"{{post.content}}\",\n  \"userId\": {{post.userId}},\n  \"author\": \"{{post.author}}\",\n  \"createdAt\": \"{{post.createdAt}}\",\n  \"tags\": {{stringify post.tags}},\n  \"comments\": {{stringify post.comments}}\n}\n{{/if}}\n{{/each}}",
+          "uuid": "252384aa-a440-42d1-a9f5-49ab16a2c16a",
+          "body": "{\n  \"message\": \"notFound\"\n}",
           "latency": 0,
-          "statusCode": 200,
-          "label": "Success",
+          "statusCode": 404,
+          "label": "",
           "headers": [
             {
               "key": "Content-Type",
@@ -319,11 +312,11 @@
           "sendFileAsBody": false,
           "rules": [
             {
-              "target": "header",
-              "modifier": "Authorization",
-              "value": "^Bearer .+",
+              "target": "data_bucket",
+              "modifier": "Profiles.{{urlParam 'id'}}",
+              "value": "",
               "invert": false,
-              "operator": "regex"
+              "operator": "null"
             }
           ],
           "rulesOperator": "OR",
@@ -334,11 +327,11 @@
           "callbacks": []
         },
         {
-          "uuid": "bee36a2f-a863-43f7-85e1-a652e003a34e",
-          "body": "{\n  \"message\": \"Authentication required\"\n}",
+          "uuid": "920691c2-e9d8-4773-b46c-29869198b809",
+          "body": "{{~setVar 'articleId' (parseInt (urlParam 'id'))~}}\r\n{{setVar 'jwtUserId' (jwtPayload (header 'Authorization') 'id')~}}\r\n{{~setVar 'article' (find (dataRaw 'Articles') (object id=@articleId))~}}\r\n{{~setVar 'authorId' @article.author.id~}}\r\n{{~#if (eq @jwtUserId @authorId)~}}\r\n{{{stringify (objectMerge \r\n    (object data=@article)\r\n    (object readonly=false)\r\n)}}}\r\n{{~else~}}\r\n{{{stringify (objectMerge \r\n    (object data=@article)\r\n    (object readonly=true)\r\n)}}}\r\n{{~/if}}\r\n",
           "latency": 0,
-          "statusCode": 401,
-          "label": "Unauthorized",
+          "statusCode": 200,
+          "label": "Success",
           "headers": [
             {
               "key": "Content-Type",
@@ -642,7 +635,7 @@
       "responses": [
         {
           "uuid": "3f413ea4-97d5-4e45-95e7-deee6e97bce6",
-          "body": "{\n  \"message\": \"errors.unauthorized\"\n}",
+          "body": "{\n  \"message\": \"unauthorized\"\n}",
           "latency": 0,
           "statusCode": 401,
           "label": "",
@@ -674,7 +667,7 @@
         },
         {
           "uuid": "ddb1dbca-94f6-49bc-b440-cd5fb6d55c3b",
-          "body": "{\n  \"message\": \"errors.forbidden\"\n}",
+          "body": "{\n  \"message\": \"forbidden\"\n}",
           "latency": 0,
           "statusCode": 403,
           "label": "",
@@ -706,7 +699,7 @@
         },
         {
           "uuid": "9c218a9f-9fc7-4bc4-9f12-ee969dce372e",
-          "body": "{\n  \"message\": \"errors.notFound\"\n}",
+          "body": "{\n  \"message\": \"notFound\"\n}",
           "latency": 0,
           "statusCode": 404,
           "label": "",
@@ -738,7 +731,7 @@
         },
         {
           "uuid": "efc58b80-e4e5-46ad-a82b-701bdbbaefa5",
-          "body": "{{~#if (bodyRaw 'username')~}}\r\n{{setData 'set' 'profiles' (concat (urlParam 'id') '.username') (bodyRaw 'username')}}\r\n{{~/if~}}\r\n{{~#if (bodyRaw 'name')~}}\r\n{{setData 'set' 'profiles' (concat (urlParam 'id') '.name') (bodyRaw 'name')}}\r\n{{~/if~}}\r\n{{~#if (bodyRaw 'surname')~}}\r\n{{setData 'set' 'profiles' (concat (urlParam 'id') '.surname') (bodyRaw 'surname')}}\r\n{{~/if~}}\r\n{{~#if (bodyRaw 'photo')~}}\r\n{{setData 'set' 'profiles' (concat (urlParam 'id') '.photo') (bodyRaw 'photo')}}\r\n{{~/if~}}\r\n{{~#if (bodyRaw 'age')~}}\r\n{{setData 'set' 'profiles' (concat (urlParam 'id') '.age') (bodyRaw 'age')}}\r\n{{~/if~}}\r\n{{~#if (bodyRaw 'country')~}}\r\n{{setData 'set' 'profiles' (concat (urlParam 'id') '.country') (bodyRaw 'country')}}\r\n{{~/if~}}\r\n{{~#if (bodyRaw 'city')~}}\r\n{{setData 'set' 'profiles' (concat (urlParam 'id') '.city') (bodyRaw 'city')}}\r\n{{~/if~}}\r\n{{~#if (bodyRaw 'currency')~}}\r\n{{setData 'set' 'profiles' (concat (urlParam 'id') '.currency') (bodyRaw 'currency')}}\r\n{{~/if~}}\r\n{{{stringify (dataRaw 'profiles' (urlParam 'id'))}}}",
+          "body": "{{~#if (bodyRaw 'title')~}}\r\n{{setData 'set' 'articles' (concat (urlParam 'id') '.title') (bodyRaw 'title')}}\r\n{{~/if~}}\r\n{{~#if (bodyRaw 'name')~}}\r\n{{setData 'set' 'profiles' (concat (urlParam 'id') '.name') (bodyRaw 'name')}}\r\n{{~/if~}}\r\n{{~#if (bodyRaw 'surname')~}}\r\n{{setData 'set' 'profiles' (concat (urlParam 'id') '.surname') (bodyRaw 'surname')}}\r\n{{~/if~}}\r\n{{~#if (bodyRaw 'photo')~}}\r\n{{setData 'set' 'profiles' (concat (urlParam 'id') '.photo') (bodyRaw 'photo')}}\r\n{{~/if~}}\r\n{{~#if (bodyRaw 'age')~}}\r\n{{setData 'set' 'profiles' (concat (urlParam 'id') '.age') (bodyRaw 'age')}}\r\n{{~/if~}}\r\n{{~#if (bodyRaw 'country')~}}\r\n{{setData 'set' 'profiles' (concat (urlParam 'id') '.country') (bodyRaw 'country')}}\r\n{{~/if~}}\r\n{{~#if (bodyRaw 'city')~}}\r\n{{setData 'set' 'profiles' (concat (urlParam 'id') '.city') (bodyRaw 'city')}}\r\n{{~/if~}}\r\n{{~#if (bodyRaw 'currency')~}}\r\n{{setData 'set' 'profiles' (concat (urlParam 'id') '.currency') (bodyRaw 'currency')}}\r\n{{~/if~}}\r\n{{{stringify (dataRaw 'profiles' (urlParam 'id'))}}}",
           "latency": 0,
           "statusCode": 200,
           "label": "",
@@ -761,6 +754,182 @@
               "operator": "regex"
             }
           ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "6b7bf530-0e70-4a50-b7ea-01651212a7fd",
+      "type": "http",
+      "documentation": "",
+      "method": "put",
+      "endpoint": "article/:id",
+      "responses": [
+        {
+          "uuid": "2d9f4e92-4a94-4332-afeb-55150c86050f",
+          "body": "{\n  \"message\": \"unauthorized\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "",
+              "invert": false,
+              "operator": "null"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "fc54be73-7247-49a0-9199-09f164887e1b",
+          "body": "{\n  \"message\": \"forbidden\"\n}",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "params",
+              "modifier": "id",
+              "value": "{{jwtPayload (header 'Authorization') 'id'}}",
+              "invert": true,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "9d1061a6-db78-42fa-aacf-73191ba3d4db",
+          "body": "{\n  \"message\": \"notFound\"\n}",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "data_bucket",
+              "modifier": "Articles.{{urlParam 'id'}}",
+              "value": "",
+              "invert": false,
+              "operator": "null"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "1aa87345-4d01-4673-8c8f-8181d2e587ed",
+          "body": "{{~#if (bodyRaw 'title')~}}\n{{setData 'set' 'articles' (concat (urlParam 'id') '.title') (bodyRaw 'title')}}\n{{~/if~}}\n{{~#if (bodyRaw 'tags')~}}\n{{setData 'set' 'articles' (concat (urlParam 'id') '.tags') (bodyRaw 'tags')}}\n{{~/if~}}\n{{~#if (bodyRaw 'content')~}}\n{{setData 'set' 'articles' (concat (urlParam 'id') '.content') (array)}}\n{{~#each (bodyRaw 'content') as |block|~}}\n  {{~#if block.id~}}\n  {{setData 'push' 'articles' (concat (urlParam 'id') '.content') (block)}}\n  {{~else~}}\n  {{setData 'push' 'articles' (concat (urlParam 'id') '.content') (objectMerge (object id=(faker 'string.uuid')) (block))}}\n  {{~/if~}}\n{{~/each~}}\n{{~/if~}}\n{{{stringify (dataRaw 'articles' (urlParam 'id'))}}}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "^Bearer .+",
+              "invert": false,
+              "operator": "regex"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "45cf7d5d-0e1b-4b15-8fcb-e4d68c310a4c",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "blocks",
+      "responses": [
+        {
+          "uuid": "0111e7c9-cb07-497e-9a01-0b18d74cefd2",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "DATABUCKET",
+          "filePath": "",
+          "databucketID": "tldh",
+          "sendFileAsBody": false,
+          "rules": [],
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
@@ -797,6 +966,10 @@
     },
     {
       "type": "route",
+      "uuid": "6b7bf530-0e70-4a50-b7ea-01651212a7fd"
+    },
+    {
+      "type": "route",
       "uuid": "ef3986ed-18a8-43e8-a27a-5210f10a293b"
     },
     {
@@ -818,6 +991,10 @@
     {
       "type": "route",
       "uuid": "d1728441-7d4f-4750-91c8-05dda27b8682"
+    },
+    {
+      "type": "route",
+      "uuid": "45cf7d5d-0e1b-4b15-8fcb-e4d68c310a4c"
     }
   ],
   "proxyMode": false,
@@ -855,14 +1032,21 @@
       "id": "users",
       "name": "Profiles",
       "documentation": "List of all users",
-      "value": "[\r\n  {{#repeat 10}}\r\n  {\r\n  \"id\": {{add @index 1}},\r\n  \"username\": \"{{faker 'internet.username'}}\",\r\n  \"name\": \"{{faker 'person.firstName'}}\",\r\n  \"surname\": \"{{faker 'person.lastName'}}\",\r\n  \"photo\": \"{{faker 'image.personPortrait'}}\",\r\n  \"age\": {{faker 'number.int' min=10 max=90}},\r\n  \"country\": \"{{faker 'location.country'}}\",\r\n  \"city\": \"{{faker 'location.city'}}\",\r\n  \"currency\": \"{{faker 'finance.currencyCode'}}\"\r\n  }\r\n  {{#unless @last}},{{/unless}}\r\n  {{/repeat}}\r\n]\r\n"
+      "value": "[\r\n  {\r\n    \"id\": 0,\r\n    \"username\": \"user\",\r\n    \"name\": \"Елисей\",\r\n    \"surname\": \"Трофимов\",\r\n    \"photo\": \"https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/female/512/91.jpg\",\r\n    \"age\": 21,\r\n    \"country\": \"Эквадор\",\r\n    \"city\": \"Кузнецк\",\r\n    \"currency\": \"SRD\"\r\n  },\r\n  {{#repeat 10}}\r\n  {\r\n  \"id\": {{add @index 1}},\r\n  \"username\": \"{{faker 'internet.username'}}\",\r\n  \"name\": \"{{faker 'person.firstName'}}\",\r\n  \"surname\": \"{{faker 'person.lastName'}}\",\r\n  \"photo\": \"{{faker 'image.personPortrait'}}\",\r\n  \"age\": {{faker 'number.int' min=10 max=90}},\r\n  \"country\": \"{{faker 'location.country'}}\",\r\n  \"city\": \"{{faker 'location.city'}}\",\r\n  \"currency\": \"{{faker 'finance.currencyCode'}}\"\r\n  }\r\n  {{#unless @last}},{{/unless}}\r\n  {{/repeat}}\r\n]\r\n"
+    },
+    {
+      "uuid": "6c2650ca-2348-4ab7-beee-819adf3392b6",
+      "id": "tldh",
+      "name": "Blocks",
+      "documentation": "",
+      "value": "[\r\n  {{#repeat 11}}\r\n  {\r\n    \"id\": \"{{faker 'string.uuid'}}\",\r\n    \"type\": \"text\",\r\n    \"title\": \"{{faker 'lorem.sentence'}}\",\r\n    \"blockContent\": \"{{faker 'lorem.paragraph' 3}}\",\r\n    \"articleId\": {{@index}}\r\n  },\r\n  {\r\n    \"id\": \"{{faker 'string.uuid'}}\",\r\n    \"type\": \"code\",\r\n    \"title\": \"{{faker 'lorem.sentence'}}\",\r\n    \"blockContent\": \"print(\\\"Hello, world!\\\")\\nfor i in range(10):\\n  print(i)\\n\",\r\n    \"articleId\": {{@index}}\r\n  },\r\n  {\r\n    \"id\": \"{{faker 'string.uuid'}}\",\r\n    \"type\": \"image\",\r\n    \"title\": \"{{faker 'lorem.sentence'}}\",\r\n    \"blockContent\": \"{{faker 'image.avatarGitHub'}}\",\r\n    \"articleId\": {{@index}}\r\n  }{{#unless @last}},{{/unless}}\r\n  {{/repeat}}\r\n]"
     },
     {
       "uuid": "3150a840-253c-4e28-a264-e2f0ce3dbc47",
       "id": "posts",
-      "name": "Posts",
+      "name": "Articles",
       "documentation": "List of blog posts",
-      "value": "[\r\n  {{#repeat 50}}\r\n  {\r\n    \"id\": {{@index}},\r\n    \"title\": \"{{faker 'lorem.sentence'}}\",\r\n    \"content\": \"{{faker 'lorem.paragraph'}}\\n\\n{{faker 'lorem.paragraph'}}\\n\\n{{faker 'lorem.paragraph'}}\",\r\n    \"userId\": \"{{faker 'number.int' min=1 max=3}}\",\r\n    \"author\": \"{{faker 'person.fullName'}}\",\r\n    \"createdAt\": \"{{faker 'date.recent' 30}}\",\r\n    \"tags\": [\"{{faker 'word.noun'}}\", \"{{faker 'word.verb'}}\"],\r\n    \"comments\": []\r\n  }{{#unless @last}},{{/unless}}\r\n  {{/repeat}}\r\n]\r\n"
+      "value": "{{~setVar 'profileUser' (find (dataRaw 'profiles') (object id=0))~}}\r\n[\r\n  {{setVar 'content' (filter (dataRaw 'blocks') (object articleId=0))}}\r\n  {\r\n    \"id\":  0,\r\n    \"title\": \"{{faker 'lorem.sentence'}}\",\r\n    \"content\": {{{stringify @content}}},\r\n    \"author\": {{{stringify @profileUser}}},\r\n    \"createdAt\": \"{{dateFormat (faker 'date.past') 'dd.MM.yyyy'}}\",\r\n    \"tags\": [\"{{faker 'word.noun'}}\", \"{{faker 'word.verb'}}\"],\r\n    \"comments\": []\r\n  },\r\n  {{#repeat 20}}\r\n  {{setVar 'profile' (oneOf (dataRaw 'Profiles'))~}}\r\n  {{setVar 'content' (filter (dataRaw 'blocks') (object articleId=(add @index 1)))}}\r\n  {\r\n    \"id\":  {{add @index 1}},\r\n    \"title\": \"{{faker 'lorem.sentence'}}\",\r\n    \"content\": {{{stringify @content}}},\r\n    \"author\": {{{stringify @profile}}},\r\n    \"createdAt\": \"{{dateFormat (faker 'date.past') 'dd.MM.yyyy'}}\",\r\n    \"tags\": [\"{{faker 'word.noun'}}\", \"{{faker 'word.verb'}}\"],\r\n    \"comments\": []\r\n  }{{#unless @last}},{{/unless}}\r\n  {{/repeat}}\r\n]\r\n"
     }
   ],
   "callbacks": []

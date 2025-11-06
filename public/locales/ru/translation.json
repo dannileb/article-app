@@ -15,5 +15,6 @@
   "loginForm_title": "Вход",
   "header_login_text": "Войти",
   "profile_text": "Профиль",
-  "navBarLabel-profile": "Профиль"
+  "navBarLabel-profile": "Профиль",
+  "reloadBtnText": "Перезагрузить"
 }

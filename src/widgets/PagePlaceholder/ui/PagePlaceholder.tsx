@@ -1,14 +1,14 @@
 import { Text } from '#/shared/ui/Text/Text';
 import { FileExcelOutlined, UserOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
-import classes from '../ProfilePage.module.scss';
+import classes from './PagePlaceholder.module.scss';
 import classNames from 'classnames';
 
 interface ProfilePagePlaceholderProps {
     i18nErrorKey?: string;
 }
 
-export const ProfilePagePlaceholder = ({
+export const PagePlaceholder = ({
     i18nErrorKey,
 }: ProfilePagePlaceholderProps) => {
     const { t } = useTranslation('profile');

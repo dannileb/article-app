@@ -1,11 +1,11 @@
 import { useTranslation } from 'react-i18next';
 import { Text } from '#/shared/ui/Text/Text';
-import { Profile } from '../../model/types/profile.types';
-import classes from '../ProfilePage.module.scss';
+import { Profile } from '../model/types/profile.types';
+import classes from './ProfileCard.module.scss';
 import { Heading } from '#/shared/ui/Heading/Heading';
-import { TextCopiable } from '#/shared/ui/TextCopiable/TextCopiable';
 import { EnvironmentOutlined } from '@ant-design/icons';
 import { Avatar } from '#/shared/ui/Avatar/Avatar';
+import { TextCopiable } from '#/widgets/TextCopiable';
 
 interface ProfileCardProps {
     profile: Profile;

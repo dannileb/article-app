@@ -1,0 +1,21 @@
+{
+  "titlePlaceholder": "Enter article title",
+  "titleLabel": "Article title",
+  "editorHeading": "Editing an article",
+  "tags": "Tags",
+  "tagsInputPlaceholder": "Enter tags using any separator",
+  "textBlockLabel": "Text",
+  "imageLink": "Image link",
+  "imageLingPlaceholder": "Enter image link",
+  "imageDescription": "Image caption",
+  "imageCaptionPlaceholder": "Enter a description of the image",
+  "blockContentPlaceholder": "Enter block text",
+  "preview": "Preview",
+  "save": "Save",
+  "edit": "Edit",
+  "blockContentLabel": "Block text",
+  "cancel": "Cancel",
+  "blockTitlePlaceholder": "Enter a block title",
+  "addBlockBtn": "Add block",
+  "blockType": "Block type"
+}

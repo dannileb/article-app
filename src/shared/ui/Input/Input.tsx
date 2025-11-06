@@ -1,5 +1,11 @@
 import classNames from 'classnames';
-import { ChangeEventHandler, InputHTMLAttributes, memo, useState } from 'react';
+import {
+    ChangeEventHandler,
+    InputHTMLAttributes,
+    memo,
+    useId,
+    useState,
+} from 'react';
 import classes from './Input.module.scss';
 import { Button } from '#/shared/ui/Button/Button';
 import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons';
@@ -22,6 +28,8 @@ export interface InputProps extends HTMLInputProps {
     value?: string;
     /** Обработчик изменения значения */
     onChange?: (value: string) => void;
+    /** Обязательное поле */
+    required?: boolean;
 }
 
 const InputInner = ({
@@ -30,8 +38,13 @@ const InputInner = ({
     className,
     type = 'text',
     label,
+    required,
+    view = 'primary',
+    form = 'default',
     ...props
 }: InputProps) => {
+    const labelId = useId();
+
     const [typeLocal, setTypeLocal] = useState<InputProps['type']>(type);
 
     const handleOnChange: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -43,10 +56,26 @@ const InputInner = ({
     };
 
     return (
-        <label className={classNames(classes.inputContainer, className)}>
-            {label && <span className={classes.inputLabel}>{label}</span>}
+        <label
+            htmlFor={labelId}
+            className={classNames(
+                classes.inputContainer,
+                classes[view],
+                classes[form],
+                className,
+            )}
+        >
+            {label && (
+                <span className={classes.inputLabel}>
+                    {label}
+                    {required && (
+                        <span className={classes.inputRequired}> *</span>
+                    )}
+                </span>
+            )}
             <div className={classes.inputBody}>
                 <input
+                    id={labelId}
                     type={typeLocal}
                     value={value}
                     onChange={handleOnChange}
