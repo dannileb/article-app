@@ -15,8 +15,17 @@ export const articleSlice = createSlice({
     name: 'article',
     initialState,
     reducers: {
+        edit: (state) => {
+            state.isEditing = true;
+        },
         cancelEdit: (state) => {
-            state.form = state.data;
+            if (state.data) {
+                state.form = {
+                    title: state.data?.title,
+                    content: state.data?.content,
+                    tags: state.data?.tags,
+                };
+            }
             state.updateError = undefined;
             state.isEditing = false;
         },
@@ -85,9 +94,6 @@ export const articleSlice = createSlice({
                 });
                 state.form.content = newContent;
             }
-        },
-        edit: (state) => {
-            state.isEditing = true;
         },
     },
     extraReducers: (builder) => {
