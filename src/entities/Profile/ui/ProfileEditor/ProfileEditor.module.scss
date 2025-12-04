@@ -1,0 +1,46 @@
+.card {
+    padding: 16px;
+    border-radius: var(--border-radius-card);
+
+    background-color: var(--color-bg-accent-blue);
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    gap: 16px;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 8px;
+}
+
+.nameWrapper {
+    margin-bottom: 4px;
+
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+}
+
+.updatePhotoContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.updatePhotoWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+
+    .updatedPhoto {
+        width: 32px;
+    }
+
+    .updatePhotoIcon {
+        font-size: 64px;
+    }
+}

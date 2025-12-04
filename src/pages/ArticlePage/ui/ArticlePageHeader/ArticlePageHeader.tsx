@@ -1,11 +1,10 @@
-import { Modal } from '#/shared/ui/Modal';
 import { useCallback, useState } from 'react';
 import { Article } from '../../model/types/article.types';
 import { Heading } from '#/shared/ui/Heading/Heading';
 import classes from './ArticlePageHeader.module.scss';
 import { Text } from '#/shared/ui/Text/Text';
 import { Button } from '#/shared/ui/Button/Button';
-import { ProfileCard } from '#/entities/Profile';
+import { ProfileModal } from '#/entities/Profile';
 import { useAppDispatch } from '#/shared/lib/hooks/reduxHooks';
 import { useTranslation } from 'react-i18next';
 import { EditOutlined } from '@ant-design/icons';
@@ -63,12 +62,11 @@ export const ArticlePageHeader = ({
                     {t('editArticle')}
                 </Button>
             )}
-            <Modal
+            <ProfileModal
+                profileId={articleData.author.id.toString()}
                 isOpen={isAuthorModalOpen}
                 onClickOutside={handleCloseAuthorModal}
-            >
-                <ProfileCard profile={articleData.author} />
-            </Modal>
+            />
         </div>
     );
 };

@@ -6,18 +6,11 @@ import {
 } from '../types/article.types';
 import { DeepPartial } from '#/shared/types/DeepPartial.types';
 import { articleActions, articleReducer } from './articleSlice';
-import { Profile } from '#/entities/Profile';
 
-const mockAuthor: Profile = {
-    id: 1,
+const mockAuthor: Article['author'] = {
+    id: 'test_id',
     username: 'test',
-    name: 'test',
-    surname: 'test',
     photo: 'test',
-    age: 1,
-    country: 'test',
-    city: 'test',
-    currency: 'test',
 };
 const mockArticleForm: ArticleBase = {
     title: 'Test Article',
@@ -25,7 +18,7 @@ const mockArticleForm: ArticleBase = {
     tags: ['test'],
 };
 const mockArticle: Article = {
-    id: 1,
+    id: 'test_id',
     createdAt: '2022-01-01',
     author: mockAuthor,
     ...mockArticleForm,

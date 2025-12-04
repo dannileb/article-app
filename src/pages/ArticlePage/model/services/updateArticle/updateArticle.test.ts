@@ -1,22 +1,15 @@
 import { updateArticle } from './updateArticle';
 import { TestAsyncThunk } from '#/shared/lib/tests/TestAsyncThunk';
 import { $api } from '#/shared/api/api';
-import { Profile } from '#/entities/Profile';
 import { Article, ArticleBase } from '../../types/article.types';
 
 jest.mock('#/shared/api/api');
 const mockedAxios = jest.mocked($api);
 
-const mockAuthor: Profile = {
-    id: 1,
+const mockAuthor: Article['author'] = {
+    id: '1',
     username: 'test',
-    name: 'test',
-    surname: 'test',
     photo: 'test',
-    age: 1,
-    country: 'test',
-    city: 'test',
-    currency: 'test',
 };
 const mockArticleForm: ArticleBase = {
     title: 'Test Article',
@@ -24,7 +17,7 @@ const mockArticleForm: ArticleBase = {
     tags: ['test'],
 };
 const mockArticle: Article = {
-    id: 1,
+    id: '1',
     createdAt: '2022-01-01',
     author: mockAuthor,
     ...mockArticleForm,

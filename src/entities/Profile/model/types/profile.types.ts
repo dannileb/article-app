@@ -1,5 +1,5 @@
 export interface Profile {
-    id: number;
+    id: string;
     username: string;
     name: string;
     surname: string;
@@ -8,4 +8,20 @@ export interface Profile {
     country: string;
     city: string;
     currency: string;
+}
+
+export interface ProfileResponse {
+    profileData: Profile;
+    readonly: boolean;
+}
+
+export interface ProfileSchema {
+    data?: Profile;
+    form?: Profile;
+    isLoading: boolean;
+    error?: string;
+    readonly?: boolean;
+    isEditing?: boolean;
+    isUpdateLoading?: boolean;
+    updateError?: string;
 }

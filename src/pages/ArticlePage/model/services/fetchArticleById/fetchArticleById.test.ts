@@ -1,25 +1,19 @@
-import { Profile } from '#/entities/Profile';
-import { fetchArticleById } from '#/pages/ArticlePage/model/services/fetchArticleById/fetchArticleById';
+import { fetchArticleById } from './fetchArticleById';
 import { TestAsyncThunk } from '#/shared/lib/tests/TestAsyncThunk';
 import { Article } from '../../types/article.types';
+import { convertTimestamp } from '#/shared/lib/date';
 
 describe('fetchArticleById.test', () => {
-    const mockAuthor: Profile = {
-        id: 1,
+    const mockAuthor: Article['author'] = {
+        id: 'test_id',
         username: 'test',
-        name: 'test',
-        surname: 'test',
         photo: 'test',
-        age: 1,
-        country: 'test',
-        city: 'test',
-        currency: 'test',
     };
     const mockArticle: Article = {
-        id: 1,
+        id: 'test_id',
         title: 'Test Article',
         content: [],
-        createdAt: '2022-01-01',
+        createdAt: '1735678800',
         author: mockAuthor,
         tags: ['test'],
     };
@@ -32,11 +26,18 @@ describe('fetchArticleById.test', () => {
 
         thunk.api.get.mockReturnValue(Promise.resolve({ data: payload }));
 
-        const result = await thunk.callThunk({ articleId: '1' });
+        const result = await thunk.callThunk({ articleId: 'test_id' });
+        console.debug(convertTimestamp(1735678800));
 
-        expect(thunk.api.get).toHaveBeenCalledWith('/articles/1');
+        expect(thunk.api.get).toHaveBeenCalledWith('/articles/test_id');
         expect(result.meta.requestStatus).toBe('fulfilled');
-        expect(result.payload).toEqual(payload);
+        expect(result.payload).toEqual({
+            data: {
+                ...mockArticle,
+                createdAt: convertTimestamp(Number(mockArticle.createdAt)),
+            },
+            readonly: true,
+        });
     });
 
     it('should return error', async () => {

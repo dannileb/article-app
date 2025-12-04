@@ -4,7 +4,7 @@ import avatarPlaceholder from '#/shared/assets/images/avatarPlaceholder.webp';
 
 interface AvatarProps {
     size?: number | string;
-    src: string;
+    src?: string;
     alt: string;
     className?: string;
 }
@@ -20,9 +20,10 @@ export const Avatar = ({ size = 100, src, alt, className }: AvatarProps) => {
         >
             <img
                 className={classes.avatar}
-                src={src}
+                src={src ?? avatarPlaceholder}
                 alt={alt}
                 onError={(e) => {
+                    console.log(e);
                     e.currentTarget.src = avatarPlaceholder;
                     e.currentTarget.onerror = null;
                 }}

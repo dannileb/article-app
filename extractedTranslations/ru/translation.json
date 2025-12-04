@@ -1,9 +1,14 @@
 {
   "": "",
   "age": "",
+  "authoToComment": "",
+  "author": "",
   "catchedError_btnText": "",
   "catchedError_text": "",
   "city": "",
+  "commentInputLabel": "",
+  "commentInputPlaceholder": "",
+  "commentsHeading": "",
   "country": "",
   "currency": "",
   "editArticle": "",
@@ -12,6 +17,7 @@
   "errors": {
     "unknown": ""
   },
+  "goToProfilePage": "",
   "header_login_text": "",
   "header_title": "",
   "imageBlockLabel": "",

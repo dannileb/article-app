@@ -2,6 +2,7 @@ import { ArticleResponse } from '../../types/article.types';
 import { processAsyncThunkError } from '#/shared/lib/redux/processAsyncThunkError';
 import { ThunkConfig } from '#/shared/types/Redux';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { convertTimestamp } from '#/shared/lib/date';
 
 export const fetchArticleById = createAsyncThunk<
     ArticleResponse,
@@ -15,7 +16,16 @@ export const fetchArticleById = createAsyncThunk<
             const response = await api.get<ArticleResponse>(
                 `/articles/${articleId}`,
             );
-            return response.data;
+            const convertedData = {
+                ...response.data.data,
+                createdAt: convertTimestamp(
+                    Number(response.data.data.createdAt),
+                ),
+            };
+            return {
+                data: convertedData,
+                readonly: response.data.readonly,
+            };
         } catch (error: unknown) {
             return processAsyncThunkError(error, rejectWithValue);
         }

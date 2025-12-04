@@ -5,7 +5,7 @@
   "editorHeading": "Редактирование статьи",
   "tags": "Теги",
   "tagsInputPlaceholder": "Вводите теги через любой разделитель",
-  "textBlockLabel": "Текст",
+  "textBlockLabel": "Описание блока",
   "imageLink": "Ссылка на изображение",
   "imageLingPlaceholder": "Введите ссылку на изображение",
   "imageDescription": "Подпись к изображению",
@@ -20,5 +20,12 @@
   "addBlockBtn": "Добавить блок",
   "blockType": "Тип блока",
   "codeBlockLabel": "Код",
-  "imageblockLabel": "Изображение"
+  "imageblockLabel": "Изображение",
+  "codeBlockTitlePlaceholder": "Введите описание блока кода",
+  "codeBlockTitle": "Описание блока",
+  "codeBlockContentLabel": "Содержание блока",
+  "codeBlockContentPlaceholder": "Введите код",
+  "commentsHeading": "Комментарии",
+  "noComments": "Комментариев нет",
+  "authoToComment": "Авторизуйтесь для комментирования"
 }

@@ -16,5 +16,6 @@
   "dropPhotoUpdate": "or drag it here",
   "update_photo": "Or upload a photo",
   "image": "Enter link",
-  "image_alert": "In demo mode, photo uploading is not available"
+  "image_alert": "In demo mode, photo uploading is not available",
+  "goToProfilePage": "Go to profile"
 }

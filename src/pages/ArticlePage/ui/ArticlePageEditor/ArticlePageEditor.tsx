@@ -1,7 +1,7 @@
 import { getArticleData, getArticleForm } from '../../model/selectors';
 import { useAppSelector } from '#/shared/lib/hooks/reduxHooks';
 import { ArticlePageHeaderEditor } from '../ArticlePageHeader/ArticlePageHeaderEditor';
-import PageLoader from '#/widgets/PageLoader';
+import PageLoader from '#/shared/ui/PageLoader';
 import { Heading } from '#/shared/ui/Heading/Heading';
 import { useTranslation } from 'react-i18next';
 import classes from '../ArticlePage.module.scss';

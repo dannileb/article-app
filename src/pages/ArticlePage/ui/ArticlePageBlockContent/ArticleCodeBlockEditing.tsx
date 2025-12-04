@@ -23,13 +23,15 @@ export const ArticleCodeBlockEditing = ({
             )}
         >
             <Input
-                label={t('textBlockLabel')}
+                label={t('codeBlockTitle')}
+                placeholder={t('codeBlockTitlePlaceholder')}
                 value={block.title}
                 onChange={handleChangeBlockTitle}
             />
             <TextArea
                 view="code"
-                label={t('blockContentLabel')}
+                label={t('codeBlockContentLabel')}
+                placeholder={t('codeBlockContentPlaceholder')}
                 value={block.blockContent}
                 onChange={handleChangeContent}
             />

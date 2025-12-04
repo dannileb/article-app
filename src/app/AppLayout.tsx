@@ -1,7 +1,7 @@
 import { Outlet, useNavigation } from 'react-router';
 import { NavBar } from '#/widgets/NavBar';
 import { SideBar } from '#/widgets/SideBar';
-import PageLoader from '#/widgets/PageLoader';
+import PageLoader from '#/shared/ui/PageLoader';
 import { Suspense, useEffect } from 'react';
 import { useAppDispatch } from '#/shared/lib/hooks/reduxHooks';
 import { getUserAuth } from '#/entities/User';

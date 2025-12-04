@@ -15,5 +15,8 @@
   "header_login_text": "Log in",
   "profile_text": "Profile",
   "navBarLabel-profile": "Profile",
-  "reloadBtnText": "Reload"
+  "reloadBtnText": "Reload",
+  "commentInputPlaceholder": "",
+  "commentInputLabel": "Comment",
+  "author": "Author"
 }

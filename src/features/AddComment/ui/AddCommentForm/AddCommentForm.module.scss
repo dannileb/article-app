@@ -1,0 +1,15 @@
+.addComnnetForm {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.addComnnetFormBody {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.sendButton {
+    align-self: center;
+}

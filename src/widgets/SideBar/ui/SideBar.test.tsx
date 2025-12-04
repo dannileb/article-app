@@ -8,7 +8,7 @@ import { fireEvent, screen } from '@testing-library/react';
 const initialState: DeepPartial<StateSchema> = {
     user: {
         authData: {
-            id: 1,
+            id: '1',
             username: 'test',
         },
     },

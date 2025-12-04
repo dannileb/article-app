@@ -6,7 +6,7 @@ describe('getUser.test', () => {
         const state: DeepPartial<StateSchema> = {
             user: {
                 authData: {
-                    id: 1,
+                    id: '1',
                     username: 'test',
                     role: 'test',
                 },
@@ -15,7 +15,7 @@ describe('getUser.test', () => {
         };
         const { authData, isLoading } = getUser(state as StateSchema);
         expect(isLoading).toBe(true);
-        expect(authData?.id).toBe(1);
+        expect(authData?.id).toBe('1');
         expect(authData?.username).toBe('test');
         expect(authData?.role).toBe('test');
     });

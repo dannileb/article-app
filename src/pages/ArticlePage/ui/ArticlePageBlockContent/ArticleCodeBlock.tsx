@@ -12,15 +12,19 @@ export const ArticleCodeBlock = ({ block }: ArticleBlockProps) => {
                 classes.blockWrapper_code,
             )}
         >
-            <CopyButton
-                view="clear"
-                className={classes.copyButton}
-                copyingText={block.blockContent}
-            />
-            {block.title && (
-                <Text view="secondary" size="s" className={classes.codeTitle}>
-                    {block.title}
-                </Text>
+            {block.title ? (
+                <div className={classes.codeTitleWrapper}>
+                    <Text view="secondary" size="s">
+                        {block.title}
+                    </Text>
+                    <CopyButton view="clear" copyingText={block.blockContent} />
+                </div>
+            ) : (
+                <CopyButton
+                    view="clear"
+                    className={classes.copyButton_absolute}
+                    copyingText={block.blockContent}
+                />
             )}
             <pre>
                 <code>{block.blockContent}</code>

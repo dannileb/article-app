@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import {
     ChangeEventHandler,
+    ComponentProps,
     InputHTMLAttributes,
     memo,
     useId,
@@ -8,7 +9,11 @@ import {
 } from 'react';
 import classes from './Input.module.scss';
 import { Button } from '#/shared/ui/Button/Button';
-import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons';
+import {
+    EyeInvisibleOutlined,
+    EyeOutlined,
+    SendOutlined,
+} from '@ant-design/icons';
 
 type HTMLInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'>;
 
@@ -30,6 +35,12 @@ export interface InputProps extends HTMLInputProps {
     onChange?: (value: string) => void;
     /** Обязательное поле */
     required?: boolean;
+    /** Кнопка действия */
+    withActionButton?: boolean;
+    /** Иконка действия */
+    actionButtonIcon?: React.ReactNode;
+    /** Обработчик действия */
+    onActionButtonClick?: ComponentProps<typeof Button>['onClick'];
 }
 
 const InputInner = ({
@@ -41,6 +52,9 @@ const InputInner = ({
     required,
     view = 'primary',
     form = 'default',
+    withActionButton,
+    onActionButtonClick,
+    actionButtonIcon,
     ...props
 }: InputProps) => {
     const labelId = useId();
@@ -82,18 +96,28 @@ const InputInner = ({
                     {...props}
                     className={classes.input}
                 />
-                {type === 'password' && (
+                {withActionButton ? (
                     <Button
-                        className={classes.inputPasswordButton}
+                        className={classes.inputActionButton}
                         view="compact"
-                        onClick={handleChangePasswordVisibility}
+                        onClick={onActionButtonClick}
                     >
-                        {typeLocal === 'password' ? (
-                            <EyeOutlined />
-                        ) : (
-                            <EyeInvisibleOutlined />
-                        )}
+                        {actionButtonIcon ?? <SendOutlined />}
                     </Button>
+                ) : (
+                    type === 'password' && (
+                        <Button
+                            className={classes.inputActionButton}
+                            view="compact"
+                            onClick={handleChangePasswordVisibility}
+                        >
+                            {typeLocal === 'password' ? (
+                                <EyeOutlined />
+                            ) : (
+                                <EyeInvisibleOutlined />
+                            )}
+                        </Button>
+                    )
                 )}
             </div>
         </label>

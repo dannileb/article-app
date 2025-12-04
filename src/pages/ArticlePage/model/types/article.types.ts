@@ -1,5 +1,3 @@
-import { Profile } from '#/entities/Profile';
-
 export type ArticleBlockType = 'text' | 'image' | 'code';
 
 export interface IArticleBlock {
@@ -16,11 +14,15 @@ export interface ArticleBase {
 }
 
 export interface Article extends ArticleBase {
-    id: number;
+    id: string;
     title: string;
     content: IArticleBlock[];
     createdAt: string;
-    author: Profile;
+    author: {
+        id: string;
+        username: string;
+        photo: string;
+    };
     tags: string[];
 }
 

@@ -13,7 +13,7 @@ import {
     getArticleIsEditing,
     getArticleIsLoading,
 } from '../model/selectors';
-import PageLoader from '#/widgets/PageLoader';
+import PageLoader from '#/shared/ui/PageLoader';
 import { PagePlaceholder } from '#/widgets/PagePlaceholder/ui/PagePlaceholder';
 import { useTranslation } from 'react-i18next';
 import { getUserIsAuth } from '#/entities/User';

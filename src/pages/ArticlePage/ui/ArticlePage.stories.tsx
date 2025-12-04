@@ -3,21 +3,14 @@ import type { Meta, StoryObj } from '@storybook/react';
 import ArticlePage from './ArticlePage';
 import { ReduxDecorator } from '#/shared/config/storybook/ReduxDecorator';
 import { articleReducer } from '../model/slice/articleSlice';
-import { Profile } from '#/entities/Profile';
 import { Article, ArticleBase } from '../model/types/article.types';
 
 const Component = ArticlePage;
 
-const mockAuthor: Profile = {
-    id: 1,
+const mockAuthor: Article['author'] = {
+    id: '1',
     username: 'test',
-    name: 'test',
-    surname: 'test',
     photo: 'test',
-    age: 1,
-    country: 'test',
-    city: 'test',
-    currency: 'test',
 };
 const mockArticleForm: ArticleBase = {
     title: 'Test Article',
@@ -25,7 +18,7 @@ const mockArticleForm: ArticleBase = {
     tags: ['test'],
 };
 const mockArticle: Article = {
-    id: 1,
+    id: 'test_id',
     createdAt: '2022-01-01',
     author: mockAuthor,
     ...mockArticleForm,

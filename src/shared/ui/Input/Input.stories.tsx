@@ -32,3 +32,9 @@ export const DarkPassword: Story = {
     },
     decorators: [ThemeDecorator(Theme.DARK)],
 };
+export const WithActionButton: Story = {
+    args: {
+        withActionButton: true,
+    },
+    decorators: [ThemeDecorator(Theme.DARK)],
+};

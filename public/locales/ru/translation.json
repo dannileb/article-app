@@ -16,5 +16,8 @@
   "header_login_text": "Войти",
   "profile_text": "Профиль",
   "navBarLabel-profile": "Профиль",
-  "reloadBtnText": "Перезагрузить"
+  "reloadBtnText": "Перезагрузить",
+  "commentInputPlaceholder": "Введите комментарий",
+  "commentInputLabel": "Комментарий",
+  "author": "Автор"
 }

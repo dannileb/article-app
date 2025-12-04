@@ -11,7 +11,12 @@ const mockedAxios = jest.mocked($api);
 describe('loginByUsername.test', () => {
     test('login should be successed: token saved and dispathc setAuthData have been called', async () => {
         const userPayload = {
-            user: { id: 1, username: 'test', name: 'Test User', role: 'user' },
+            user: {
+                id: '1',
+                username: 'test',
+                name: 'Test User',
+                role: 'user',
+            },
             accessToken: 'jwt-token',
         };
         mockedAxios.post.mockResolvedValue({ data: userPayload });

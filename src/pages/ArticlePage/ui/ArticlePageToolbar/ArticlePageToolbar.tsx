@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from '#/shared/lib/hooks/reduxHooks';
 import { memo, useCallback, useMemo, useState } from 'react';
 import { articleActions } from '../../model/slice/articleSlice';
 import { updateArticle } from '../../model/services/updateArticle/updateArticle';
-import { getArticleUpdateError } from '#/pages/ArticlePage/model/selectors/getArticleUpdateError';
+import { getArticleUpdateError } from '#/pages/ArticlePage/model/selectors/article/getArticleUpdateError';
 import { Text } from '#/shared/ui/Text/Text';
 
 const ArticlePageToolbarInner = () => {

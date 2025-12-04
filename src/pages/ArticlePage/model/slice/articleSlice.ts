@@ -10,7 +10,6 @@ const initialState: ArticleSchema = {
     isEditing: false,
 };
 
-// TODO: написать тесты
 export const articleSlice = createSlice({
     name: 'article',
     initialState,

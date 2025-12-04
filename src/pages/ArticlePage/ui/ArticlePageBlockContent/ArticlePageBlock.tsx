@@ -71,6 +71,9 @@ export const ArticlePageBlock = memo(
                 </div>
             );
         }
+        if (!block.title || !block.blockContent.length) {
+            return null;
+        }
         return <BlockComponent block={block} editing={editing} index={index} />;
     },
 );

@@ -17,7 +17,7 @@ describe('getUserAuth.test', () => {
 
     test('should return auth data', async () => {
         const mockUser: User = {
-            id: 1,
+            id: '1',
             username: 'test',
             role: 'test',
         };

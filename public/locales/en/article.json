@@ -4,7 +4,7 @@
   "editorHeading": "Editing an article",
   "tags": "Tags",
   "tagsInputPlaceholder": "Enter tags using any separator",
-  "textBlockLabel": "Text",
+  "textBlockLabel": "Block Description",
   "imageLink": "Image link",
   "imageLingPlaceholder": "Enter image link",
   "imageDescription": "Image caption",
@@ -17,5 +17,10 @@
   "cancel": "Cancel",
   "blockTitlePlaceholder": "Enter a block title",
   "addBlockBtn": "Add block",
-  "blockType": "Block type"
+  "blockType": "Block type",
+  "codeBlockTitlePlaceholder": "Enter a description of the code block",
+  "codeBlockContentLabel": "Block content",
+  "codeBlockContentPlaceholder": "Enter code",
+  "commentsHeading": "Comments",
+  "noComments": "No comments"
 }
