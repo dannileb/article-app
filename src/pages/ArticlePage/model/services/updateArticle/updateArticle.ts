@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { processAsyncThunkError } from '#/shared/lib/redux/processAsyncThunkError';
 import { ThunkConfig } from '#/shared/types/Redux';
 import { getArticleData, getArticleForm } from '../../selectors';
-import { Article } from '../../types/article.types';
+import { Article } from '#/entities/Article';
 
 export const updateArticle = createAsyncThunk<Article, undefined, ThunkConfig>(
     'article/updateArticle',

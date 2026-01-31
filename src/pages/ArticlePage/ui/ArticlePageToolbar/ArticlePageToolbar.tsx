@@ -1,4 +1,4 @@
-import { ArticleBlockType } from '../../model/types/article.types';
+import { ArticleBlockType } from '#/entities/Article';
 import { Button } from '#/shared/ui/Button/Button';
 import { Select } from '#/shared/ui/Select/Select';
 import { PlusOutlined } from '@ant-design/icons';

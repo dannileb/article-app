@@ -28,9 +28,7 @@ describe('fetchArticleComments.test', () => {
 
         const result = await thunk.callThunk({ articleId: 'test_id' });
 
-        expect(thunk.api.get).toHaveBeenCalledWith(
-            '/articles/test_id/comments',
-        );
+        expect(thunk.api.get).toHaveBeenCalledWith('/article/test_id/comments');
         expect(result.meta.requestStatus).toBe('fulfilled');
         expect(result.payload).toEqual({
             ...mockResponse,
@@ -50,7 +48,7 @@ describe('fetchArticleComments.test', () => {
 
         const result = await thunk.callThunk({ articleId: 'test' });
 
-        expect(thunk.api.get).toHaveBeenCalledWith('/articles/test/comments');
+        expect(thunk.api.get).toHaveBeenCalledWith('/article/test/comments');
         expect(result.meta.requestStatus).toBe('rejected');
         expect(result.payload).toEqual({ message: 'unknown' });
     });

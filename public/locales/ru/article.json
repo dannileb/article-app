@@ -27,5 +27,6 @@
   "codeBlockContentPlaceholder": "Введите код",
   "commentsHeading": "Комментарии",
   "noComments": "Комментариев нет",
-  "authoToComment": "Авторизуйтесь для комментирования"
+  "authoToComment": "Авторизуйтесь для комментирования",
+  "goBack": "Назад"
 }

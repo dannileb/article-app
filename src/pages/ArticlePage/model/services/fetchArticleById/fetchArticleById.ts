@@ -1,4 +1,4 @@
-import { ArticleResponse } from '../../types/article.types';
+import { ArticleResponse } from '#/entities/Article';
 import { processAsyncThunkError } from '#/shared/lib/redux/processAsyncThunkError';
 import { ThunkConfig } from '#/shared/types/Redux';
 import { createAsyncThunk } from '@reduxjs/toolkit';
@@ -14,7 +14,7 @@ export const fetchArticleById = createAsyncThunk<
         const { api } = extra;
         try {
             const response = await api.get<ArticleResponse>(
-                `/articles/${articleId}`,
+                `/article/${articleId}`,
             );
             const convertedData = {
                 ...response.data.data,

@@ -27,6 +27,10 @@ export const routerConfig = createBrowserRouter([
                 lazy: () => import('#/pages/ArticlePage'),
             },
             {
+                path: RoutePath.articles,
+                lazy: () => import('#/pages/ArticlesListPage'),
+            },
+            {
                 Component: PrivateRoutes,
             },
             {

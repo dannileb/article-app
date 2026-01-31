@@ -228,7 +228,7 @@
       "responses": [
         {
           "uuid": "c947447a-9aa1-41dd-922e-f4f1dee6c2bd",
-          "body": "{{data 'posts'}}",
+          "body": "{{~setVar 'page' (queryParam \"page\" 1)~}}\r\n{{~setVar 'limit' (queryParam \"limit\" 10)~}}\r\n{{~setVar 'all' (dataRaw \"Articles\")}}\r\n{{~setVar 'total' (len @all)~}}\r\n{{~setVar 'start' (multiply (subtract @page 1) @limit)~}}\r\n{{~setVar 'end' (add @start @limit)~}}\r\n{{~setVar 'items'(slice @all @start @end)~}}\r\n{\r\n  \"page\": {{@page}},\r\n  \"limit\": {{@limit}},\r\n  \"total\": {{@total}},\r\n  \"lastPage\": {{#if (gte @end @total)}}true{{else}}false{{/if}},\r\n  \"items\": [\r\n    {{#each @items}}\r\n    {\r\n      \"id\": \"{{this.id}}\",\r\n      \"title\": \"{{this.title}}\",\r\n      \"description\": \"{{this.description}}\",\r\n      \"preview\": \"{{this.preview}}\",\r\n      \"author\": {{{stringify this.author}}},\r\n      \"createdAt\": \"{{this.createdAt}}\",\r\n      \"tags\": {{{stringify this.tags}}}\r\n    }{{#unless @last}},{{/unless}}\r\n    {{/each}}\r\n  ]\r\n}\r\n",
           "latency": 0,
           "statusCode": 200,
           "label": "Success",
@@ -238,41 +238,9 @@
               "value": "application/json"
             }
           ],
-          "bodyType": "DATABUCKET",
-          "filePath": "",
-          "databucketID": "posts",
-          "sendFileAsBody": false,
-          "rules": [
-            {
-              "target": "header",
-              "modifier": "Authorization",
-              "value": "^Bearer .+",
-              "invert": false,
-              "operator": "regex"
-            }
-          ],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false,
-          "crudKey": "id",
-          "callbacks": []
-        },
-        {
-          "uuid": "f1ecab98-1fbf-4ab4-bb31-ba928459ba02",
-          "body": "{\n  \"message\": \"Authentication required\"\n}",
-          "latency": 0,
-          "statusCode": 401,
-          "label": "Unauthorized",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
           "bodyType": "INLINE",
           "filePath": "",
-          "databucketID": "",
+          "databucketID": "posts",
           "sendFileAsBody": false,
           "rules": [],
           "rulesOperator": "OR",
@@ -292,7 +260,7 @@
       "type": "http",
       "documentation": "Get post by ID",
       "method": "get",
-      "endpoint": "articles/:id",
+      "endpoint": "article/:id",
       "responses": [
         {
           "uuid": "252384aa-a440-42d1-a9f5-49ab16a2c16a",
@@ -654,7 +622,7 @@
               "target": "header",
               "modifier": "Authorization",
               "value": "^Bearer .+",
-              "invert": false,
+              "invert": true,
               "operator": "regex"
             }
           ],
@@ -715,8 +683,8 @@
           "sendFileAsBody": false,
           "rules": [
             {
-              "target": "data_bucket",
-              "modifier": "Profiles.{{urlParam 'id'}}",
+              "target": "templating",
+              "modifier": "{{find (dataRaw 'Profiles') (object id=(urlParam 'id'))}}",
               "value": "",
               "invert": false,
               "operator": "null"
@@ -731,7 +699,7 @@
         },
         {
           "uuid": "efc58b80-e4e5-46ad-a82b-701bdbbaefa5",
-          "body": "{{~#if (bodyRaw 'title')~}}\r\n{{setData 'set' 'articles' (concat (urlParam 'id') '.title') (bodyRaw 'title')}}\r\n{{~/if~}}\r\n{{~#if (bodyRaw 'name')~}}\r\n{{setData 'set' 'profiles' (concat (urlParam 'id') '.name') (bodyRaw 'name')}}\r\n{{~/if~}}\r\n{{~#if (bodyRaw 'surname')~}}\r\n{{setData 'set' 'profiles' (concat (urlParam 'id') '.surname') (bodyRaw 'surname')}}\r\n{{~/if~}}\r\n{{~#if (bodyRaw 'photo')~}}\r\n{{setData 'set' 'profiles' (concat (urlParam 'id') '.photo') (bodyRaw 'photo')}}\r\n{{~/if~}}\r\n{{~#if (bodyRaw 'age')~}}\r\n{{setData 'set' 'profiles' (concat (urlParam 'id') '.age') (bodyRaw 'age')}}\r\n{{~/if~}}\r\n{{~#if (bodyRaw 'country')~}}\r\n{{setData 'set' 'profiles' (concat (urlParam 'id') '.country') (bodyRaw 'country')}}\r\n{{~/if~}}\r\n{{~#if (bodyRaw 'city')~}}\r\n{{setData 'set' 'profiles' (concat (urlParam 'id') '.city') (bodyRaw 'city')}}\r\n{{~/if~}}\r\n{{~#if (bodyRaw 'currency')~}}\r\n{{setData 'set' 'profiles' (concat (urlParam 'id') '.currency') (bodyRaw 'currency')}}\r\n{{~/if~}}\r\n{{{stringify (dataRaw 'profiles' (urlParam 'id'))}}}",
+          "body": "{{#each (dataRaw 'profiles')}}\r\n  {{#if (eq this.id (urlParam 'id'))}}\r\n    {{~#if (bodyRaw 'name')~}}\r\n    {{setData 'set' 'profiles' (concat @index '.name') (bodyRaw 'name')}}\r\n    {{~/if~}}\r\n    {{~#if (bodyRaw 'surname')~}}\r\n    {{setData 'set' 'profiles' (concat @index '.surname') (bodyRaw 'surname')}}\r\n    {{~/if~}}\r\n    {{~#if (bodyRaw 'photo')~}}\r\n    {{setData 'set' 'profiles' (concat @index '.photo') (bodyRaw 'photo')}}\r\n    {{~/if~}}\r\n    {{~#if (bodyRaw 'age')~}}\r\n    {{setData 'set' 'profiles' (concat @index '.age') (bodyRaw 'age')}}\r\n    {{~/if~}}\r\n    {{~#if (bodyRaw 'country')~}}\r\n    {{setData 'set' 'profiles' (concat @index '.country') (bodyRaw 'country')}}\r\n    {{~/if~}}\r\n    {{~#if (bodyRaw 'city')~}}\r\n    {{setData 'set' 'profiles' (concat @index '.city') (bodyRaw 'city')}}\r\n    {{~/if~}}\r\n    {{~#if (bodyRaw 'currency')~}}\r\n    {{setData 'set' 'profiles' (concat @index '.currency') (bodyRaw 'currency')}}\r\n    {{~/if~}}\r\n  {{/if}}\r\n{{/each}}\r\n{{{stringify  (find (dataRaw 'profiles') (object id=(urlParam 'id')))}}}",
           "latency": 0,
           "statusCode": 200,
           "label": "",
@@ -794,7 +762,7 @@
               "target": "header",
               "modifier": "Authorization",
               "value": "^Bearer .+",
-              "invert": false,
+              "invert": true,
               "operator": "regex"
             }
           ],
@@ -823,11 +791,11 @@
           "sendFileAsBody": false,
           "rules": [
             {
-              "target": "params",
-              "modifier": "id",
+              "target": "templating",
+              "modifier": "(find (dataRaw 'Articles') (object id=(urlParam 'id')))).author.id",
               "value": "{{jwtPayload (header 'Authorization') 'id'}}",
-              "invert": true,
-              "operator": "equals"
+              "invert": false,
+              "operator": "null"
             }
           ],
           "rulesOperator": "OR",
@@ -855,8 +823,8 @@
           "sendFileAsBody": false,
           "rules": [
             {
-              "target": "data_bucket",
-              "modifier": "Articles.{{urlParam 'id'}}",
+              "target": "templating",
+              "modifier": "{{find (dataRaw 'Articles') (object id=(urlParam 'id'))}}",
               "value": "",
               "invert": false,
               "operator": "null"
@@ -871,7 +839,7 @@
         },
         {
           "uuid": "1aa87345-4d01-4673-8c8f-8181d2e587ed",
-          "body": "{{~#if (bodyRaw 'title')~}}\n{{setData 'set' 'articles' (concat (urlParam 'id') '.title') (bodyRaw 'title')}}\n{{~/if~}}\n{{~#if (bodyRaw 'tags')~}}\n{{setData 'set' 'articles' (concat (urlParam 'id') '.tags') (bodyRaw 'tags')}}\n{{~/if~}}\n{{~#if (bodyRaw 'content')~}}\n{{setData 'set' 'articles' (concat (urlParam 'id') '.content') (array)}}\n{{~#each (bodyRaw 'content') as |block|~}}\n  {{~#if block.id~}}\n  {{setData 'push' 'articles' (concat (urlParam 'id') '.content') (block)}}\n  {{~else~}}\n  {{setData 'push' 'articles' (concat (urlParam 'id') '.content') (objectMerge (object id=(faker 'string.uuid')) (block))}}\n  {{~/if~}}\n{{~/each~}}\n{{~/if~}}\n{{{stringify (dataRaw 'articles' (urlParam 'id'))}}}",
+          "body": "{{#each (dataRaw 'articles')}}\n  {{~setVar 'articleIndex' @index~}}\n  {{#if (eq this.id (urlParam 'id'))}}\n    {{~#if (bodyRaw 'title')~}}\n      {{setData 'set' 'articles' @articleIndex '.title') (bodyRaw 'title')}}\n      {{~/if~}}\n      {{~#if (bodyRaw 'tags')~}}\n      {{setData 'set' 'articles' @articleIndex '.tags') (bodyRaw 'tags')}}\n      {{~/if~}}\n      {{~#if (bodyRaw 'content')~}}\n      {{setData 'set' 'articles' @articleIndex '.content') (array)}}\n      {{~#each (bodyRaw 'content') as |block|~}}\n        {{~#if block.id~}}\n        {{setData 'push' 'articles' @articleIndex '.content') (block)}}\n        {{~else~}}\n        {{setData 'push' 'articles' @articleIndex '.content') (objectMerge (object id=(faker 'string.uuid')) (block))}}\n        {{~/if~}}\n      {{~/each~}}\n    {{~/if~}}\n  {{/if}}\n{{/each}}\n{{{stringify (dataRaw 'articles' (urlParam 'id'))}}}",
           "latency": 0,
           "statusCode": 200,
           "label": "",
@@ -947,7 +915,7 @@
       "type": "http",
       "documentation": "Get article comments by ID",
       "method": "get",
-      "endpoint": "articles/:id/comments",
+      "endpoint": "article/:id/comments",
       "responses": [
         {
           "uuid": "ba64f834-4224-47ac-b6b4-67a737b56629",
@@ -1015,7 +983,7 @@
       "type": "http",
       "documentation": "Get article comments by ID",
       "method": "post",
-      "endpoint": "articles/:id/comments",
+      "endpoint": "article/:id/comments",
       "responses": [
         {
           "uuid": "89a60b4e-75fc-4355-8d57-aacb804e2594",
@@ -1215,7 +1183,7 @@
       "id": "posts",
       "name": "Articles",
       "documentation": "List of blog posts",
-      "value": "{{~setVar 'profileTest' (find (dataRaw 'profiles') (object id=\"test_profile_ID\"))~}}\r\n[\r\n  {\r\n    \"id\":  \"test_article_ID\",\r\n    \"title\": \"{{faker 'lorem.sentence'}}\",\r\n    \"content\": [\r\n      {\r\n        \"id\": \"{{uuid}}\",\r\n        \"type\": \"text\",\r\n        \"title\": \"{{faker 'lorem.sentence'}}\",\r\n        \"blockContent\": \"{{faker 'lorem.paragraph' 3}}\"\r\n      },\r\n      {\r\n        \"id\": \"{{uuid}}\",\r\n        \"type\": \"code\",\r\n        \"title\": \"{{faker 'lorem.sentence'}}\",\r\n        \"blockContent\": \"print(\\\"Hello, world!\\\")\\nfor i in range(10):\\n  print(i)\\n\"\r\n      },\r\n      {\r\n        \"id\": \"{{faker 'string.uuid'}}\",\r\n        \"type\": \"image\",\r\n        \"title\": \"{{faker 'lorem.sentence'}}\",\r\n        \"blockContent\": \"{{faker 'image.avatarGitHub'}}\"\r\n      }\r\n    ],\r\n    \"author\": {\r\n      \"id\": \"{{@profileTest.id}}\",\r\n      \"username\": \"{{@profileTest.username}}\"\r\n    },\r\n    \"createdAt\": \"{{dateFormat (faker 'date.past') 'T'}}\",\r\n    \"tags\": [\"{{faker 'word.noun'}}\", \"{{faker 'word.verb'}}\"]\r\n  },\r\n  {{#repeat 20}}\r\n  {{~setVar 'profile' (oneOf (dataRaw 'Profiles'))~}}\r\n  {\r\n    \"id\":  \"{{uuid}}\",\r\n    \"title\": \"{{faker 'lorem.sentence'}}\",\r\n    \"content\": [\r\n      {\r\n        \"id\": \"{{uuid}}\",\r\n        \"type\": \"text\",\r\n        \"title\": \"{{faker 'lorem.sentence'}}\",\r\n        \"blockContent\": \"{{faker 'lorem.paragraph' 3}}\"\r\n      },\r\n      {\r\n        \"id\": \"{{uuid}}\",\r\n        \"type\": \"code\",\r\n        \"title\": \"{{faker 'lorem.sentence'}}\",\r\n        \"blockContent\": \"print(\\\"Hello, world!\\\")\\nfor i in range(10):\\n  print(i)\\n\"\r\n      },\r\n      {\r\n        \"id\": \"{{faker 'string.uuid'}}\",\r\n        \"type\": \"image\",\r\n        \"title\": \"{{faker 'lorem.sentence'}}\",\r\n        \"blockContent\": \"{{faker 'image.avatarGitHub'}}\"\r\n      }\r\n    ],\r\n    \"author\": {\r\n      \"id\": \"{{@profile.id}}\",\r\n      \"username\": \"{{@profile.username}}\"\r\n    },\r\n    \"createdAt\": \"{{dateFormat (faker 'date.past') 'T'}}\",\r\n    \"tags\": [\"{{faker 'word.noun'}}\", \"{{faker 'word.verb'}}\"]\r\n  }\r\n  {{#unless @last}},{{/unless}}\r\n  {{/repeat}}\r\n]\r\n"
+      "value": "{{~setVar 'profileTest' (find (dataRaw 'profiles') (object id=\"test_profile_ID\"))~}}\r\n[\r\n  {\r\n    \"id\":  \"test_article_ID\",\r\n    \"title\": \"{{faker 'lorem.sentence'}}\",\r\n    \"description\": \"{{faker 'lorem.paragraph' 3}}\",\r\n    \"preview\": \"{{faker 'image.avatarGitHub'}}\",\r\n    \"content\": [\r\n      {\r\n        \"id\": \"{{uuid}}\",\r\n        \"type\": \"text\",\r\n        \"title\": \"{{faker 'lorem.sentence'}}\",\r\n        \"blockContent\": \"{{faker 'lorem.paragraph' 3}}\"\r\n      },\r\n      {\r\n        \"id\": \"{{uuid}}\",\r\n        \"type\": \"code\",\r\n        \"title\": \"{{faker 'lorem.sentence'}}\",\r\n        \"blockContent\": \"print(\\\"Hello, world!\\\")\\nfor i in range(10):\\n  print(i)\\n\"\r\n      },\r\n      {\r\n        \"id\": \"{{faker 'string.uuid'}}\",\r\n        \"type\": \"image\",\r\n        \"title\": \"{{faker 'lorem.sentence'}}\",\r\n        \"blockContent\": \"{{faker 'image.avatarGitHub'}}\"\r\n      }\r\n    ],\r\n    \"author\": {\r\n      \"id\": \"{{@profileTest.id}}\",\r\n      \"username\": \"{{@profileTest.username}}\"\r\n    },\r\n    \"createdAt\": \"{{dateFormat (faker 'date.past') 'T'}}\",\r\n    \"tags\": [\"{{faker 'word.noun'}}\", \"{{faker 'word.verb'}}\"]\r\n  },\r\n  {{#repeat 50}}\r\n  {{~setVar 'profile' (oneOf (dataRaw 'Profiles'))~}}\r\n  {\r\n    \"id\":  \"{{uuid}}\",\r\n    \"title\": \"{{faker 'lorem.sentence'}}\",\r\n    \"description\": \"{{faker 'lorem.paragraph' 3}}\",\r\n    \"preview\": \"{{faker 'image.avatarGitHub'}}\",\r\n    \"content\": [\r\n      {\r\n        \"id\": \"{{uuid}}\",\r\n        \"type\": \"text\",\r\n        \"title\": \"{{faker 'lorem.sentence'}}\",\r\n        \"blockContent\": \"{{faker 'lorem.paragraph' 3}}\"\r\n      },\r\n      {\r\n        \"id\": \"{{uuid}}\",\r\n        \"type\": \"code\",\r\n        \"title\": \"{{faker 'lorem.sentence'}}\",\r\n        \"blockContent\": \"print(\\\"Hello, world!\\\")\\nfor i in range(10):\\n  print(i)\\n\"\r\n      },\r\n      {\r\n        \"id\": \"{{faker 'string.uuid'}}\",\r\n        \"type\": \"image\",\r\n        \"title\": \"{{faker 'lorem.sentence'}}\",\r\n        \"blockContent\": \"{{faker 'image.avatarGitHub'}}\"\r\n      }\r\n    ],\r\n    \"author\": {\r\n      \"id\": \"{{@profile.id}}\",\r\n      \"username\": \"{{@profile.username}}\"\r\n    },\r\n    \"createdAt\": \"{{dateFormat (faker 'date.past') 'T'}}\",\r\n    \"tags\": [\"{{faker 'word.noun'}}\", \"{{faker 'word.verb'}}\"]\r\n  }\r\n  {{#unless @last}},{{/unless}}\r\n  {{/repeat}}\r\n]\r\n"
     },
     {
       "uuid": "8dc767de-f4be-4c10-8bcc-c5d8cd4f0fef",

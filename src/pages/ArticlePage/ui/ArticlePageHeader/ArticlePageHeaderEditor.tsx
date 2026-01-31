@@ -1,6 +1,6 @@
 import { Input } from '#/shared/ui/Input/Input';
 import { useTranslation } from 'react-i18next';
-import { ArticleBase } from '../../model/types/article.types';
+import { ArticleBase } from '#/entities/Article';
 import { useArticlePageEditor } from '../useArticlePageEditor';
 import { Tag } from '#/shared/ui/Tag/Tag';
 import classes from './ArticlePageHeader.module.scss';

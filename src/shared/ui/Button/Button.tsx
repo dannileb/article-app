@@ -3,12 +3,13 @@ import classes from './Button.module.scss';
 import classNames from 'classnames';
 import { LoadingOutlined } from '@ant-design/icons';
 
-export interface ButtonProps
-    extends PropsWithChildren<ButtonHTMLAttributes<HTMLButtonElement>> {
+export interface ButtonProps extends PropsWithChildren<
+    ButtonHTMLAttributes<HTMLButtonElement>
+> {
     view?: 'clear' | 'primary' | 'secondary' | 'compact' | 'link';
     form?: 'default' | 'brick' | 'rounded';
     icon?: React.ReactNode;
-    iconPosition?: 'left' | 'right';
+    // iconPosition?: 'left' | 'right';
     isLoading?: boolean;
 }
 

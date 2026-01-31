@@ -19,5 +19,6 @@
   "reloadBtnText": "Перезагрузить",
   "commentInputPlaceholder": "Введите комментарий",
   "commentInputLabel": "Комментарий",
-  "author": "Автор"
+  "author": "Автор",
+  "navBarLabel-articles": "Статьи"
 }

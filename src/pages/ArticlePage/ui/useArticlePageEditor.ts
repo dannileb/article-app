@@ -1,7 +1,7 @@
 import { articleActions } from '../model/slice/articleSlice';
 import { useAppDispatch } from '#/shared/lib/hooks/reduxHooks';
 import { useCallback } from 'react';
-import { ArticleBlockType } from '../model/types/article.types';
+import { ArticleBlockType } from '#/entities/Article';
 
 export const useArticlePageEditor = (blockIndex?: number) => {
     const dispatch = useAppDispatch();

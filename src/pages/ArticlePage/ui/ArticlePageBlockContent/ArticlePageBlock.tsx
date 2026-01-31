@@ -1,8 +1,5 @@
 import { memo, useCallback } from 'react';
-import {
-    ArticleBlockType,
-    IArticleBlock,
-} from '../../model/types/article.types';
+import { ArticleBlockType, IArticleBlock } from '#/entities/Article';
 import { ArticleTextBlock } from './ArticleTextBlock';
 import { ArticleImageBlock } from './ArticleImageBlock';
 import { ArticleCodeBlock } from './ArticleCodeBlock';

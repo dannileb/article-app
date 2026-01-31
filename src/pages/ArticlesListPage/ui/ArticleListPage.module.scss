@@ -1,0 +1,28 @@
+.pageContainer {
+    height: 100%;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.cardList {
+    margin-top: 16px;
+    display: flex;
+    gap: 16px;
+}
+
+.cardList_grid {
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.cardList_list {
+    flex-direction: column;
+}
+
+.loader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

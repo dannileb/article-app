@@ -5,6 +5,7 @@ import { ThemeSwitcher } from '#/widgets/ThemeSwitcher';
 import { LangSwitcher } from '#/widgets/LangSwitcher/ui/LangSwitcher';
 import { Button } from '#/shared/ui/Button/Button';
 import {
+    ContainerOutlined,
     HomeOutlined,
     InfoCircleOutlined,
     LeftOutlined,
@@ -19,7 +20,7 @@ import { getUser } from '#/entities/User';
 import { generatePath } from 'react-router';
 
 export const SideBar = () => {
-    const { t } = useTranslation();
+    const { t } = useTranslation('translation');
     const { authData } = useAppSelector(getUser);
 
     const [collapsed, setCollapsed] = useState<boolean>(false);
@@ -35,6 +36,11 @@ export const SideBar = () => {
                 text: t('navBarLabel-about'),
                 to: RoutePath.about,
                 icon: <InfoCircleOutlined />,
+            },
+            {
+                text: t('navBarLabel-articles'),
+                to: RoutePath.articles,
+                icon: <ContainerOutlined />,
             },
         ];
         if (authData) {

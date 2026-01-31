@@ -12,7 +12,7 @@ const meta = {
     tags: ['autodocs'],
     args: {
         entityId: '1',
-        entityType: 'articles',
+        entityType: 'article',
     },
     decorators: [
         ReduxDecorator(

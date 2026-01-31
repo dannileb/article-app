@@ -20,7 +20,7 @@ const reducersList = {
 
 interface AddCommentFormProps {
     entityId: string;
-    entityType: 'articles';
+    entityType: 'article';
     onSendComment?: (payload: CommentType | ResponseError | undefined) => void;
 }
 

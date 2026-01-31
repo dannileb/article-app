@@ -1,5 +1,5 @@
 import { ArticlePageBlock } from '../ArticlePageBlockContent/ArticlePageBlock';
-import { Article } from '../../model/types/article.types';
+import { Article } from '#/entities/Article';
 import { ArticlePageHeader } from '../ArticlePageHeader/ArticlePageHeader';
 import classes from '../ArticlePage.module.scss';
 import { useAppDispatch, useAppSelector } from '#/shared/lib/hooks/reduxHooks';
@@ -13,6 +13,10 @@ import { useTranslation } from 'react-i18next';
 import { ResponseError } from '#/shared/types/Axios';
 import { CommentType } from '#/entities/Comment';
 import { articleCommentsActions } from '../../model/slice/articleCommentSlice';
+import { Button } from '#/shared/ui/Button/Button';
+import { ArrowLeftOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router';
+import { RoutePath } from '#/shared/config/routeConfig/routeConfig';
 
 interface ArticlePageViewerProps {
     articleData: Article;
@@ -21,6 +25,7 @@ interface ArticlePageViewerProps {
 export const ArticlePageViewer = ({ articleData }: ArticlePageViewerProps) => {
     const { t } = useTranslation('article');
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
     const readonly = useAppSelector(getArticleIsReadonly);
     const isAuth = useAppSelector(getUserIsAuth);
@@ -36,6 +41,16 @@ export const ArticlePageViewer = ({ articleData }: ArticlePageViewerProps) => {
 
     return (
         <div className={classes.contentWrapper}>
+            <Button
+                view="clear"
+                icon={<ArrowLeftOutlined />}
+                className={classes.backButton}
+                onClick={() => {
+                    navigate(RoutePath.articles);
+                }}
+            >
+                {t('goBack')}
+            </Button>
             <ArticlePageHeader articleData={articleData} readonly={readonly} />
             <div className={classes.contentWrapper}>
                 {articleData.content.map((block, index) => (
@@ -46,7 +61,7 @@ export const ArticlePageViewer = ({ articleData }: ArticlePageViewerProps) => {
                 <Suspense fallback={<></>}>
                     <AddCommentForm
                         entityId={articleData.id}
-                        entityType="articles"
+                        entityType="article"
                         onSendComment={handleSendComment}
                     />
                 </Suspense>

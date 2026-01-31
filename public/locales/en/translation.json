@@ -18,5 +18,6 @@
   "reloadBtnText": "Reload",
   "commentInputPlaceholder": "",
   "commentInputLabel": "Comment",
-  "author": "Author"
+  "author": "Author",
+  "navBarLabel-articles": "Articles"
 }

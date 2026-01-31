@@ -3,7 +3,7 @@ import {
     ArticleBase,
     ArticleBlockType,
     ArticleSchema,
-} from '../types/article.types';
+} from '#/entities/Article';
 import { DeepPartial } from '#/shared/types/DeepPartial.types';
 import { articleActions, articleReducer } from './articleSlice';
 

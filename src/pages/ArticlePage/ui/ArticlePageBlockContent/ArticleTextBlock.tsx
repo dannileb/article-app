@@ -1,7 +1,7 @@
 import classes from './ArticlePageBlock.module.scss';
 import { Heading } from '#/shared/ui/Heading/Heading';
 import { Text } from '#/shared/ui/Text/Text';
-import { IArticleBlock } from '../../model/types/article.types';
+import { IArticleBlock } from '#/entities/Article';
 
 export const ArticleTextBlock = ({ block }: { block: IArticleBlock }) => {
     return (

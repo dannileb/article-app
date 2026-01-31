@@ -1,7 +1,7 @@
 import { updateArticle } from './updateArticle';
 import { TestAsyncThunk } from '#/shared/lib/tests/TestAsyncThunk';
 import { $api } from '#/shared/api/api';
-import { Article, ArticleBase } from '../../types/article.types';
+import { Article, ArticleBase } from '#/entities/Article';
 
 jest.mock('#/shared/api/api');
 const mockedAxios = jest.mocked($api);

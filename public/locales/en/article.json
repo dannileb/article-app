@@ -22,5 +22,6 @@
   "codeBlockContentLabel": "Block content",
   "codeBlockContentPlaceholder": "Enter code",
   "commentsHeading": "Comments",
-  "noComments": "No comments"
+  "noComments": "No comments",
+  "goBack": "Back"
 }

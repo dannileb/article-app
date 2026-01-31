@@ -1,6 +1,6 @@
 import { updateArticle } from '../services/updateArticle/updateArticle';
 import { fetchArticleById } from '../services/fetchArticleById/fetchArticleById';
-import { ArticleBlockType, ArticleSchema } from '../types/article.types';
+import { ArticleBlockType, ArticleSchema } from '#/entities/Article';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { userActions } from '#/entities/User';
 

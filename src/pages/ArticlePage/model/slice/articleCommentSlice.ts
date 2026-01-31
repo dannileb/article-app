@@ -9,19 +9,21 @@ import {
 
 const adapter = createEntityAdapter<CommentType>();
 
+const initialState = adapter.getInitialState<ArticleCommentsSchema>({
+    isLoading: false,
+    error: undefined,
+    totalCount: 0,
+    ids: [],
+    entities: {},
+});
+
 export const getArticleComments = adapter.getSelectors<StateSchema>(
-    (state) => state.articleComments || adapter.getInitialState(),
+    (state) => state.articleComments || initialState,
 );
 
 export const articleCommentsSlice = createSlice({
     name: 'articleComments',
-    initialState: adapter.getInitialState<ArticleCommentsSchema>({
-        isLoading: false,
-        error: undefined,
-        totalCount: 0,
-        ids: [],
-        entities: {},
-    }),
+    initialState,
     reducers: {
         addComment(state, action: PayloadAction<CommentType>) {
             const entity = action.payload;

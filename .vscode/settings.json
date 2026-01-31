@@ -58,7 +58,7 @@
       "group": "Default"
     }
   ],
-  "favorites.sortOrder": "MANUAL",
+  "favorites.sortOrder": "ASC",
   "i18n-ally.localesPaths": ["public/locales"],
   "i18n-ally.sourceLanguage": "ru",
   "i18n-ally.displayLanguage": "ru",

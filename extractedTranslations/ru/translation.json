@@ -35,6 +35,7 @@
   "loginModal_heading": "",
   "name": "",
   "navBarLabel-about": "",
+  "navBarLabel-articles": "",
   "navBarLabel-main": "",
   "navBarLabel-profile": "",
   "notFound": "",
@@ -50,6 +51,9 @@
   "saveButton": "",
   "surname": "",
   "textBlockLabel": "",
+  "translation": {
+    "navBarLabel-articles": ""
+  },
   "username": "",
   "username_alert": "",
   "Главная": "",

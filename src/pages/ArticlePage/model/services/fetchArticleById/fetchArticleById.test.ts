@@ -1,6 +1,6 @@
 import { fetchArticleById } from './fetchArticleById';
 import { TestAsyncThunk } from '#/shared/lib/tests/TestAsyncThunk';
-import { Article } from '../../types/article.types';
+import { Article } from '#/entities/Article';
 import { convertTimestamp } from '#/shared/lib/date';
 
 describe('fetchArticleById.test', () => {
@@ -27,9 +27,8 @@ describe('fetchArticleById.test', () => {
         thunk.api.get.mockReturnValue(Promise.resolve({ data: payload }));
 
         const result = await thunk.callThunk({ articleId: 'test_id' });
-        console.debug(convertTimestamp(1735678800));
 
-        expect(thunk.api.get).toHaveBeenCalledWith('/articles/test_id');
+        expect(thunk.api.get).toHaveBeenCalledWith('/article/test_id');
         expect(result.meta.requestStatus).toBe('fulfilled');
         expect(result.payload).toEqual({
             data: {
@@ -47,7 +46,7 @@ describe('fetchArticleById.test', () => {
 
         const result = await thunk.callThunk({ articleId: '1' });
 
-        expect(thunk.api.get).toHaveBeenCalledWith('/articles/1');
+        expect(thunk.api.get).toHaveBeenCalledWith('/article/1');
         expect(result.meta.requestStatus).toBe('rejected');
         expect(result.payload).toEqual({ message: 'unknown' });
     });

@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { Article } from '../../model/types/article.types';
+import { Article } from '#/entities/Article';
 import { Heading } from '#/shared/ui/Heading/Heading';
 import classes from './ArticlePageHeader.module.scss';
 import { Text } from '#/shared/ui/Text/Text';

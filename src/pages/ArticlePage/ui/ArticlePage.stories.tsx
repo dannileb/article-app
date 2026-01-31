@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import ArticlePage from './ArticlePage';
 import { ReduxDecorator } from '#/shared/config/storybook/ReduxDecorator';
 import { articleReducer } from '../model/slice/articleSlice';
-import { Article, ArticleBase } from '../model/types/article.types';
+import { Article, ArticleBase } from '#/entities/Article';
 
 const Component = ArticlePage;
 

@@ -2,7 +2,7 @@ import { useAppDispatch } from '#/shared/lib/hooks/reduxHooks';
 import { ReducersList, ReduxStoreWithManager } from '#/shared/types/Redux';
 import { useEffect } from 'react';
 import { useStore } from 'react-redux';
-
+// TODO: написать тесты на все и сторибуки
 function isKeyofRedusersList(
     key: string,
     redusersList: ReducersList,
@@ -19,7 +19,10 @@ export const useReducerManager = (
 
     useEffect(() => {
         Object.entries(redusersList).forEach(([name, reducer]) => {
-            if (isKeyofRedusersList(name, redusersList)) {
+            if (
+                isKeyofRedusersList(name, redusersList) &&
+                store.reducerManager.getReducerMap()[name] === undefined
+            ) {
                 store.reducerManager.add(name, reducer);
                 dispatch({ type: `@INIT ${name} reducer` });
             }

@@ -3,6 +3,7 @@ import { userReducer } from '#/entities/User';
 import { StateSchema } from './StateSchema';
 import { createReducerManager } from '#/app/providers/ReduxProvider/config/reducerManager';
 import { $api } from '#/shared/api/api';
+import { preserveSrollPositionReducer } from '#/features/PreserveScrollPosition';
 
 export function createReduxStore(
     initialState?: StateSchema,
@@ -11,6 +12,7 @@ export function createReduxStore(
     const rootReducers: ReducersMapObject<StateSchema> = {
         ...ascyncReducers,
         user: userReducer,
+        preserveScrollPosition: preserveSrollPositionReducer,
     };
 
     const reducerManager = createReducerManager(rootReducers);

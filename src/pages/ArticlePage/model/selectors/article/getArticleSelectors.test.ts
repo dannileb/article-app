@@ -1,7 +1,7 @@
 import { getArticleData } from './getArticleData';
 import { getArticleIsLoading } from './getArticleIsLoading';
 import { DeepPartial } from '#/shared/types/DeepPartial.types';
-import { Article, ArticleBase } from '../../types/article.types';
+import { Article, ArticleBase } from '#/entities/Article';
 import { getArticleError } from './getArticleError';
 import { getArticleIsReadonly } from './getArticleIsReadonly';
 import { getArticleForm } from './getArticleForm';

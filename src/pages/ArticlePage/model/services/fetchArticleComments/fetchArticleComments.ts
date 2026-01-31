@@ -1,8 +1,8 @@
 import { processAsyncThunkError } from '#/shared/lib/redux/processAsyncThunkError';
 import { ThunkConfig } from '#/shared/types/Redux';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { ArticleCommentsResponse } from '#/pages/ArticlePage/model/types/articleComments.types';
 import { convertTimestamp } from '#/shared/lib/date';
+import { ArticleCommentsResponse } from '../../types/articleComments.types';
 
 export const fetchArticleComments = createAsyncThunk<
     ArticleCommentsResponse,
@@ -14,7 +14,7 @@ export const fetchArticleComments = createAsyncThunk<
         const { api } = extra;
         try {
             const response = await api.get<ArticleCommentsResponse>(
-                `/articles/${articleId}/comments`,
+                `/article/${articleId}/comments`,
             );
             const adaptedData = response.data.data.map((comment) => ({
                 ...comment,

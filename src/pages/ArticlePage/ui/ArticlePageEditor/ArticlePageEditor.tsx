@@ -9,7 +9,7 @@ import { ArticlePageBlock } from '../ArticlePageBlockContent/ArticlePageBlock';
 import { Button } from '#/shared/ui/Button/Button';
 import { useCallback, useMemo, useState } from 'react';
 import { ArticlePageHeader } from '../ArticlePageHeader/ArticlePageHeader';
-import { Article } from '../../model/types/article.types';
+import { Article } from '#/entities/Article';
 import { EditOutlined, EyeOutlined } from '@ant-design/icons';
 import { ArticlePageToolbar } from '../ArticlePageToolbar/ArticlePageToolbar';
 

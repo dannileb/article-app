@@ -15,15 +15,14 @@ export interface ArticleBase {
 
 export interface Article extends ArticleBase {
     id: string;
-    title: string;
-    content: IArticleBlock[];
     createdAt: string;
+    description?: string;
+    preview?: string;
     author: {
         id: string;
         username: string;
         photo: string;
     };
-    tags: string[];
 }
 
 export interface ArticleResponse {
