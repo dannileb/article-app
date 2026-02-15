@@ -1,3 +1,9 @@
 {
-  "articlesList-heading": "Статьи"
+  "articlesList-heading": "Статьи",
+  "defalut": "По умолчанию",
+  "popular": "Сначала популярные",
+  "latest": "Сначала новые",
+  "oldest": "Сначала старые",
+  "searchKey_placeholder": "Введите название статьи для поиска",
+  "noArticles": "Статьи не найдены"
 }

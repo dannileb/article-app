@@ -1,8 +1,13 @@
 import { Article } from '#/entities/Article';
-import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
+import {
+    createEntityAdapter,
+    createSlice,
+    PayloadAction,
+} from '@reduxjs/toolkit';
 import {
     ArticlesListSchema,
     ArticlesListView,
+    ArticleSortValue,
 } from '../types/articlesList.types';
 import { ARTICLES_LIST_VIEW_KEY } from '#/shared/consts/localStorage';
 import { fetchNextArticlesListPage } from '../services/fetchNextArticlesListPage/fetchNextArticlesListPage';
@@ -32,6 +37,20 @@ function assertLocalStorageArticleView(
     }
 }
 
+const ARTICLE_SORT_VALUES: readonly ArticleSortValue[] = [
+    'latest',
+    'oldest',
+    'popular',
+    'default',
+] as const;
+
+export function isArticleSortValue(value: unknown): value is ArticleSortValue {
+    return (
+        typeof value === 'string' &&
+        ARTICLE_SORT_VALUES.includes(value as ArticleSortValue)
+    );
+}
+
 export const articlesListPageSlice = createSlice({
     name: 'articlesList',
     initialState,
@@ -40,7 +59,24 @@ export const articlesListPageSlice = createSlice({
             state.view = state.view === 'grid' ? 'list' : 'grid';
             localStorage.setItem(ARTICLES_LIST_VIEW_KEY, state.view);
         },
-        initState: (state) => {
+        initState: (
+            state,
+            {
+                payload: params,
+            }: PayloadAction<
+                | {
+                      sort?: string;
+                      searchKey?: string;
+                  }
+                | undefined
+            >,
+        ) => {
+            const { sort, searchKey } = params ?? {};
+            if (isArticleSortValue(sort)) {
+                state.sort = sort;
+            }
+            console.debug(searchKey);
+            state.searchKey = searchKey;
             try {
                 const view = localStorage.getItem(ARTICLES_LIST_VIEW_KEY);
                 assertLocalStorageArticleView(view);
@@ -57,16 +93,32 @@ export const articlesListPageSlice = createSlice({
                 state.currentPage = 1;
             }
         },
+        resetCurrentPage: (state) => {
+            state.currentPage = 1;
+        },
+        setSearchKey: (state, action: PayloadAction<string>) => {
+            state.searchKey = action.payload;
+        },
+        setSortParams: (state, action: PayloadAction<ArticleSortValue>) => {
+            state.sort = action.payload;
+        },
     },
     extraReducers: (builder) => {
         builder
-            .addCase(fetchNextArticlesListPage.pending, (state) => {
+            .addCase(fetchNextArticlesListPage.pending, (state, action) => {
                 state.isLoading = true;
+                if (action.meta.arg.replace) {
+                    adapter.removeAll(state);
+                }
             })
             .addCase(fetchNextArticlesListPage.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.lastPage = action.payload.lastPage;
-                adapter.addMany(state, action.payload.items);
+                if (action.meta.arg.replace) {
+                    adapter.setAll(state, action.payload.items);
+                } else {
+                    adapter.addMany(state, action.payload.items);
+                }
             })
             .addCase(fetchNextArticlesListPage.rejected, (state, action) => {
                 state.isLoading = false;

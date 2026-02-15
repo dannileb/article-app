@@ -38,12 +38,18 @@ describe('articlesPageSlice.test', () => {
         getItemSpy.mockReturnValue('list');
 
         const state: DeepPartial<ArticlesListSchema> = {};
+
         const newState = articlesListReducer(
             state as ArticlesListSchema,
-            articlesListActions.initState(),
+            articlesListActions.initState({
+                searchKey: 'test',
+                sort: 'latest',
+            }),
         );
         expect(newState).toEqual({
             view: 'list',
+            searchKey: 'test',
+            sort: 'latest',
             _inited: true,
         });
         expect(getItemSpy).toHaveBeenCalledWith(ARTICLES_LIST_VIEW_KEY);
@@ -58,6 +64,48 @@ describe('articlesPageSlice.test', () => {
         );
         expect(newState).toEqual({
             currentPage: 2,
+        });
+    });
+
+    it('should reset current page', () => {
+        const state: DeepPartial<ArticlesListSchema> = {
+            currentPage: 1,
+        };
+        expect(
+            articlesListReducer(
+                state as ArticlesListSchema,
+                articlesListActions.resetCurrentPage(),
+            ),
+        ).toEqual({
+            currentPage: 1,
+        });
+    });
+
+    it('should update search key', () => {
+        const state: DeepPartial<ArticlesListSchema> = {
+            searchKey: '',
+        };
+        expect(
+            articlesListReducer(
+                state as ArticlesListSchema,
+                articlesListActions.setSearchKey('test'),
+            ),
+        ).toEqual({
+            searchKey: 'test',
+        });
+    });
+
+    it('should update sort', () => {
+        const state: DeepPartial<ArticlesListSchema> = {
+            sort: 'default',
+        };
+        expect(
+            articlesListReducer(
+                state as ArticlesListSchema,
+                articlesListActions.setSortParams('latest'),
+            ),
+        ).toEqual({
+            sort: 'latest',
         });
     });
 });

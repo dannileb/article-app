@@ -16,13 +16,14 @@ export interface ArticleBase {
 export interface Article extends ArticleBase {
     id: string;
     createdAt: string;
-    description?: string;
-    preview?: string;
     author: {
         id: string;
         username: string;
         photo: string;
     };
+    description?: string;
+    preview?: string;
+    views?: number;
 }
 
 export interface ArticleResponse {

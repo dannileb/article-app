@@ -33,7 +33,9 @@ const ArticlePageToolbarInner = () => {
         dispatch(articleActions.addArticleBlock(addingBlockType));
     }, [dispatch, addingBlockType]);
 
-    const blockTypeItems = useMemo(
+    const blockTypeItems = useMemo<
+        { label: string; value: ArticleBlockType }[]
+    >(
         () => [
             {
                 label: t('textBlockLabel'),
@@ -57,10 +59,12 @@ const ArticlePageToolbarInner = () => {
                 <div className={classes.addBlockContainer}>
                     <Select
                         label={t('blockType')}
-                        value={addingBlockType}
+                        value={blockTypeItems.find(
+                            (item) => item.value === addingBlockType,
+                        )}
                         items={blockTypeItems}
                         onChange={(value) => {
-                            setAddingBlockType(value as ArticleBlockType);
+                            setAddingBlockType(value.value);
                         }}
                     />
                     <Button

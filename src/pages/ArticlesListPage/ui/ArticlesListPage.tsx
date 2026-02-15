@@ -11,7 +11,7 @@ import { useAppDispatch, useAppSelector } from '#/shared/lib/hooks/reduxHooks';
 import classes from './ArticleListPage.module.scss';
 import { Heading } from '#/shared/ui/Heading/Heading';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router';
+import { useNavigate, useSearchParams } from 'react-router';
 import { generatePath } from 'react-router';
 import { RoutePath } from '#/shared/config/routeConfig/routeConfig';
 import { ArticleListItem } from './ArticleListItem';
@@ -29,6 +29,8 @@ import {
     preserveSrollPositionActions,
 } from '#/features/PreserveScrollPosition';
 import { getArticlesListPageInited } from '../model/selectors/getArticlesListPageInited';
+import { SEARCH_URL_PARAM_KEY, SORT_URL_PARAM_KEY } from '../lib/constants';
+import { Text } from '#/shared/ui/Text/Text';
 
 const reducers: ReducersList = {
     articlesList: articlesListPageSlice.reducer,
@@ -46,12 +48,13 @@ const ArticlesListPage = () => {
     );
     const inited = useAppSelector(getArticlesListPageInited);
     const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
 
     const handleScrollEnd = useCallback(() => {
         if (isLoading || lastPage) {
             return;
         }
-        dispatch(fetchNextArticlesListPage());
+        dispatch(fetchNextArticlesListPage({}));
         dispatch(articlesListPageSlice.actions.addCurrentPage());
     }, [dispatch, isLoading, lastPage]);
 
@@ -80,9 +83,16 @@ const ArticlesListPage = () => {
 
     useEffect(() => {
         if (!inited) {
-            dispatch(articlesListPageSlice.actions.initState());
+            const sort = searchParams.get(SORT_URL_PARAM_KEY) ?? '';
+            const searchKey = searchParams.get(SEARCH_URL_PARAM_KEY) ?? '';
+            dispatch(
+                articlesListPageSlice.actions.initState({
+                    sort,
+                    searchKey,
+                }),
+            );
         }
-    }, [dispatch, inited]);
+    }, [dispatch, inited, searchParams]);
 
     return (
         <DynamicModuleLoader reducers={reducers} removeAfterUnmount={false}>
@@ -93,39 +103,45 @@ const ArticlesListPage = () => {
             >
                 <Heading level={1}>{t('articlesList-heading')}</Heading>
                 <ArticlesListToolbar />
-                <div
-                    className={classNames(
-                        classes.cardList,
-                        classes[`cardList_${view}`],
-                    )}
-                >
-                    {articles.map((article) => (
-                        <ArticleListItem
-                            key={article.id}
-                            listView={view}
-                            article={article}
-                            onClick={() =>
-                                navigate(
-                                    generatePath(RoutePath.article, {
-                                        articleId: article.id,
-                                    }),
-                                )
-                            }
-                        />
-                    ))}
-                    {isLoading && (
-                        <div className={classes.loader}>
-                            <Loader />
-                        </div>
-                    )}
+                <div className={classes.cardListWrapper}>
                     <div
-                        ref={triggerRef}
-                        aria-hidden="true"
-                        style={{
-                            marginTop: articles.length ? '-26px' : undefined,
-                            height: '10px',
-                        }}
-                    />
+                        className={classNames(
+                            classes.cardList,
+                            classes[`cardList_${view}`],
+                        )}
+                    >
+                        {articles.map((article) => (
+                            <ArticleListItem
+                                key={article.id}
+                                listView={view}
+                                article={article}
+                                onClick={() =>
+                                    navigate(
+                                        generatePath(RoutePath.article, {
+                                            articleId: article.id,
+                                        }),
+                                    )
+                                }
+                            />
+                        ))}
+                        {isLoading ? (
+                            <div className={classes.loader}>
+                                <Loader />
+                            </div>
+                        ) : (
+                            !articles.length && <Text>{t('noArticles')}</Text>
+                        )}
+                        <div
+                            ref={triggerRef}
+                            aria-hidden="true"
+                            style={{
+                                marginTop: articles.length
+                                    ? '-26px'
+                                    : undefined,
+                                height: '10px',
+                            }}
+                        />
+                    </div>
                 </div>
             </div>
         </DynamicModuleLoader>

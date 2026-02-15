@@ -7,7 +7,7 @@ interface DefaultSelectItem {
     value: string;
 }
 
-export interface SelectProps<T = DefaultSelectItem> {
+export interface SelectProps<T extends DefaultSelectItem> {
     /** Метка поля ввода */
     label?: string;
     /** Тип текстового поля */
@@ -17,16 +17,16 @@ export interface SelectProps<T = DefaultSelectItem> {
     // /** Форма границ компонента */
     // form?: 'default' | 'brick' | 'rounded';
     /** Значение текстового поля */
-    value?: string;
+    value?: T;
     /** Обработчик изменения значения */
-    onChange?: (value: string) => void;
+    onChange?: (value: T) => void;
     /** Обязательное поле */
     required?: boolean;
     /** Дополнительный класс */
     className?: string;
 }
 
-const SelectInner = ({
+const SelectInner = <T extends DefaultSelectItem>({
     items,
     value,
     onChange,
@@ -35,9 +35,9 @@ const SelectInner = ({
     required,
 }: // view = 'primary',
 // form = 'default',
-SelectProps) => {
+SelectProps<T>) => {
     const labelId = useId();
-
+    console.debug(value);
     return (
         <label
             htmlFor={labelId}
@@ -58,11 +58,15 @@ SelectProps) => {
             )}
             <select
                 id={labelId}
-                value={value}
+                value={value?.value}
                 className={classes.select}
                 onChange={(e) => {
-                    console.debug(e.target.value);
-                    onChange?.(e.target.value);
+                    const selectedItem = items.find(
+                        (item) => item.value === e.target.value,
+                    );
+                    if (selectedItem) {
+                        onChange?.(selectedItem);
+                    }
                 }}
             >
                 {items.map((item) => (
@@ -79,4 +83,4 @@ SelectProps) => {
     );
 };
 
-export const Select = memo(SelectInner);
+export const Select = memo(SelectInner) as typeof SelectInner;

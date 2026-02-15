@@ -1,9 +1,14 @@
 .pageContainer {
     height: 100%;
-    overflow: auto;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     gap: 16px;
+}
+
+.cardListWrapper {
+    overflow-y: auto;
+    padding-right: 8px;
 }
 
 .cardList {

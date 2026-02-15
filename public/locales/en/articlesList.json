@@ -1,3 +1,9 @@
 {
-  "articlesList-heading": "Articles"
+  "articlesList-heading": "Articles",
+  "defalut": "Default",
+  "popular": "Popular first",
+  "latest": "New ones first",
+  "oldest": "Old ones first",
+  "searchKey_placeholder": "Enter article title to search",
+  "noArticles": "No articles found"
 }

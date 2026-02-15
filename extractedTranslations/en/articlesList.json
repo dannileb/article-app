@@ -1,5 +1,11 @@
 {
   "articlesList-heading": "",
+  "defalut": "",
   "grid-view": "",
-  "list-view": ""
+  "latest": "",
+  "list-view": "",
+  "noArticles": "",
+  "oldest": "",
+  "popular": "",
+  "searchKey_placeholder": ""
 }

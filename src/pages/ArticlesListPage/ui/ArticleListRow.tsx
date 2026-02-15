@@ -5,6 +5,7 @@ import { Tag } from '#/shared/ui/Tag/Tag';
 import { Text } from '#/shared/ui/Text/Text';
 import { ArticleListItemProps } from '#/pages/ArticlesListPage/ui/ArticleListItem';
 import avatarPlaceholder from '#/shared/assets/images/avatarPlaceholder.webp';
+import { EyeOutlined } from '@ant-design/icons';
 
 const MAX_TAGS_COUNT = 5;
 
@@ -45,6 +46,10 @@ export const ArticleListRow = ({
                     <div className={classes.publishedInfo}>
                         <Text view="secondary">{article.createdAt}</Text>
                         <Text>@{article.author.username}</Text>
+                        <div className={classes.views}>
+                            <Text>{article.views ?? 0}</Text>
+                            <EyeOutlined />
+                        </div>
                     </div>
                 </div>
             </div>

@@ -34,7 +34,7 @@ describe('fetchNextArticlesListPage.test', () => {
 
         thunk.api.get.mockReturnValue(Promise.resolve({ data: payload }));
 
-        const result = await thunk.callThunk(undefined);
+        const result = await thunk.callThunk({});
 
         expect(thunk.api.get).toHaveBeenCalledWith(
             `/articles?page=${currentPage}`,
