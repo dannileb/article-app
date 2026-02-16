@@ -3,7 +3,7 @@ import { UserSchema } from '#/entities/User';
 import { AddCommentSchema } from '#/features/AddComment';
 import { LoginSchema } from '#/features/AuthByUsername';
 import { ArticleSchema } from '#/entities/Article';
-import { ArticleCommentsSchema } from '#/pages/ArticlePage';
+import { ArticlePageSchema } from '#/pages/ArticlePage';
 import { ArticlesListSchema } from '#/pages/ArticlesListPage';
 import { PreserveSrollPositionSchema } from '#/features/PreserveScrollPosition';
 
@@ -15,6 +15,6 @@ export interface StateSchema {
     profile?: ProfileSchema;
     articlesList?: ArticlesListSchema;
     article?: ArticleSchema;
-    articleComments?: ArticleCommentsSchema;
+    articlePage?: ArticlePageSchema;
     addComment?: AddCommentSchema;
 }

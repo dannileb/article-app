@@ -18,7 +18,7 @@ const initialState = adapter.getInitialState<ArticleCommentsSchema>({
 });
 
 export const getArticleComments = adapter.getSelectors<StateSchema>(
-    (state) => state.articleComments || initialState,
+    (state) => state.articlePage?.comments || initialState,
 );
 
 export const articleCommentsSlice = createSlice({

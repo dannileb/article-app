@@ -1,6 +1,6 @@
 import { Article } from '#/entities/Article';
+import { ArticlesListView } from '../model/types/articleList.types';
 import { CardProps } from '#/shared/ui/Card/Card';
-import { ArticlesListView } from '../model/types/articlesList.types';
 import { ArticleListCard } from './ArticleListCard';
 import { ArticleListRow } from './ArticleListRow';
 

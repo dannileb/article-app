@@ -19,9 +19,11 @@ import { useTranslation } from 'react-i18next';
 import { getUserIsAuth } from '#/entities/User';
 import { ArticlePageEditor } from './ArticlePageEditor/ArticlePageEditor';
 import { ArticlePageViewer } from './ArticlePageViewer/ArticlePageViewer';
+import { articlePageReducer } from '../model/slice';
 
 const initialRedusers: ReducersList = {
     article: articleReducer,
+    articlePage: articlePageReducer,
 };
 
 export function ArticlePage() {

@@ -3,7 +3,7 @@ import { Heading } from '#/shared/ui/Heading/Heading';
 import { Tag } from '#/shared/ui/Tag/Tag';
 import { Text } from '#/shared/ui/Text/Text';
 import classes from './ArticleListCard.module.scss';
-import { ArticleListItemProps } from '#/pages/ArticlesListPage/ui/ArticleListItem';
+import { ArticleListItemProps } from './ArticleListItem';
 import avatarPlaceholder from '#/shared/assets/images/avatarPlaceholder.webp';
 import { EyeOutlined } from '@ant-design/icons';
 

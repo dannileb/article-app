@@ -17,6 +17,7 @@ import { Button } from '#/shared/ui/Button/Button';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router';
 import { RoutePath } from '#/shared/config/routeConfig/routeConfig';
+import { ArticlePageRecommendations } from '../ArticlePageRecommendations/ArticlePageRecommendations';
 
 interface ArticlePageViewerProps {
     articleData: Article;
@@ -57,6 +58,7 @@ export const ArticlePageViewer = ({ articleData }: ArticlePageViewerProps) => {
                     <ArticlePageBlock key={index} block={block} index={index} />
                 ))}
             </div>
+            <ArticlePageRecommendations />
             {isAuth ? (
                 <Suspense fallback={<></>}>
                     <AddCommentForm

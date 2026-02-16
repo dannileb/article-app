@@ -1,12 +1,5 @@
 import { CommentList, CommentType } from '#/entities/Comment';
-import {
-    articleCommentsReducer,
-    getArticleComments,
-} from '../../model/slice/articleCommentSlice';
-import {
-    DynamicModuleLoader,
-    ReducersList,
-} from '#/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
+import { getArticleComments } from '../../model/slice/articleCommentSlice';
 import { Heading } from '#/shared/ui/Heading/Heading';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '#/shared/lib/hooks/reduxHooks';
@@ -14,19 +7,13 @@ import { useCallback, useEffect, useState } from 'react';
 import {
     getArticleAuthorId,
     getArticleCommentsError,
-    getArticleCommentsIsLoading,
     getArticleId,
 } from '../../model/selectors';
 import { fetchArticleComments } from '../../model/services/fetchArticleComments/fetchArticleComments';
-import PageLoader from '#/shared/ui/PageLoader';
 import { PagePlaceholder } from '#/widgets/PagePlaceholder/ui/PagePlaceholder';
 import { Text } from '#/shared/ui/Text/Text';
 import classes from './ArticlePageComments.module.scss';
 import { ProfileModal } from '#/entities/Profile';
-
-const initialReducers: ReducersList = {
-    articleComments: articleCommentsReducer,
-};
 
 export const ArticlePageComments = () => {
     const { t } = useTranslation('article');
@@ -36,7 +23,7 @@ export const ArticlePageComments = () => {
     const articleId = useAppSelector(getArticleId);
     const authorId = useAppSelector(getArticleAuthorId);
     const comments = useAppSelector(getArticleComments.selectAll);
-    const isLoading = useAppSelector(getArticleCommentsIsLoading);
+    // const isLoading = useAppSelector(getArticleCommentsIsLoading);
     const error = useAppSelector(getArticleCommentsError);
 
     const [authorModalId, setAuthorModalId] = useState<string>();
@@ -66,8 +53,7 @@ export const ArticlePageComments = () => {
     }, [dispatch, articleId]);
 
     return (
-        <DynamicModuleLoader reducers={initialReducers}>
-            <PageLoader view="secondary" show={isLoading} />
+        <>
             {comments.length > 0 ? (
                 <div className={classes.commentsWrapper}>
                     <Heading level={4}>{t('commentsHeading')}</Heading>
@@ -87,6 +73,6 @@ export const ArticlePageComments = () => {
                 isOpen={authorModalId !== undefined}
                 onClickOutside={handleCloseAuthorModal}
             />
-        </DynamicModuleLoader>
+        </>
     );
 };

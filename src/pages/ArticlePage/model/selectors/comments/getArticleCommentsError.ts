@@ -1,2 +1,2 @@
 export const getArticleCommentsError = (state: StateSchema) =>
-    state.articleComments?.error;
+    state.articlePage?.comments?.error;
