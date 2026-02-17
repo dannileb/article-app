@@ -39,6 +39,7 @@ export const Grid: Story = {
             {
                 articlesList: {
                     view: 'grid',
+                    lastPage: true,
                     ids: ['1', '2', '3'],
                     entities: {
                         '1': mockArticle,
@@ -58,6 +59,7 @@ export const List: Story = {
             {
                 articlesList: {
                     view: 'list',
+                    lastPage: true,
                     ids: ['1', '2', '3'],
                     entities: {
                         '1': mockArticle,
