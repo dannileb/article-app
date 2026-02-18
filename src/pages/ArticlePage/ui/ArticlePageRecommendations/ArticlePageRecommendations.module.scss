@@ -3,3 +3,11 @@
     flex-direction: column;
     gap: 1em;
 }
+
+.recommendationsListWrapper {
+    height: 420px;
+}
+
+.recommendationsList {
+    flex-wrap: nowrap;
+}

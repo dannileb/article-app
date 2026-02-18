@@ -6,7 +6,7 @@ import {
     DynamicModuleLoader,
     ReducersList,
 } from '#/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
-import React, { useCallback, useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '#/shared/lib/hooks/reduxHooks';
 import classes from './ArticleListPage.module.scss';
 import { Heading } from '#/shared/ui/Heading/Heading';
@@ -15,7 +15,6 @@ import { useSearchParams } from 'react-router';
 import { getArticlesListView } from '../model/selectors/getArticlesListView';
 import { getArticlesListIsLoading } from '../model/selectors/getAriclesListIsLoading';
 import { ArticlesListToolbar } from './ArticlesListToolbar';
-import { useInfiniteScroll } from '#/shared/lib/hooks/useInfiniteScroll';
 import { fetchNextArticlesListPage } from '../model/services/fetchNextArticlesListPage/fetchNextArticlesListPage';
 import { getArticlesListLastPage } from '../model/selectors/getArticlesListLastPage';
 import { useDebounce } from '#/shared/lib/hooks/useDebounce';
@@ -26,6 +25,7 @@ import {
 import { getArticlesListPageInited } from '../model/selectors/getArticlesListPageInited';
 import { SEARCH_URL_PARAM_KEY, SORT_URL_PARAM_KEY } from '../lib/constants';
 import { ArticlesList } from '#/entities/Article';
+import { ListRange } from 'react-virtuoso';
 
 const reducers: ReducersList = {
     articlesList: articlesListPageSlice.reducer,
@@ -48,32 +48,24 @@ const ArticlesListPage = () => {
         if (isLoading || lastPage) {
             return;
         }
-        dispatch(fetchNextArticlesListPage({}));
         dispatch(articlesListPageSlice.actions.addCurrentPage());
+        dispatch(fetchNextArticlesListPage({}));
     }, [dispatch, isLoading, lastPage]);
 
-    const { wrapperRef, triggerRef } = useInfiniteScroll(handleScrollEnd, {
-        rootMargin: '0px 0px 30% 0px',
-        threshold: 0,
-    });
-
-    const handleScroll = useDebounce((e: React.UIEvent<HTMLDivElement>) => {
-        if (e.target instanceof HTMLElement) {
-            dispatch(
-                preserveSrollPositionActions.setScrollPosition({
-                    key: 'articlesList',
-                    value: e.target.scrollTop,
-                }),
-            );
-        }
+    const handleRangeChange = useDebounce((range: ListRange) => {
+        dispatch(
+            preserveSrollPositionActions.setScrollPosition({
+                key: 'articlesList',
+                value: (range.startIndex + range.endIndex) / 2,
+            }),
+        );
     }, 200);
 
     useEffect(() => {
-        if (wrapperRef.current) {
-            wrapperRef.current.scrollTop = scrollPosition;
+        if (!inited) {
+            dispatch(fetchNextArticlesListPage({}));
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [dispatch, inited]);
 
     useEffect(() => {
         if (!inited) {
@@ -90,11 +82,7 @@ const ArticlesListPage = () => {
 
     return (
         <DynamicModuleLoader reducers={reducers} removeAfterUnmount={false}>
-            <div
-                ref={wrapperRef}
-                className={classes.pageContainer}
-                onScroll={handleScroll}
-            >
+            <div className={classes.pageContainer}>
                 <Heading level={1}>{t('articlesList-heading')}</Heading>
                 <ArticlesListToolbar />
                 <div className={classes.cardListWrapper}>
@@ -102,8 +90,9 @@ const ArticlesListPage = () => {
                         articles={articles}
                         isLoading={!!isLoading}
                         view={view}
-                        virtualScroll
-                        triggerRef={triggerRef}
+                        endReached={handleScrollEnd}
+                        onRangeChanged={handleRangeChange}
+                        initialTopMostItemIndex={scrollPosition}
                     />
                 </div>
             </div>

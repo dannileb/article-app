@@ -23,12 +23,15 @@ export const ArticlePageRecommendations = () => {
     return (
         <div className={classes.recommendations}>
             <Heading level={4}>{t('recommendationsHeading')}</Heading>
-            <ArticlesList
-                view="list"
-                isLoading={false}
-                articles={recommendations}
-                target="_blank"
-            />
+            <div className={classes.recommendationsListWrapper}>
+                <ArticlesList
+                    view="grid"
+                    isLoading={false}
+                    articles={recommendations}
+                    target="_blank"
+                    className={classes.recommendationsList}
+                />
+            </div>
         </div>
     );
 };

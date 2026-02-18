@@ -1,77 +1,93 @@
-import classNames from 'classnames';
-import classes from './ArticlesList.module.scss';
-import { ArticleListItem } from './ArticleListItem';
 import { Article } from '../model/types/article.types';
+import { useTranslation } from 'react-i18next';
+import { HTMLAttributeAnchorTarget } from 'react';
+import { ListRange, VirtuosoGrid, VirtuosoGridProps } from 'react-virtuoso';
+import { AppLink } from '#/shared/ui/AppLink/AppLink';
 import { generatePath } from 'react-router';
 import { RoutePath } from '#/shared/config/routeConfig/routeConfig';
+import { ArticleListItem } from '#/entities/Article/ui/ArticleListItem';
 import { Loader } from '#/shared/ui/Loader/Loader';
-import { Text } from '#/shared/ui/Text/Text';
-import { useTranslation } from 'react-i18next';
-import { AppLink } from '#/shared/ui/AppLink/AppLink';
-import { HTMLAttributeAnchorTarget } from 'react';
-
-type ListWithVirtualScroll =
-    | {
-          virtualScroll: true;
-          triggerRef: React.RefObject<HTMLDivElement | null>;
-      }
-    | {
-          virtualScroll?: false;
-          triggerRef?: never;
-      };
+import classes from './ArticlesList.module.scss';
+import classNames from 'classnames';
 
 type ArticlesListProps = {
     articles: Article[];
     isLoading: boolean;
     view: 'list' | 'grid';
     target?: HTMLAttributeAnchorTarget;
-} & ListWithVirtualScroll;
+    endReached?: (index: number) => void;
+    onRangeChanged?: (range: ListRange) => void;
+    initialTopMostItemIndex?: number;
+    className?: string;
+};
+
+type ArticleListContext = {
+    isLoading: boolean;
+};
+
+const gridComponents: VirtuosoGridProps<
+    undefined,
+    ArticleListContext
+>['components'] = {
+    Footer: ({ context }) =>
+        context.isLoading && (
+            <div className={classes.loader}>
+                <Loader />
+            </div>
+        ),
+};
 
 export const ArticlesList = ({
     articles,
     isLoading,
     view,
-    triggerRef,
+    endReached,
     target,
+    onRangeChanged,
+    initialTopMostItemIndex = 0,
+    className,
 }: ArticlesListProps) => {
     const { t } = useTranslation('articlesList');
 
+    if (!articles.length) {
+        return <div>{t('noArticles')}</div>;
+    }
+
     return (
-        <div
-            className={classNames(
+        <VirtuosoGrid
+            style={{ height: '100%' }}
+            data={articles}
+            components={gridComponents}
+            context={{ isLoading }}
+            itemContent={(index) => {
+                const article = articles[index];
+                if (!article) {
+                    return null;
+                }
+                return (
+                    <AppLink
+                        to={generatePath(RoutePath.article, {
+                            articleId: article.id,
+                        })}
+                        target={target}
+                    >
+                        <ArticleListItem
+                            key={article.id}
+                            listView={view}
+                            article={article}
+                        />
+                    </AppLink>
+                );
+            }}
+            endReached={endReached}
+            overscan={20}
+            listClassName={classNames(
                 classes.cardList,
                 classes[`cardList_${view}`],
+                className,
             )}
-        >
-            {articles.map((article) => (
-                <AppLink
-                    to={generatePath(RoutePath.article, {
-                        articleId: article.id,
-                    })}
-                    target={target}
-                >
-                    <ArticleListItem
-                        key={article.id}
-                        listView={view}
-                        article={article}
-                    />
-                </AppLink>
-            ))}
-            {isLoading ? (
-                <div className={classes.loader}>
-                    <Loader />
-                </div>
-            ) : (
-                !articles.length && <Text>{t('noArticles')}</Text>
-            )}
-            <div
-                ref={triggerRef}
-                aria-hidden="true"
-                style={{
-                    marginTop: articles.length ? '-26px' : undefined,
-                    height: '10px',
-                }}
-            />
-        </div>
+            rangeChanged={onRangeChanged}
+            initialTopMostItemIndex={initialTopMostItemIndex}
+        />
     );
 };
