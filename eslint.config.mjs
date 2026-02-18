@@ -8,6 +8,7 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import prettierConfig from 'eslint-config-prettier';
 import { defineConfig } from 'eslint/config';
 import i18next from 'eslint-plugin-i18next';
+import pathChecker from './eslint-rules/index.mjs';
 
 export default defineConfig(
     {
@@ -47,4 +48,11 @@ export default defineConfig(
     },
     i18next.configs['flat/recommended'],
     prettierConfig,
+    {
+        files: ['**/*.{js,jsx,ts,tsx}'],
+        plugins: { pathChecker },
+        rules: {
+            'pathChecker/path-checker': 'error',
+        },
+    },
 );

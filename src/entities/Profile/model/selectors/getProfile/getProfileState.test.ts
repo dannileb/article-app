@@ -7,7 +7,7 @@ import { getProfileIsUpdateLoading } from './getProfileIsUpdateLoading';
 import { getProfileForm } from './getProfileForm';
 import { getProfileUpdateError } from './getProfileUpdateError';
 import { getProfileIsEditing } from './getProfileIsEditing';
-import { Profile } from '#/entities/Profile';
+import { Profile } from '../../types/profile.types';
 
 describe('getProfileState.test', () => {
     it('should return state', () => {

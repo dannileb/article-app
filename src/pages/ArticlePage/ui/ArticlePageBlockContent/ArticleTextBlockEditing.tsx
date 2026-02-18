@@ -1,7 +1,7 @@
 import classes from './ArticlePageBlock.module.scss';
 import { Input } from '#/shared/ui/Input/Input';
 import { useTranslation } from 'react-i18next';
-import { useArticlePageEditor } from '#/pages/ArticlePage/ui/useArticlePageEditor';
+import { useArticlePageEditor } from '../useArticlePageEditor';
 import classNames from 'classnames';
 import { TextArea } from '#/shared/ui/TextArea/TextArea';
 import { ArticleBlockProps } from './ArticlePageBlock';

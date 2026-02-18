@@ -1,7 +1,7 @@
 import { updateProfile } from './updateProfile';
 import { TestAsyncThunk } from '#/shared/lib/tests/TestAsyncThunk';
 import { $api } from '#/shared/api/api';
-import { Profile } from '#/entities/Profile';
+import { Profile } from '../../types/profile.types';
 
 jest.mock('#/shared/api/api');
 const mockedAxios = jest.mocked($api);

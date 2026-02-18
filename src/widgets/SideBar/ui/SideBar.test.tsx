@@ -1,7 +1,7 @@
 import { userReducer } from '#/entities/User';
 import { renderWithProviders } from '#/shared/lib/tests/renderWithTranslation';
 import { DeepPartial } from '#/shared/types/DeepPartial.types';
-import { SideBar } from '#/widgets/SideBar/ui/SideBar';
+import { SideBar } from './SideBar';
 import { ReducersMapObject } from '@reduxjs/toolkit';
 import { fireEvent, screen } from '@testing-library/react';
 

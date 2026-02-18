@@ -1,4 +1,4 @@
-import { Article } from '#/entities/Article';
+import { Article } from '../model/types/article.types';
 import { ArticlesListView } from '../model/types/articleList.types';
 import { CardProps } from '#/shared/ui/Card/Card';
 import { ArticleListCard } from './ArticleListCard';

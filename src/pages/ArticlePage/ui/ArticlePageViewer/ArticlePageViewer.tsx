@@ -4,7 +4,7 @@ import { ArticlePageHeader } from '../ArticlePageHeader/ArticlePageHeader';
 import classes from '../ArticlePage.module.scss';
 import { useAppDispatch, useAppSelector } from '#/shared/lib/hooks/reduxHooks';
 import { getArticleIsReadonly } from '../../model/selectors';
-import { ArticlePageComments } from '#/pages/ArticlePage/ui/ArticlePageComments/ArticlePageComments';
+import { ArticlePageComments } from '../ArticlePageComments/ArticlePageComments';
 import { AddCommentForm } from '#/features/AddComment';
 import { Suspense, useCallback } from 'react';
 import { getUserIsAuth } from '#/entities/User';

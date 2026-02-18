@@ -1,7 +1,7 @@
 import { configureStore, ReducersMapObject } from '@reduxjs/toolkit';
 import { userReducer } from '#/entities/User';
 import { StateSchema } from './StateSchema';
-import { createReducerManager } from '#/app/providers/ReduxProvider/config/reducerManager';
+import { createReducerManager } from './reducerManager';
 import { $api } from '#/shared/api/api';
 import { preserveSrollPositionReducer } from '#/features/PreserveScrollPosition';
 

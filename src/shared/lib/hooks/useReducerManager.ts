@@ -2,7 +2,7 @@ import { useAppDispatch } from '#/shared/lib/hooks/reduxHooks';
 import { ReducersList, ReduxStoreWithManager } from '#/shared/types/Redux';
 import { useEffect } from 'react';
 import { useStore } from 'react-redux';
-// TODO: написать тесты на все и сторибуки
+
 function isKeyofRedusersList(
     key: string,
     redusersList: ReducersList,

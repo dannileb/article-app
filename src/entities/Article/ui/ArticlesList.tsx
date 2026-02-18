@@ -5,7 +5,7 @@ import { ListRange, VirtuosoGrid, VirtuosoGridProps } from 'react-virtuoso';
 import { AppLink } from '#/shared/ui/AppLink/AppLink';
 import { generatePath } from 'react-router';
 import { RoutePath } from '#/shared/config/routeConfig/routeConfig';
-import { ArticleListItem } from '#/entities/Article/ui/ArticleListItem';
+import { ArticleListItem } from './ArticleListItem';
 import { Loader } from '#/shared/ui/Loader/Loader';
 import classes from './ArticlesList.module.scss';
 import classNames from 'classnames';

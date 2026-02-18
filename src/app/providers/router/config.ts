@@ -1,5 +1,5 @@
 import { AppLayout } from '#/app/AppLayout';
-import { PrivateRoutes } from '#/app/providers/router/ui/PrivateRoutes';
+import { PrivateRoutes } from './ui/PrivateRoutes';
 import NotFoundPage from '#/pages/NotFoundPage';
 import UnauthorizedPage from '#/pages/UnauthorizedPage';
 import { RoutePath } from '#/shared/config/routeConfig/routeConfig';

@@ -1,9 +1,6 @@
 import { ArticlesListSchema } from '../types/articlesList.types';
 import { DeepPartial } from '#/shared/types/DeepPartial.types';
-import {
-    articlesListActions,
-    articlesListReducer,
-} from '#/pages/ArticlesListPage/model/slices/articlesPageSlice';
+import { articlesListActions, articlesListReducer } from './articlesPageSlice';
 import { ARTICLES_LIST_VIEW_KEY } from '#/shared/consts/localStorage';
 
 describe('articlesPageSlice.test', () => {

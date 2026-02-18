@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { ProfileCard } from './ProfileCard';
 import { ReduxDecorator } from '#/shared/config/storybook/ReduxDecorator';
-import { profileReducer } from '#/entities/Profile';
+import { profileReducer } from '../../model/slice/profileSlice';
 
 const mockUser = {
     id: '1',

@@ -14,7 +14,7 @@ import {
 } from '@ant-design/icons';
 import { RoutePath } from '#/shared/config/routeConfig/routeConfig';
 import { useTranslation } from 'react-i18next';
-import { SideBarLink } from '#/widgets/SideBar/ui/SideBarLink/SideBarLink';
+import { SideBarLink } from './SideBarLink/SideBarLink';
 import { useAppSelector } from '#/shared/lib/hooks/reduxHooks';
 import { getUser } from '#/entities/User';
 import { generatePath } from 'react-router';

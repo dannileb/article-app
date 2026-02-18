@@ -3,7 +3,7 @@ import { ProfileSchema } from '../types/profile.types';
 import { getProfile } from '../services/getProfile/getProfile';
 import { updateProfile } from '../services/updateProfile/updateProfile';
 import { userActions } from '#/entities/User';
-import { Profile } from '#/entities/Profile';
+import { Profile } from '../types/profile.types';
 
 const initialState: ProfileSchema = {
     isLoading: false,
