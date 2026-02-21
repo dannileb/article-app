@@ -1,22 +1,14 @@
 import { Heading } from '#/shared/ui/Heading/Heading';
 import { useTranslation } from 'react-i18next';
 import classes from './ArticlePageRecommendations.module.scss';
-import { useAppDispatch, useAppSelector } from '#/shared/lib/hooks/reduxHooks';
 import { ArticlesList } from '#/entities/Article';
-import { getArticleRecommendations } from '../../model/slice/articleRecommendationsSlice';
-import { useEffect } from 'react';
-import { fetchArticleRecommendations } from '../../model/services/fetchArticlesRecommendations/fetchArticleRecommendations';
+import { useGetArticleRecommendationsQuery } from '../../api/articleRecommendationsApi';
 
 export const ArticlePageRecommendations = () => {
     const { t } = useTranslation('article');
-    const recommendations = useAppSelector(getArticleRecommendations.selectAll);
-    const dispatch = useAppDispatch();
+    const { data: recommendations } = useGetArticleRecommendationsQuery();
 
-    useEffect(() => {
-        dispatch(fetchArticleRecommendations());
-    }, [dispatch]);
-
-    if (!recommendations.length) {
+    if (!recommendations?.items) {
         return;
     }
 
@@ -27,7 +19,7 @@ export const ArticlePageRecommendations = () => {
                 <ArticlesList
                     view="grid"
                     isLoading={false}
-                    articles={recommendations}
+                    articles={recommendations.items}
                     target="_blank"
                     className={classes.recommendationsList}
                 />

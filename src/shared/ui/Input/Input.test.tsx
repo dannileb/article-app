@@ -47,38 +47,38 @@ describe('Input', () => {
         expect(inputElement).toHaveAttribute('placeholder', 'test placeholder');
         expect(inputElement).toBeDisabled();
     });
+});
 
-    describe('Password type', () => {
-        test('renders password input with visibility toggle button', () => {
-            render(<Input type="password" label="password" />);
-            const inputElement = screen.getByLabelText('password');
-            const buttonElement = screen.getByRole('button');
+describe('Password type', () => {
+    test('renders password input with visibility toggle button', () => {
+        render(<Input type="password" label="password" />);
+        const inputElement = screen.getByLabelText('password');
+        const buttonElement = screen.getByRole('button');
 
-            expect(inputElement).toBeInTheDocument();
-            expect(inputElement).toHaveAttribute('type', 'password');
-            expect(buttonElement).toBeInTheDocument();
-        });
-
-        test('toggles password visibility when button is clicked', () => {
-            render(<Input type="password" label="password" />);
-            const inputElement = screen.getByLabelText('password');
-            const buttonElement = screen.getByRole('button');
-
-            expect(inputElement).toHaveAttribute('type', 'password');
-
-            fireEvent.click(buttonElement);
-            expect(inputElement).toHaveAttribute('type', 'text');
-
-            fireEvent.click(buttonElement);
-            expect(inputElement).toHaveAttribute('type', 'password');
-        });
+        expect(inputElement).toBeInTheDocument();
+        expect(inputElement).toHaveAttribute('type', 'password');
+        expect(buttonElement).toBeInTheDocument();
     });
 
-    describe('Non-password types', () => {
-        test('does not render visibility toggle button for text type', () => {
-            render(<Input type="text" />);
-            const buttons = screen.queryByRole('button');
-            expect(buttons).not.toBeInTheDocument();
-        });
+    test('toggles password visibility when button is clicked', () => {
+        render(<Input type="password" label="password" />);
+        const inputElement = screen.getByLabelText('password');
+        const buttonElement = screen.getByRole('button');
+
+        expect(inputElement).toHaveAttribute('type', 'password');
+
+        fireEvent.click(buttonElement);
+        expect(inputElement).toHaveAttribute('type', 'text');
+
+        fireEvent.click(buttonElement);
+        expect(inputElement).toHaveAttribute('type', 'password');
+    });
+});
+
+describe('Non-password types', () => {
+    test('does not render visibility toggle button for text type', () => {
+        render(<Input type="text" />);
+        const buttons = screen.queryByRole('button');
+        expect(buttons).not.toBeInTheDocument();
     });
 });

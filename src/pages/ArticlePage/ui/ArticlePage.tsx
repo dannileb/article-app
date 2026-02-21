@@ -18,12 +18,10 @@ import { PagePlaceholder } from '#/widgets/PagePlaceholder/ui/PagePlaceholder';
 import { useTranslation } from 'react-i18next';
 import { getUserIsAuth } from '#/entities/User';
 import { ArticlePageEditor } from './ArticlePageEditor/ArticlePageEditor';
-import { articlePageReducer } from '../model/slice';
 import { ArticlePageViewer } from './ArticlePageViewer/ArticlePageViewer';
 
 const initialRedusers: ReducersList = {
     article: articleReducer,
-    articlePage: articlePageReducer,
 };
 
 export function ArticlePage() {

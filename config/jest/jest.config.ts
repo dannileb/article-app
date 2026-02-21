@@ -31,6 +31,17 @@ const config: Config = {
         __API__: '',
         __PROJECT__: 'jest',
     },
+    reporters: [
+        'default',
+        [
+            'jest-html-reporters',
+            {
+                publicPath: '<rootDir>/jest-report',
+                filename: 'report.html',
+                openReport: false,
+            },
+        ],
+    ],
 };
 
 export default config;

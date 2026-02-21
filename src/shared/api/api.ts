@@ -1,5 +1,6 @@
 import { ACCESS_TOKEN_KEY } from '#/shared/consts/localStorage';
 import axios from 'axios';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 const $api = axios.create({
     baseURL: __API__,
@@ -20,4 +21,22 @@ $api.interceptors.request.use(
     },
 );
 
-export { $api };
+const rtkQueryApi = createApi({
+    reducerPath: '',
+    baseQuery: fetchBaseQuery({
+        baseUrl: __API__,
+        prepareHeaders: (headers) => {
+            const token = localStorage.getItem(ACCESS_TOKEN_KEY);
+
+            if (token) {
+                headers.set('Authorization', `Bearer ${token}`);
+            }
+
+            return headers;
+        },
+    }),
+    endpoints: () => ({}),
+    tagTypes: ['Comment'],
+});
+
+export { $api, rtkQueryApi };

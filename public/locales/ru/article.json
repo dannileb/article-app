@@ -25,9 +25,6 @@
   "codeBlockTitle": "Описание блока",
   "codeBlockContentLabel": "Содержание блока",
   "codeBlockContentPlaceholder": "Введите код",
-  "commentsHeading": "Комментарии",
-  "noComments": "Комментариев нет",
-  "authoToComment": "Авторизуйтесь для комментирования",
   "goBack": "Назад",
   "recommendationsHeading": "Возможно вам понравится"
 }

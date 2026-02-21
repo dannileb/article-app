@@ -26,13 +26,14 @@ const renderOptions = {
 };
 
 describe('SideBar', () => {
-    test('Default render', () => {
+    beforeEach(() => {
         renderWithProviders(SideBar, renderOptions);
+    });
+    test('Default render', () => {
         expect(screen.getByTestId('sidebar')).toBeInTheDocument();
     });
 
     test('Toggle sidebar', () => {
-        renderWithProviders(SideBar, renderOptions);
         const toggleButton = screen.getByTestId('sidebar-toggle');
         expect(screen.getByTestId('sidebar')).toBeInTheDocument();
         fireEvent.click(toggleButton);

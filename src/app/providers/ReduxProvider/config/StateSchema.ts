@@ -1,20 +1,18 @@
 import { ProfileSchema } from '#/entities/Profile';
 import { UserSchema } from '#/entities/User';
-import { AddCommentSchema } from '#/features/AddComment';
 import { LoginSchema } from '#/features/AuthByUsername';
 import { ArticleSchema } from '#/entities/Article';
-import { ArticlePageSchema } from '#/pages/ArticlePage';
 import { ArticlesListSchema } from '#/pages/ArticlesListPage';
 import { PreserveSrollPositionSchema } from '#/features/PreserveScrollPosition';
+import { rtkQueryApi } from '#/shared/api/api';
 
 export interface StateSchema {
     user: UserSchema;
     preserveScrollPosition: PreserveSrollPositionSchema;
+    [rtkQueryApi.reducerPath]: ReturnType<typeof rtkQueryApi.reducer>;
     // async
     login?: LoginSchema;
     profile?: ProfileSchema;
     articlesList?: ArticlesListSchema;
     article?: ArticleSchema;
-    articlePage?: ArticlePageSchema;
-    addComment?: AddCommentSchema;
 }

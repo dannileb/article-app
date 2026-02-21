@@ -20,5 +20,8 @@
   "commentInputPlaceholder": "Введите комментарий",
   "commentInputLabel": "Комментарий",
   "author": "Автор",
-  "navBarLabel-articles": "Статьи"
+  "navBarLabel-articles": "Статьи",
+  "commentsHeading": "Комментарии",
+  "noComments": "Комментариев нет",
+  "authoToComment": "Авторизуйтесь для комментирования"
 }

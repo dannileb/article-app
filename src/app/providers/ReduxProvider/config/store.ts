@@ -2,7 +2,7 @@ import { configureStore, ReducersMapObject } from '@reduxjs/toolkit';
 import { userReducer } from '#/entities/User';
 import { StateSchema } from './StateSchema';
 import { createReducerManager } from './reducerManager';
-import { $api } from '#/shared/api/api';
+import { $api, rtkQueryApi } from '#/shared/api/api';
 import { preserveSrollPositionReducer } from '#/features/PreserveScrollPosition';
 
 export function createReduxStore(
@@ -13,6 +13,7 @@ export function createReduxStore(
         ...ascyncReducers,
         user: userReducer,
         preserveScrollPosition: preserveSrollPositionReducer,
+        [rtkQueryApi.reducerPath]: rtkQueryApi.reducer,
     };
 
     const reducerManager = createReducerManager(rootReducers);
@@ -28,7 +29,7 @@ export function createReduxStore(
                         api: $api,
                     },
                 },
-            }),
+            }).concat(rtkQueryApi.middleware),
     });
 
     // @ts-expect-error fix later

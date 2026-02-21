@@ -56,15 +56,16 @@ export const SideBar = () => {
     const onToggle = () => {
         setCollapsed((prev) => !prev);
     };
+
     return (
-        <div
+        <aside
             data-testid="sidebar"
             className={classNames(classes.sidebar, {
                 [classes.collapsed]: collapsed,
             })}
         >
             <div className={classes.contentContainer}>
-                <div className={classes.content}>
+                <nav className={classes.content}>
                     {sidebarLinks.map((link, index) => {
                         return (
                             <SideBarLink
@@ -74,7 +75,7 @@ export const SideBar = () => {
                             />
                         );
                     })}
-                </div>
+                </nav>
                 <div className={classes.switchers}>
                     <ThemeSwitcher />
                     <LangSwitcher shortened={collapsed} />
@@ -87,6 +88,6 @@ export const SideBar = () => {
                 className={classes.toggleButton}
                 view="compact"
             ></Button>
-        </div>
+        </aside>
     );
 };

@@ -915,7 +915,7 @@
       "type": "http",
       "documentation": "Get article comments by ID",
       "method": "get",
-      "endpoint": "article/:id/comments",
+      "endpoint": "comments/article/:id",
       "responses": [
         {
           "uuid": "ba64f834-4224-47ac-b6b4-67a737b56629",
@@ -983,7 +983,7 @@
       "type": "http",
       "documentation": "Get article comments by ID",
       "method": "post",
-      "endpoint": "article/:id/comments",
+      "endpoint": "comments/article/:id",
       "responses": [
         {
           "uuid": "89a60b4e-75fc-4355-8d57-aacb804e2594",
@@ -1051,7 +1051,7 @@
         },
         {
           "uuid": "daee0b1d-131d-47d2-9d30-a84bfa369cbe",
-          "body": "{{~#if (bodyRaw 'text')~}}\r\n{{~setVar 'authorId' (jwtPayload (header 'Authorization') 'id')~}}\r\n{{~setVar 'profile' (find (dataRaw 'profiles') (object id=@authorId))~}}\r\n{{~setVar 'newComment' (object \r\n    id=(uuid) \r\n    author=(object \r\n        id=@profile.id \r\n        username=@profile.username \r\n        photo=@profile.photo\r\n    )\r\n    text=(bodyRaw 'text')\r\n    createdAt=(now 'T')\r\n    articleId=(parseInt (bodyRaw 'entityId'))\r\n)~}}\r\n{{~setData 'push' 'ArticleComments' '' @newComment~}}\r\n{{{stringify @newComment}}}\r\n{{~/if~}}\r\n",
+          "body": "{{~#if (bodyRaw 'text')~}}\r\n  {{~setVar 'authorId' (jwtPayload (header 'Authorization') 'id')~}}\r\n  {{~setVar 'profile' (find (dataRaw 'profiles') (object id=@authorId))~}}\r\n  {{~setVar 'newComment' (object \r\n      id=(uuid) \r\n      author=(object \r\n          id=@profile.id \r\n          username=@profile.username \r\n          photo=@profile.photo\r\n      )\r\n      text=(bodyRaw 'text')\r\n      createdAt=(now 'T')\r\n      articleId=(urlParam 'id')\r\n  )~}}\r\n  {{~setData 'push' 'ArticleComments' '' @newComment~}}\r\n  {{{stringify @newComment}}}\r\n{{~else~}}\r\n  { \"error\": \"Text is required\" }\r\n{{~/if~}}",
           "latency": 0,
           "statusCode": 200,
           "label": "Success",

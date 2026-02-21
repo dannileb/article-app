@@ -19,5 +19,7 @@
   "commentInputPlaceholder": "",
   "commentInputLabel": "Comment",
   "author": "Author",
-  "navBarLabel-articles": "Articles"
+  "navBarLabel-articles": "Articles",
+  "commentsHeading": "Comments",
+  "noComments": "No comments"
 }

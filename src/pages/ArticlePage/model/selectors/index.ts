@@ -5,6 +5,4 @@ export { getArticleIsReadonly } from './article/getArticleIsReadonly';
 export { getArticleIsEditing } from './article/getArticleIsEditing';
 export { getArticleForm } from './article/getArticleForm';
 export { getArticleId } from './article/getArticleId';
-export { getArticleCommentsIsLoading } from './comments/getArticleCommentsIsLoading';
-export { getArticleCommentsError } from './comments/getArticleCommentsError';
 export { getArticleAuthorId } from './article/getArticleIAuthorId';
