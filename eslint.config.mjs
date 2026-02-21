@@ -20,6 +20,7 @@ export default defineConfig(
             '*.config.ts',
             'storybook-static',
             'test-results',
+            'jest-report',
         ],
     },
     js.configs.recommended,
