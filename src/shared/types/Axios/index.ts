@@ -1,1 +1,1 @@
-export { ResponseError } from './Axios.types';
+export type { ResponseError } from './Axios.types';

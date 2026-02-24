@@ -27,7 +27,7 @@ const renderOptions = {
 
 describe('SideBar', () => {
     beforeEach(() => {
-        renderWithProviders(SideBar, renderOptions);
+        renderWithProviders(<SideBar />, renderOptions);
     });
     test('Default render', () => {
         expect(screen.getByTestId('sidebar')).toBeInTheDocument();

@@ -29,15 +29,24 @@ export const ProfilePageToolbar = ({
                         onClick={onCancelEdit}
                         disabled={isLoading}
                         view="secondary"
+                        data-testid="ProfilePageToolbar.CancelEditButton"
                     >
                         {t('cancelEdit')}
                     </Button>
-                    <Button onClick={onSaveEdit} isLoading={isLoading}>
+                    <Button
+                        onClick={onSaveEdit}
+                        isLoading={isLoading}
+                        data-testid="ProfilePageToolbar.SaveEditButton"
+                    >
                         {t('saveEdit')}
                     </Button>
                 </>
             ) : (
-                <Button icon={<EditOutlined />} onClick={onEdit}>
+                <Button
+                    icon={<EditOutlined />}
+                    onClick={onEdit}
+                    data-testid="ProfilePageToolbar.EditButton"
+                >
                     {t('editButton')}
                 </Button>
             )}

@@ -39,11 +39,13 @@ export const ProfileEditor = () => {
                         label={t('name')}
                         value={form?.name ?? ''}
                         onChange={handleChangeName}
+                        data-testid="ProfileEditor.NameInput"
                     />
                     <Input
                         label={t('surname')}
                         value={form?.surname ?? ''}
                         onChange={handleChangeSurname}
+                        data-testid="ProfileEditor.SurnameInput"
                     />
                 </div>
                 <div>
@@ -51,6 +53,7 @@ export const ProfileEditor = () => {
                         label={t('username')}
                         value={form?.username ?? ''}
                         onChange={handleChangeUsername}
+                        data-testid="ProfileEditor.UsernameInput"
                     />
                     <Text view="secondary">{t('username_alert')}</Text>
                 </div>
@@ -59,11 +62,13 @@ export const ProfileEditor = () => {
                         label={t('country')}
                         value={form?.country ?? ''}
                         onChange={handleChangeCountry}
+                        data-testid="ProfileEditor.CountryInput"
                     />
                     <Input
                         label={t('city')}
                         value={form?.city ?? ''}
                         onChange={handleChangeCity}
+                        data-testid="ProfileEditor.CityInput"
                     />
                 </div>
                 <Input
@@ -73,11 +78,13 @@ export const ProfileEditor = () => {
                     min={16}
                     max={90}
                     onChange={handleChangeAge}
+                    data-testid="ProfileEditor.AgeInput"
                 />
                 <Input
                     label={t('currency')}
                     value={form?.currency}
                     onChange={handleChangeCurrency}
+                    data-testid="ProfileEditor.CurrencyInput"
                 />
                 {error && <Text view="error">{tError(error)}</Text>}
             </div>
@@ -86,6 +93,7 @@ export const ProfileEditor = () => {
                     label={t('image')}
                     value={form?.photo}
                     onChange={handleChangePhoto}
+                    data-testid="ProfileEditor.PhotoInput"
                 />
                 <DndInput accept="image/*">
                     <div className={classes.updatePhotoWrapper}>

@@ -1,3 +1,3 @@
-export { ReducersList } from './ReducersList.types';
-export { ThunkConfig } from './ThunkConfig.types';
+export type { ReducersList } from './ReducersList.types';
+export type { ThunkConfig } from './ThunkConfig.types';
 export * from './ReduxStoreWitthManager.types';

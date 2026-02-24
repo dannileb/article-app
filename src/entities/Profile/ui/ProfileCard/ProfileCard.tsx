@@ -48,7 +48,10 @@ const ProfileCardInner = ({ profileId, editable }: ProfileCardProps) => {
     }, [dispatch]);
 
     useEffect(() => {
-        if (profileId !== undefined && __PROJECT__ !== 'storybook') {
+        if (
+            profileId !== undefined &&
+            !['storybook', 'jest'].includes(__PROJECT__)
+        ) {
             dispatch(getProfile({ profileId }));
         }
     }, [dispatch, profileId, isAuthenticated]);
@@ -79,4 +82,4 @@ const ProfileCardInner = ({ profileId, editable }: ProfileCardProps) => {
     );
 };
 
-export const ProfileCard = memo(ProfileCardInner);
+export const ProfileCard = memo(ProfileCardInner) as typeof ProfileCardInner;
