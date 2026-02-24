@@ -5,6 +5,8 @@ import webpack from "webpack";
 import { BuildOptions } from "./types/config";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 import CopyPlugin from 'copy-webpack-plugin';
+import CircularDependencyPlugin from 'circular-dependency-plugin';
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
 export function buildPlugins({
   paths,
@@ -30,6 +32,20 @@ export function buildPlugins({
       patterns: [
         { from: paths.locales, to: paths.buildLocales },
       ],
+    }),
+    new CircularDependencyPlugin({
+      exclude: /node_modules/,
+      failOnError: true,
+      allowAsyncCycles: false,
+      cwd: process.cwd(),
+    }),
+    new ForkTsCheckerWebpackPlugin({
+      typescript: {
+        diagnosticOptions: {
+          semantic: true,
+          syntactic: true,
+        },
+      },
     }),
     // new BundleAnalyzerPlugin({openAnalyzer: false}),
   ]

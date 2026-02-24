@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.28.4",
+    "@babel/plugin-transform-runtime": "^7.29.0",
     "@babel/preset-env": "^7.28.3",
     "@babel/preset-react": "^7.27.1",
     "@babel/preset-typescript": "^7.27.1",
@@ -37,6 +38,7 @@
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.8.0",
     "@testing-library/react": "^16.3.0",
+    "@types/circular-dependency-plugin": "^5.0.8",
     "@types/jest": "^30.0.0",
     "@types/node": "^24.3.1",
     "@types/react": "^19.1.13",
@@ -48,6 +50,7 @@
     "babel-loader": "^10.0.0",
     "babel-plugin-i18next-extract": "^1.1.0",
     "baseline-browser-mapping": "^2.9.19",
+    "circular-dependency-plugin": "^5.2.2",
     "copy-webpack-plugin": "^13.0.1",
     "css-loader": "^7.1.2",
     "eslint": "^9.36.0",
@@ -57,6 +60,7 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-storybook": "^9.1.8",
     "file-loader": "^6.2.0",
+    "fork-ts-checker-webpack-plugin": "^9.1.0",
     "globals": "^16.4.0",
     "html-webpack-plugin": "^5.6.4",
     "husky": "^9.1.7",
@@ -105,5 +109,8 @@
     "react-transition-group": "^4.4.5",
     "react-virtuoso": "^4.18.1",
     "regenerator-runtime": "^0.14.1"
+  },
+  "overrides": {
+    "minimatch": ">=10.2.1"
   }
 }
