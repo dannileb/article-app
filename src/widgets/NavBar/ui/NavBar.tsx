@@ -9,6 +9,7 @@ import { useAppDispatch, useAppSelector } from '#/shared/lib/hooks/reduxHooks';
 import { getUser, userActions } from '#/entities/User';
 import { Text } from '#/shared/ui/Text/Text';
 import { Heading } from '#/shared/ui/Heading/Heading';
+import { NotificationsButton } from '#/entities/Notification';
 
 export const NavBar = () => {
     const { authData } = useAppSelector(getUser);
@@ -25,22 +26,25 @@ export const NavBar = () => {
             <Heading level={3} className={classes.title}>
                 {t('header_title')}
             </Heading>
-            <div className={classes.userContainer}>
-                <Text className={classes.user}>
-                    {authData?.username
-                        ? `@${authData.username}`
-                        : t('header_login_text')}
-                </Text>
-                <Button
-                    icon={authData ? <LogoutOutlined /> : <LoginOutlined />}
-                    onClick={() => {
-                        if (authData) {
-                            dispatch(userActions.logout());
-                        } else {
-                            setLoginModalOpen(true);
-                        }
-                    }}
-                />
+            <div className={classes.rightSide}>
+                <NotificationsButton />
+                <div className={classes.userContainer}>
+                    <Text className={classes.user}>
+                        {authData?.username
+                            ? `@${authData.username}`
+                            : t('header_login_text')}
+                    </Text>
+                    <Button
+                        icon={authData ? <LogoutOutlined /> : <LoginOutlined />}
+                        onClick={() => {
+                            if (authData) {
+                                dispatch(userActions.logout());
+                            } else {
+                                setLoginModalOpen(true);
+                            }
+                        }}
+                    />
+                </div>
             </div>
             <LoginModal
                 isOpen={loginModalOpen}

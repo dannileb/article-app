@@ -1077,6 +1077,74 @@
       "responseMode": null,
       "streamingMode": null,
       "streamingInterval": 0
+    },
+    {
+      "uuid": "ee5cf903-197f-44fa-96c2-4c0a025018a8",
+      "type": "http",
+      "documentation": "Get user auth",
+      "method": "get",
+      "endpoint": "notifications",
+      "responses": [
+        {
+          "uuid": "a5a1a4b8-7364-4705-b32a-3347a9592656",
+          "body": "{\n  \"message\": \"unauthorized\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "^Bearer .+",
+              "invert": true,
+              "operator": "regex"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "07221114-3919-4570-a097-99a877f69997",
+          "body": "{{~setVar 'userId' (jwtPayload (header 'Authorization') 'id')~}}\r\n{{~setVar 'userNotifications' (filter (dataRaw 'Notifications') (object userId=@userId))~}}\r\n{{~setVar 'sorted' (sortBy @userNotifications 'sendAt' 'desc')~}}\r\n{{{stringify @sorted}}}\r\n",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Success",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
     }
   ],
   "rootChildren": [
@@ -1139,6 +1207,10 @@
     {
       "type": "route",
       "uuid": "45cf7d5d-0e1b-4b15-8fcb-e4d68c310a4c"
+    },
+    {
+      "type": "route",
+      "uuid": "ee5cf903-197f-44fa-96c2-4c0a025018a8"
     }
   ],
   "proxyMode": false,
@@ -1191,6 +1263,13 @@
       "name": "ArticleComments",
       "documentation": "",
       "value": "[\r\n  {{~setVar 'userProfile' (find (dataRaw 'profiles') (object id=\"test_profile_ID\"))~}}\r\n  {\r\n    \"id\": \"{{uuid}}\",\r\n    \"author\": {\r\n      \"id\": \"{{@userProfile.id}}\",\r\n      \"username\": \"{{@userProfile.username}}\",\r\n      \"photo\": \"{{@userProfile.photo}}\"\r\n    },\r\n    \"text\": \"{{faker 'lorem.sentence'}}\",\r\n    \"createdAt\": \"{{dateFormat (faker 'date.past') 'T'}}\",\r\n    \"articleId\": \"test_article_ID\"\r\n  },\r\n  {{#each (dataRaw 'Articles')}}\r\n  {{#repeat 2}}\r\n  {{~setVar 'profile' (oneOf (dataRaw 'Profiles'))~}}\r\n  {\r\n    \"id\": \"{{uuid}}\",\r\n    \"author\": {\r\n      \"id\": \"{{@profile.id}}\",\r\n      \"username\": \"{{@profile.username}}\",\r\n      \"photo\": \"{{@profile.photo}}\"\r\n    },\r\n    \"text\": \"{{faker 'lorem.sentence'}}\",\r\n    \"createdAt\": \"{{dateFormat (faker 'date.past') 'T'}}\",\r\n    \"articleId\": \"{{this.id}}\"\r\n  }{{#unless @last}},{{/unless}}\r\n    {{/repeat}}\r\n    {{#unless @last}},{{/unless}}\r\n  {{/each}}\r\n]"
+    },
+    {
+      "uuid": "6480f143-c696-42a8-81b4-98b3e07484c9",
+      "id": "asqc",
+      "name": "Notifications",
+      "documentation": "",
+      "value": "{{~setVar 'profileTest' (find (dataRaw 'Profiles') (object id=\"test_profile_ID\"))~}}\r\n[\r\n  {\r\n    \"id\": \"test_notification_ID\",\r\n    \"title\": \"{{faker 'lorem.sentence'}}\",\r\n    \"description\": \"{{faker 'lorem.paragraph' 2}}\",\r\n    \"userId\": \"test_profile_ID\",\r\n    \"sendAt\": \"{{dateFormat (faker 'date.past') 'T'}}\"\r\n  },\r\n  {\r\n    \"id\": \"test_notification_ID_2\",\r\n    \"title\": \"{{faker 'lorem.sentence'}}\",\r\n    \"description\": \"{{faker 'lorem.paragraph' 2}}\",\r\n    \"sendAt\": \"{{dateFormat (faker 'date.past') 'T'}}\",\r\n    \"userId\": \"test_profile_ID\",\r\n    \"href\": \"https://ya.ru/\"\r\n  },\r\n  {{#repeat 30}}\r\n  {{~setVar 'profile' (oneOf (dataRaw 'Profiles'))~}}\r\n  {{~setVar 'article' (oneOf (dataRaw 'Articles'))~}}\r\n  {\r\n    \"id\": \"{{uuid}}\",\r\n    \"title\": \"{{faker 'lorem.sentence'}}\",\r\n    \"description\": \"{{faker 'lorem.paragraph' 2}}\",\r\n    \"userId\": \"{{lookup @profile 'id'}}\",\r\n    \"href\": \"/article/{{lookup @article 'id'}}\",\r\n    \"sendAt\": \"{{dateFormat (faker 'date.past') 'T'}}\"\r\n  }\r\n  {{#unless @last}},{{/unless}}\r\n  {{/repeat}}\r\n]\r\n"
     }
   ],
   "callbacks": []

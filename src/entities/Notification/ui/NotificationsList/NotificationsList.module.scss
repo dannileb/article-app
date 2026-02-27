@@ -1,0 +1,16 @@
+.notificationsWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.notifications {
+    max-height: 300px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding-right: 4px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}

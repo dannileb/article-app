@@ -5,10 +5,12 @@ import { ArticleSchema } from '#/entities/Article';
 import { ArticlesListSchema } from '#/pages/ArticlesListPage';
 import { PreserveSrollPositionSchema } from '#/features/PreserveScrollPosition';
 import { rtkQueryApi } from '#/shared/api/api';
+import { NotificationSchema } from '#/entities/Notification';
 
 export interface StateSchema {
     user: UserSchema;
     preserveScrollPosition: PreserveSrollPositionSchema;
+    notification: NotificationSchema;
     [rtkQueryApi.reducerPath]: ReturnType<typeof rtkQueryApi.reducer>;
     // async
     login?: LoginSchema;

@@ -11,6 +11,12 @@
     background-color: var(--color-bg-tertiary);
 }
 
+.rightSide {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
 .userContainer {
     display: flex;
     align-items: center;

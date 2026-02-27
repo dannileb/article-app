@@ -1,0 +1,8 @@
+.panel {
+    background: var(--color-bg-secondary);
+    position: absolute;
+    z-index: 10000;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 4px 4px 8px var(--color-bg-overlay);
+}

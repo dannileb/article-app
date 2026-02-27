@@ -7,22 +7,6 @@ import { ReducersMapObject } from '@reduxjs/toolkit';
 import { fireEvent, screen } from '@testing-library/react';
 import { $api } from '#/shared/api/api';
 
-jest.mock('#/shared/api/api', () => ({
-    rtkQueryApi: {
-        reducerPath: 'api',
-        reducer: () => ({}),
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        middleware: () => (next: any) => (action: any) => next(action),
-    },
-    $api: {
-        get: jest.fn(),
-        put: jest.fn(),
-        post: jest.fn(),
-        delete: jest.fn(),
-    },
-}));
-const mockedAxios = jest.mocked($api);
-
 const initialState: DeepPartial<StateSchema> = {
     user: {
         authData: {
@@ -74,7 +58,7 @@ const renderOptions = {
     },
 };
 
-describe('ProfileEditor.test', () => {
+describe('ProfileCard.test', () => {
     const fields = [
         'ProfileEditor.NameInput',
         'ProfileEditor.SurnameInput',
@@ -143,13 +127,15 @@ describe('ProfileEditor.test', () => {
     });
 
     test('save input data', async () => {
+        const mockedAxios = jest.spyOn($api, 'put');
+
         enterEditMode();
         fillFields();
 
         fireEvent.click(
             screen.getByTestId('ProfilePageToolbar.SaveEditButton'),
         );
-        expect(mockedAxios.put).toHaveBeenCalledWith('/profile/1', {
+        expect(mockedAxios).toHaveBeenCalledWith('/profile/1', {
             id: '1',
             name: 'edited',
             surname: 'edited',

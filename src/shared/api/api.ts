@@ -36,7 +36,7 @@ const rtkQueryApi = createApi({
         },
     }),
     endpoints: () => ({}),
-    tagTypes: ['Comment'],
+    tagTypes: ['Comment', 'Notification'],
 });
 
 export { $api, rtkQueryApi };

@@ -4,6 +4,7 @@ import { StateSchema } from './StateSchema';
 import { createReducerManager } from './reducerManager';
 import { $api, rtkQueryApi } from '#/shared/api/api';
 import { preserveSrollPositionReducer } from '#/features/PreserveScrollPosition';
+import { notificationReducer } from '#/entities/Notification';
 
 export function createReduxStore(
     initialState?: StateSchema,
@@ -13,6 +14,7 @@ export function createReduxStore(
         ...ascyncReducers,
         user: userReducer,
         preserveScrollPosition: preserveSrollPositionReducer,
+        notification: notificationReducer,
         [rtkQueryApi.reducerPath]: rtkQueryApi.reducer,
     };
 

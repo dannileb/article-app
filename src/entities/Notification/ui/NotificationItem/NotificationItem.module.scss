@@ -1,0 +1,16 @@
+.notification {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.notificationTitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 4px;
+}
+
+.notificationDate {
+    text-wrap: nowrap;
+}
