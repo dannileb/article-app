@@ -2,10 +2,8 @@ import { screen, fireEvent, act } from '@testing-library/react';
 import { NotificationsButton } from './NotificationsButton';
 import { renderWithProviders } from '#/shared/lib/tests/renderWithTranslation';
 import { notificationApi } from '../../api/notificationApi';
-import { mockNotifications } from '../../consts/mocks';
+import { LAST_SEEN_TIMESTAMP, mockNotifications } from '../../consts/mocks';
 import { notificationReducer } from '../../model/slice/notificationSlice';
-
-const LAST_SEEN_TIMESTAMP = Date.now() - 500;
 
 describe('NotificationsButton.test', () => {
     const setup = async (lastSeen = 0) => {
