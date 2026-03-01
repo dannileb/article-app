@@ -18,5 +18,8 @@
   "update_photo": "Или загрузите фото",
   "image": "Введите ссылку",
   "image_alert": "В демо-режиме загрузка фото не доступна",
-  "goToProfilePage": "Перейти в профиль"
+  "goToProfilePage": "Перейти в профиль",
+  "yourRate": "Ваша оценка",
+  "ratingTitle": "Оцените профиль",
+  "feedbackPlaceholder": "Напишите отзыв"
 }

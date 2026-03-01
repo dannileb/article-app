@@ -8,6 +8,7 @@
   "dropPhotoUpdate": "",
   "editButton": "",
   "error": "",
+  "feedbackPlaceholder": "",
   "goToProfilePage": "",
   "image": "",
   "image_alert": "",
@@ -17,11 +18,13 @@
     "error": "",
     "notFound": ""
   },
+  "ratingTitle": "",
   "saveButton": "",
   "saveEdit": "",
   "selectPhotoUpdate": "",
   "surname": "",
   "update_photo": "",
   "username": "",
-  "username_alert": ""
+  "username_alert": "",
+  "yourRate": ""
 }

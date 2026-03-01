@@ -17,5 +17,8 @@
   "update_photo": "Or upload a photo",
   "image": "Enter link",
   "image_alert": "In demo mode, photo uploading is not available",
-  "goToProfilePage": "Go to profile"
+  "goToProfilePage": "Go to profile",
+  "yourRate": "Your rating",
+  "ratingTitle": "Rate your profile",
+  "feedbackPlaceholder": "Write a review"
 }

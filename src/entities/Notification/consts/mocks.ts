@@ -1,7 +1,7 @@
 import { Notification } from '../model/types/Notification.types';
 
-const NOTIF_TIMESPAMP = Date.now() - 10000;
-const NEW_NOTIF_TIMESPAMP = Date.now();
+const NEW_NOTIF_TIMESPAMP = 1772396485;
+const NOTIF_TIMESPAMP = NEW_NOTIF_TIMESPAMP - 10000;
 
 export const mockNotifications: Notification[] = [
     {

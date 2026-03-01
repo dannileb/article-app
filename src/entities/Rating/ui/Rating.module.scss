@@ -1,0 +1,19 @@
+.ratingContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.feedbackContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+
+    &_editing {
+        flex-direction: column;
+    }
+}
+
+.feedbackButton {
+    align-self: flex-end;
+}

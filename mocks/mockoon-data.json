@@ -1145,6 +1145,314 @@
       "responseMode": null,
       "streamingMode": null,
       "streamingInterval": 0
+    },
+    {
+      "uuid": "8d7d5bed-9c14-4c6d-be8f-39df7e0fd51a",
+      "type": "http",
+      "documentation": "Get user auth",
+      "method": "get",
+      "endpoint": "articles/:id/rating",
+      "responses": [
+        {
+          "uuid": "c0ee5b89-89e5-4229-87ba-788ef98f8b81",
+          "body": "{\n  \"message\": \"unauthorized\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "^Bearer .+",
+              "invert": true,
+              "operator": "regex"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "eab23959-f789-4248-b739-afc72683df28",
+          "body": "{{~setVar 'userId' (jwtPayload (header 'Authorization') 'id')~}}\r\n{{~setVar 'articleId' (urlParam 'id')~}}\r\n{{~setVar 'userRating' (find (dataRaw 'ArticleRates') (object userId=@userId articleId=@articleId))~}}\r\n{{{stringify @userRating}}}\r\n",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Success",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "1946f92d-ecea-45b7-bf83-f3adf16315f4",
+      "type": "http",
+      "documentation": "Get user auth",
+      "method": "post",
+      "endpoint": "articles/:id/rating",
+      "responses": [
+        {
+          "uuid": "9d7f04c3-5410-4d49-a257-eb851f114a4b",
+          "body": "{\n  \"message\": \"unauthorized\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "^Bearer .+",
+              "invert": true,
+              "operator": "regex"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "af0cef23-8631-4ded-b466-fe81e35763b5",
+          "body": "{{~setVar 'userId' (jwtPayload (header 'Authorization') 'id')~}}\r\n{{~setVar 'articleId' (urlParam 'id')~}}\r\n{{~setVar 'existing' (find (dataRaw 'ArticleRates') (object userId=@userId articleId=@articleId))~}}\r\n{{~#if @existing~}}\r\n  {{#each (dataRaw 'ArticleRates')}}\r\n    {{~#if (eq this.userId @userId)~}}\r\n      {{~#if (eq this.articleId @articleId)~}}\r\n        {{~setData 'merge' 'ArticleRates' @index (object\r\n          rating=(bodyRaw 'rating')\r\n          feedback=(bodyRaw 'feedback')\r\n        )~}}\r\n      {{~/if~}}\r\n    {{~/if~}}\r\n  {{/each}}\r\n  {{{stringify (find (dataRaw 'ArticleRates') (object userId=@userId articleId=@articleId))}}}\r\n{{~else~}}\r\n  {{~setVar 'newRate' (object\r\n    id=(uuid)\r\n    rating=(bodyRaw 'rating')\r\n    feedback=(bodyRaw 'feedback')\r\n    userId=@userId\r\n    articleId=@articleId\r\n  )~}}\r\n  {{~setData 'push' 'ArticleRates' '' @newRate~}}\r\n  {{{stringify @newRate}}}\r\n{{~/if~}}\r\n",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Success",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "f369336d-abc8-4e93-9845-19c3425976ee",
+      "type": "crud",
+      "documentation": "",
+      "method": "",
+      "endpoint": "rates",
+      "responses": [
+        {
+          "uuid": "acc9010c-39c0-4778-8643-6be638d695c7",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "",
+              "value": ""
+            }
+          ],
+          "bodyType": "DATABUCKET",
+          "filePath": "",
+          "databucketID": "20at",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "193c9950-ea4b-4d06-8318-d829d457726d",
+      "type": "http",
+      "documentation": "Get user auth",
+      "method": "get",
+      "endpoint": "profiles/:id/rating",
+      "responses": [
+        {
+          "uuid": "7c296fca-be36-4255-85d8-7b2adaa2fbb6",
+          "body": "{\n  \"message\": \"unauthorized\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "^Bearer .+",
+              "invert": true,
+              "operator": "regex"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "3d0e2fbc-9f5a-4dec-8711-2a6abbfb064d",
+          "body": "{{~setVar 'userId' (jwtPayload (header 'Authorization') 'id')~}}\r\n{{~setVar 'profileId' (urlParam 'id')~}}\r\n{{~setVar 'userRating' (find (dataRaw 'ProfileRates') (object userId=@userId profileId=@profileId))~}}\r\n{{{stringify @userRating}}}\r\n",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Success",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "7715cb76-5d15-41b4-8b2d-4383a7da6f58",
+      "type": "http",
+      "documentation": "Get user auth",
+      "method": "post",
+      "endpoint": "profiles/:id/rating",
+      "responses": [
+        {
+          "uuid": "97dd0ce1-bd05-4c0c-ae01-b31e1612ab86",
+          "body": "{\n  \"message\": \"unauthorized\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "^Bearer .+",
+              "invert": true,
+              "operator": "regex"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "def7c327-2402-449c-a4bf-0a2130a05ebd",
+          "body": "{{~setVar 'userId' (jwtPayload (header 'Authorization') 'id')~}}\r\n{{~setVar 'profileId' (urlParam 'id')~}}\r\n{{~setVar 'existing' (find (dataRaw 'ProfileRates') (object userId=@userId profileId=@profileId))~}}\r\n{{~#if @existing~}}\r\n  {{#each (dataRaw 'ProfileRates')}}\r\n    {{~#if (eq this.userId @userId)~}}\r\n      {{~#if (eq this.profileId @profileId)~}}\r\n        {{~setData 'merge' 'ProfileRates' @index (object\r\n          rating=(bodyRaw 'rating')\r\n          feedback=(bodyRaw 'feedback')\r\n        )~}}\r\n      {{~/if~}}\r\n    {{~/if~}}\r\n  {{/each}}\r\n  {{{stringify (find (dataRaw 'ProfileRates') (object userId=@userId profileId=@profileId))}}}\r\n{{~else~}}\r\n  {{~setVar 'newRate' (object\r\n    id=(uuid)\r\n    rating=(bodyRaw 'rating')\r\n    feedback=(bodyRaw 'feedback')\r\n    userId=@userId\r\n    profileId=@profileId\r\n  )~}}\r\n  {{~setData 'push' 'ProfileRates' '' @newRate~}}\r\n  {{{stringify @newRate}}}\r\n{{~/if~}}\r\n",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Success",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
     }
   ],
   "rootChildren": [
@@ -1211,6 +1519,26 @@
     {
       "type": "route",
       "uuid": "ee5cf903-197f-44fa-96c2-4c0a025018a8"
+    },
+    {
+      "type": "route",
+      "uuid": "8d7d5bed-9c14-4c6d-be8f-39df7e0fd51a"
+    },
+    {
+      "type": "route",
+      "uuid": "1946f92d-ecea-45b7-bf83-f3adf16315f4"
+    },
+    {
+      "type": "route",
+      "uuid": "f369336d-abc8-4e93-9845-19c3425976ee"
+    },
+    {
+      "type": "route",
+      "uuid": "193c9950-ea4b-4d06-8318-d829d457726d"
+    },
+    {
+      "type": "route",
+      "uuid": "7715cb76-5d15-41b4-8b2d-4383a7da6f58"
     }
   ],
   "proxyMode": false,
@@ -1270,6 +1598,20 @@
       "name": "Notifications",
       "documentation": "",
       "value": "{{~setVar 'profileTest' (find (dataRaw 'Profiles') (object id=\"test_profile_ID\"))~}}\r\n[\r\n  {\r\n    \"id\": \"test_notification_ID\",\r\n    \"title\": \"{{faker 'lorem.sentence'}}\",\r\n    \"description\": \"{{faker 'lorem.paragraph' 2}}\",\r\n    \"userId\": \"test_profile_ID\",\r\n    \"sendAt\": \"{{dateFormat (faker 'date.past') 'T'}}\"\r\n  },\r\n  {\r\n    \"id\": \"test_notification_ID_2\",\r\n    \"title\": \"{{faker 'lorem.sentence'}}\",\r\n    \"description\": \"{{faker 'lorem.paragraph' 2}}\",\r\n    \"sendAt\": \"{{dateFormat (faker 'date.past') 'T'}}\",\r\n    \"userId\": \"test_profile_ID\",\r\n    \"href\": \"https://ya.ru/\"\r\n  },\r\n  {{#repeat 30}}\r\n  {{~setVar 'profile' (oneOf (dataRaw 'Profiles'))~}}\r\n  {{~setVar 'article' (oneOf (dataRaw 'Articles'))~}}\r\n  {\r\n    \"id\": \"{{uuid}}\",\r\n    \"title\": \"{{faker 'lorem.sentence'}}\",\r\n    \"description\": \"{{faker 'lorem.paragraph' 2}}\",\r\n    \"userId\": \"{{lookup @profile 'id'}}\",\r\n    \"href\": \"/article/{{lookup @article 'id'}}\",\r\n    \"sendAt\": \"{{dateFormat (faker 'date.past') 'T'}}\"\r\n  }\r\n  {{#unless @last}},{{/unless}}\r\n  {{/repeat}}\r\n]\r\n"
+    },
+    {
+      "uuid": "ae453a9b-0de4-4157-ab76-5fd2042bb6af",
+      "id": "20at",
+      "name": "ArticleRates",
+      "documentation": "",
+      "value": "[\r\n  {\r\n    \"id\": \"test_notification_ID\",\r\n    \"rating\": 3,\r\n    \"feedback\": \"{{faker 'lorem.sentence'}}\",\r\n    \"userId\": \"test_profile_ID\",\r\n    \"articleId\": \"test_article_ID\"\r\n  }\r\n]"
+    },
+    {
+      "uuid": "48d527e7-ae92-47e3-8bb1-a81c264a5683",
+      "id": "rlag",
+      "name": "ProfileRates",
+      "documentation": "",
+      "value": "[\r\n  {\r\n    \"id\": \"test_notification_ID\",\r\n    \"rating\": 3,\r\n    \"feedback\": \"{{faker 'lorem.sentence'}}\",\r\n    \"userId\": \"test_profile_ID\",\r\n    \"profileId\": \"test_article_ID\"\r\n  }\r\n]"
     }
   ],
   "callbacks": []

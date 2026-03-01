@@ -26,5 +26,8 @@
   "codeBlockContentLabel": "Содержание блока",
   "codeBlockContentPlaceholder": "Введите код",
   "goBack": "Назад",
-  "recommendationsHeading": "Возможно вам понравится"
+  "recommendationsHeading": "Возможно вам понравится",
+  "ratingTitle": "Оцените статью",
+  "article.ratingTitle": "Оцените статью",
+  "yourRating": "Ваша оценка"
 }

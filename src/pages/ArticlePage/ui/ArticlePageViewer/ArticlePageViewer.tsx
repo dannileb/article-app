@@ -11,6 +11,7 @@ import { ArrowLeftOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router';
 import { RoutePath } from '#/shared/config/routeConfig/routeConfig';
 import { ArticlePageRecommendations } from '../ArticlePageRecommendations/ArticlePageRecommendations';
+import { ArticleRating } from '#/features/ArticleRating';
 
 interface ArticlePageViewerProps {
     articleData: Article;
@@ -40,6 +41,7 @@ export const ArticlePageViewer = ({ articleData }: ArticlePageViewerProps) => {
                     <ArticlePageBlock key={index} block={block} index={index} />
                 ))}
             </div>
+            <ArticleRating articleId={articleData.id} />
             <ArticlePageRecommendations />
             <ArticlePageComments />
         </div>

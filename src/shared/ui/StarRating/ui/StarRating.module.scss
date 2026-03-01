@@ -1,0 +1,41 @@
+@mixin rated-star {
+    .starIcon {
+        color: var(--color-text-primary);
+    }
+}
+
+.ratingContainer {
+    display: flex;
+
+    &:not(:has(.starButton:hover)) {
+        .starButton_rated {
+            @include rated-star;
+        }
+    }
+}
+
+.starIcon {
+    transition: color 250ms ease-in-out;
+}
+
+.starButton {
+    padding: 2px;
+
+    .starIcon {
+        color: var(--color-bg-primary);
+
+        > svg {
+            stroke: var(--color-text-primary);
+            stroke-width: 64px;
+        }
+    }
+
+    &:hover,
+    &:has(~ .starButton:hover) {
+        @include rated-star;
+    }
+
+    &:disabled {
+        opacity: 1 !important;
+    }
+}

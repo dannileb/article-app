@@ -1,5 +1,8 @@
 {
   "addBlockBtn": "",
+  "article": {
+    "ratingTitle": ""
+  },
   "authoToComment": "",
   "blockContentLabel": "",
   "blockContentPlaceholder": "",
@@ -33,5 +36,6 @@
   "textBlock": "",
   "textBlockLabel": "",
   "titleLabel": "",
-  "titlePlaceholder": ""
+  "titlePlaceholder": "",
+  "yourRating": ""
 }
