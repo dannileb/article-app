@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import classes from './Avatar.module.scss';
 import avatarPlaceholder from '#/shared/assets/images/avatarPlaceholder.webp';
+import { AppImage } from '#/shared/ui/Image/Image';
 
 interface AvatarProps {
     size?: number | string;
@@ -18,15 +19,11 @@ export const Avatar = ({ size = 100, src, alt, className }: AvatarProps) => {
                 height: size,
             }}
         >
-            <img
+            <AppImage
                 className={classes.avatar}
                 src={src ?? avatarPlaceholder}
                 alt={alt}
-                onError={(e) => {
-                    console.log(e);
-                    e.currentTarget.src = avatarPlaceholder;
-                    e.currentTarget.onerror = null;
-                }}
+                fallback={avatarPlaceholder}
             />
         </div>
     );

@@ -1,5 +1,5 @@
 import classes from './ArticlePageBlock.module.scss';
-import { Image } from '#/shared/ui/Image/Image';
+import { AppImage } from '#/shared/ui/Image/Image';
 import { useArticlePageEditor } from '../useArticlePageEditor';
 import { Input } from '#/shared/ui/Input/Input';
 import { useTranslation } from 'react-i18next';
@@ -21,7 +21,7 @@ export const ArticleImageBlockEditing = ({
                 classes.blockWrapper_editing,
             )}
         >
-            <Image
+            <AppImage
                 src={block.blockContent ?? '#'}
                 alt={block.title}
                 className={classes.image}

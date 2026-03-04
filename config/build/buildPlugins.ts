@@ -28,11 +28,6 @@ export function buildPlugins({
       __API__: JSON.stringify(apiUrl),
       __PROJECT__: JSON.stringify(project)
     }),
-    new CopyPlugin({
-      patterns: [
-        { from: paths.locales, to: paths.buildLocales },
-      ],
-    }),
     new CircularDependencyPlugin({
       exclude: /node_modules/,
       failOnError: true,
@@ -52,7 +47,12 @@ export function buildPlugins({
   if(isDev){
     plugins.push(
       new ReactRefreshWebpackPlugin(),
-      new BundleAnalyzerPlugin({openAnalyzer: false})
+      new BundleAnalyzerPlugin({openAnalyzer: false}),
+          new CopyPlugin({
+      patterns: [
+        { from: paths.locales, to: paths.buildLocales },
+      ],
+    }),
   )
   }
   return plugins;

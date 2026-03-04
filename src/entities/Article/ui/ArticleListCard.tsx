@@ -4,8 +4,8 @@ import { Tag } from '#/shared/ui/Tag/Tag';
 import { Text } from '#/shared/ui/Text/Text';
 import classes from './ArticleListCard.module.scss';
 import { ArticleListItemProps } from './ArticleListItem';
-import avatarPlaceholder from '#/shared/assets/images/avatarPlaceholder.webp';
 import { EyeOutlined } from '@ant-design/icons';
+import { AppImage } from '#/shared/ui/Image/Image';
 
 const MAX_TAGS_COUNT = 3;
 
@@ -15,14 +15,10 @@ export const ArticleListCard = ({
 }: Omit<ArticleListItemProps, 'listView'>) => {
     return (
         <Card view="clear" className={classes.articleCard} {...cardProps}>
-            <img
+            <AppImage
                 src={article.preview}
                 alt={article.title}
                 className={classes.preview}
-                onError={(e) => {
-                    e.currentTarget.src = avatarPlaceholder;
-                    e.currentTarget.onerror = null;
-                }}
             />
             <div className={classes.content}>
                 <Heading level={4}>{article.title}</Heading>
