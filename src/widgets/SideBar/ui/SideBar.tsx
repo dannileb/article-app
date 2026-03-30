@@ -6,8 +6,6 @@ import { LangSwitcher } from '#/widgets/LangSwitcher/ui/LangSwitcher';
 import { Button } from '#/shared/ui/Button/Button';
 import {
     ContainerOutlined,
-    HomeOutlined,
-    InfoCircleOutlined,
     LeftOutlined,
     RightOutlined,
     UserOutlined,
@@ -27,16 +25,16 @@ export const SideBar = () => {
 
     const sidebarLinks = useMemo(() => {
         const baseLinks = [
-            {
-                text: t('navBarLabel-main'),
-                to: RoutePath.main,
-                icon: <HomeOutlined />,
-            },
-            {
-                text: t('navBarLabel-about'),
-                to: RoutePath.about,
-                icon: <InfoCircleOutlined />,
-            },
+            // {
+            //     text: t('navBarLabel-main'),
+            //     to: RoutePath.main,
+            //     icon: <HomeOutlined />,
+            // },
+            // {
+            //     text: t('navBarLabel-about'),
+            //     to: RoutePath.about,
+            //     icon: <InfoCircleOutlined />,
+            // },
             {
                 text: t('navBarLabel-articles'),
                 to: RoutePath.articles,

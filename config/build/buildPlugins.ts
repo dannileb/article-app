@@ -40,17 +40,17 @@ export function buildPlugins({
         },
       },
     }),
+    new CopyPlugin({
+      patterns: [
+        { from: paths.locales, to: paths.buildLocales },
+      ],
+    }),
     // new BundleAnalyzerPlugin({openAnalyzer: false}),
   ]
   if(isDev){
     plugins.push(
       new ReactRefreshWebpackPlugin(),
       new BundleAnalyzerPlugin({openAnalyzer: false}),
-          new CopyPlugin({
-      patterns: [
-        { from: paths.locales, to: paths.buildLocales },
-      ],
-    }),
   )
   }
   return plugins;

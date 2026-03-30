@@ -5,6 +5,8 @@ import {
     useRateProfileMutation,
 } from '../api/profileRatingApi';
 import { useTranslation } from 'react-i18next';
+import { useAppSelector } from '#/shared/lib/hooks/reduxHooks';
+import { getUserIsAuth } from '#/entities/User';
 
 interface ProfileRatingProps {
     profileId: string;
@@ -13,6 +15,7 @@ interface ProfileRatingProps {
 export const ProfileRating = ({ profileId }: ProfileRatingProps) => {
     const { t } = useTranslation('profile');
     const { data: profileRating } = useGetProfileRatingQuery(profileId);
+    const isAuth = useAppSelector(getUserIsAuth);
     const [rateProfile] = useRateProfileMutation();
 
     const handleRateProfile = useCallback(
@@ -21,6 +24,10 @@ export const ProfileRating = ({ profileId }: ProfileRatingProps) => {
         },
         [profileId, rateProfile],
     );
+
+    if (!isAuth) {
+        return null;
+    }
 
     return (
         <Rating

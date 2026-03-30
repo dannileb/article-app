@@ -5,6 +5,8 @@ import {
     useRateArticleMutation,
 } from '../api/articleRatingApi';
 import { useTranslation } from 'react-i18next';
+import { useAppSelector } from '#/shared/lib/hooks/reduxHooks';
+import { getUserIsAuth } from '#/entities/User';
 
 interface ArticleRatingProps {
     articleId: string;
@@ -12,6 +14,7 @@ interface ArticleRatingProps {
 
 export const ArticleRating = ({ articleId }: ArticleRatingProps) => {
     const { t } = useTranslation('article');
+    const isAuth = useAppSelector(getUserIsAuth);
     const { data: articleRating } = useGetArticleRatingQuery(articleId);
     const [rateArticle] = useRateArticleMutation();
 
@@ -21,6 +24,10 @@ export const ArticleRating = ({ articleId }: ArticleRatingProps) => {
         },
         [articleId, rateArticle],
     );
+
+    if (!isAuth) {
+        return null;
+    }
 
     return (
         <Rating
