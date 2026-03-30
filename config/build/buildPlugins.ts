@@ -24,7 +24,8 @@ export function buildPlugins({
     }),
     new webpack.DefinePlugin({
       __IS_DEV__: JSON.stringify(isDev),
-      __PROJECT__: JSON.stringify(project)
+      __PROJECT__: JSON.stringify(project),
+      __BUNDLER__: JSON.stringify('webpack'),
     }),
     new CircularDependencyPlugin({
       exclude: /node_modules/,

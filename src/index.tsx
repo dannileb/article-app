@@ -4,12 +4,15 @@ import { App } from '#/app/App';
 
 import '#/shared/config/i18n/i18n';
 import { ErrorBoundary } from '#/app/providers/ErrorBoundary';
+import { StrictMode } from 'react';
 
 document.body.innerHTML = '<div id="app"></div>';
 
 const root = createRoot(document.getElementById('app')!);
 root.render(
-    <ErrorBoundary>
-        <App />
-    </ErrorBoundary>,
+    <StrictMode>
+        <ErrorBoundary>
+            <App />
+        </ErrorBoundary>
+    </StrictMode>,
 );

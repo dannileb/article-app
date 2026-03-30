@@ -2,7 +2,10 @@ import { ACCESS_TOKEN_KEY } from '#/shared/consts/localStorage';
 import axios from 'axios';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-const __API__ = process.env.WEBPACK_API_URL;
+const __API__ =
+    __BUNDLER__ === 'vite'
+        ? import.meta.env.VITE_API_URL
+        : process.env.WEBPACK_API_URL;
 
 const $api = axios.create({
     baseURL: __API__,
