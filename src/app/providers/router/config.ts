@@ -3,7 +3,7 @@ import { PrivateRoutes } from './ui/PrivateRoutes';
 import NotFoundPage from '#/pages/NotFoundPage';
 import UnauthorizedPage from '#/pages/UnauthorizedPage';
 import { RoutePath } from '#/shared/config/routeConfig/routeConfig';
-import { createBrowserRouter } from 'react-router';
+import { createBrowserRouter, redirect } from 'react-router';
 
 export const routerConfig = createBrowserRouter([
     {
@@ -12,7 +12,7 @@ export const routerConfig = createBrowserRouter([
         children: [
             {
                 index: true,
-                lazy: () => import('#/pages/MainPage'),
+                loader: () => redirect(RoutePath.articles),
             },
             {
                 path: RoutePath.about,
