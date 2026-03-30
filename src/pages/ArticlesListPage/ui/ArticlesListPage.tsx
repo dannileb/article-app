@@ -17,15 +17,9 @@ import { getArticlesListIsLoading } from '../model/selectors/getAriclesListIsLoa
 import { ArticlesListToolbar } from './ArticlesListToolbar';
 import { fetchNextArticlesListPage } from '../model/services/fetchNextArticlesListPage/fetchNextArticlesListPage';
 import { getArticlesListLastPage } from '../model/selectors/getArticlesListLastPage';
-import { useDebounce } from '#/shared/lib/hooks/useDebounce';
-import {
-    getScrollPositionByKey,
-    preserveSrollPositionActions,
-} from '#/features/PreserveScrollPosition';
 import { getArticlesListPageInited } from '../model/selectors/getArticlesListPageInited';
 import { SEARCH_URL_PARAM_KEY, SORT_URL_PARAM_KEY } from '../lib/constants';
 import { ArticlesList } from '#/entities/Article';
-import { ListRange } from 'react-virtuoso';
 
 const reducers: ReducersList = {
     articlesList: articlesListPageSlice.reducer,
@@ -38,9 +32,9 @@ const ArticlesListPage = () => {
     const isLoading = useAppSelector(getArticlesListIsLoading);
     const lastPage = useAppSelector(getArticlesListLastPage);
     const articles = useAppSelector(getArticles.selectAll);
-    const scrollPosition = useAppSelector((state) =>
-        getScrollPositionByKey(state, 'articlesList'),
-    );
+    // const scrollPosition = useAppSelector((state) =>
+    //     getScrollPositionByKey(state, 'articlesList'),
+    // );
     const inited = useAppSelector(getArticlesListPageInited);
     const [searchParams] = useSearchParams();
 
@@ -52,14 +46,14 @@ const ArticlesListPage = () => {
         dispatch(fetchNextArticlesListPage({}));
     }, [dispatch, isLoading, lastPage]);
 
-    const handleRangeChange = useDebounce((range: ListRange) => {
-        dispatch(
-            preserveSrollPositionActions.setScrollPosition({
-                key: 'articlesList',
-                value: (range.startIndex + range.endIndex) / 2,
-            }),
-        );
-    }, 200);
+    // const handleRangeChange = useDebounce((range: ListRange) => {
+    //     dispatch(
+    //         preserveSrollPositionActions.setScrollPosition({
+    //             key: 'articlesList',
+    //             value: Math.round((range.startIndex + range.endIndex) / 2),
+    //         }),
+    //     );
+    // }, 200);
 
     useEffect(() => {
         if (!inited) {
@@ -91,8 +85,8 @@ const ArticlesListPage = () => {
                         isLoading={!!isLoading}
                         view={view}
                         endReached={handleScrollEnd}
-                        onRangeChanged={handleRangeChange}
-                        initialTopMostItemIndex={scrollPosition}
+                        // onRangeChanged={handleRangeChange}
+                        // initialTopMostItemIndex={scrollPosition}
                     />
                 </div>
             </div>

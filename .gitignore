@@ -5,9 +5,11 @@ node_modules
 storybook-static
 
 # Playwright
+/dist
 /test-results/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
 /jest-report
+.env

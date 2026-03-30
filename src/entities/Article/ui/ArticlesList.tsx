@@ -59,28 +59,23 @@ export const ArticlesList = ({
             data={articles}
             components={gridComponents}
             context={{ isLoading }}
-            itemContent={(index) => {
-                const article = articles[index];
+            itemContent={(_, article) => {
                 if (!article) {
                     return null;
                 }
                 return (
                     <AppLink
+                        key={article?.id}
                         to={generatePath(RoutePath.article, {
-                            articleId: article.id,
+                            articleId: article?.id ?? 0,
                         })}
                         target={target}
                     >
-                        <ArticleListItem
-                            key={article.id}
-                            listView={view}
-                            article={article}
-                        />
+                        <ArticleListItem listView={view} article={article} />
                     </AppLink>
                 );
             }}
             endReached={endReached}
-            overscan={20}
             listClassName={classNames(
                 classes.cardList,
                 classes[`cardList_${view}`],

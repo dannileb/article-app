@@ -8,6 +8,6 @@ services:
     ipc: host
     environment:
       - HUSKY=0
-    command: sh -c "npm ci && npx playwright test ./tests/ui.spec.ts --update-snapshots"
+    command: sh -c "npm ci && npx playwright test ./tests/ui/ui.spec.ts --update-snapshots"
 volumes:
   node_modules:

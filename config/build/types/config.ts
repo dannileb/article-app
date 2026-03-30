@@ -20,6 +20,6 @@ export interface BuildOptions {
   paths: BuildPaths;
   isDev: boolean;
   port: number;
-  apiUrl: string;
-  project: 'storybook' | 'frontend' | 'jest'
+  project: 'storybook' | 'frontend' | 'jest',
+  isDotEnv: boolean;
 }

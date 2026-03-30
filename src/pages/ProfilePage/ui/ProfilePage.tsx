@@ -14,7 +14,10 @@ function ProfilePage() {
     }
 
     return (
-        <div className={classes.pageContainer}>
+        <div
+            className={classes.pageContainer}
+            data-testid="ProfilePage.Container"
+        >
             <ProfileCard profileId={profileId} editable />
             {userData && userData.authData?.id !== profileId && (
                 <ProfileRating profileId={profileId} />

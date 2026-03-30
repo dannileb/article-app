@@ -22,7 +22,10 @@ const StarRatingInner = ({
     };
 
     return (
-        <div className={classes.ratingContainer}>
+        <div
+            className={classes.ratingContainer}
+            aria-label={`rating: ${value}`}
+        >
             {Array.from({ length: ratingRange }).map((_, i) => (
                 <Button
                     key={i}

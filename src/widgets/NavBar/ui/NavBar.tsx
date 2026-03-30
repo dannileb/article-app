@@ -43,6 +43,11 @@ export const NavBar = () => {
                                 setLoginModalOpen(true);
                             }
                         }}
+                        data-testid={
+                            authData
+                                ? 'NavBar.LogoutButton'
+                                : 'NavBar.LoginButton'
+                        }
                     />
                 </div>
             </div>

@@ -73,6 +73,7 @@ const LoginFormInner = ({ onLogin }: LoginFormProps) => {
                 autoFocus={true}
                 onChange={handleChangeUsername}
                 value={username}
+                data-testid="LoginForm.Username"
             />
             <Input
                 type="password"
@@ -81,6 +82,7 @@ const LoginFormInner = ({ onLogin }: LoginFormProps) => {
                 placeholder={t('loginForm_password')}
                 onChange={handleChangePassword}
                 value={password}
+                data-testid="LoginForm.Password"
             />
             {error && <Text view="error">{tError(error)}</Text>}
             <Button
@@ -89,6 +91,7 @@ const LoginFormInner = ({ onLogin }: LoginFormProps) => {
                 className={classes.button}
                 disabled={!username || !password}
                 icon={<LoginOutlined />}
+                data-testid="LoginForm.LoginButton"
             >
                 {t('loginForm_login')}
             </Button>

@@ -18,7 +18,7 @@ export const ProfileCardСontent = ({ profile }: ProfileCardProps) => {
         <div className={classes.card}>
             <div className={classes.info}>
                 <div className={classes.nameWrapper}>
-                    <Heading level={2}>
+                    <Heading level={2} data-testid="ProfileCard.Name">
                         {profile.name} {profile.surname}
                     </Heading>
                 </div>

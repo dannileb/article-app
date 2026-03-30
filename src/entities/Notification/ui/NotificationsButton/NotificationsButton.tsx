@@ -7,15 +7,18 @@ import { useGetNotificationsQuery } from '../../api/notificationApi';
 import { useAppDispatch, useAppSelector } from '#/shared/lib/hooks/reduxHooks';
 import { notificationActions } from '../../model/slice/notificationSlice';
 import { getNotificationsLastSeen } from '../../model/selectors/notificationSelectors';
+import { getUserIsAuth } from '#/entities/User';
 
 const NotificationsButtonInner = () => {
     const dispatch = useAppDispatch();
     const lastSeen = useAppSelector(getNotificationsLastSeen);
+    const isAuth = useAppSelector(getUserIsAuth);
 
     const { data: notifications, isLoading } = useGetNotificationsQuery(
         undefined,
         {
-            pollingInterval: __PROJECT__ === 'jest' ? undefined : 5000,
+            pollingInterval:
+                __PROJECT__ === 'jest' || !isAuth ? undefined : 5000,
         },
     );
 
